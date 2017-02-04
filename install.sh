@@ -1,8 +1,12 @@
 #bin/sh
 
 rm -r ~/.vim
-cd ~/ && ln -s .dotfiles/vim .vim
+ln -s ~/.dotfiles/vim ~/.vim
 echo "[+] Vim config installed !"
+
+rm -r ~/.zshrc
+ln -s ~/.dotfiles/zsh/templates/zshrc ~/.zshrc
+echo "[+] Zsh config installed !"
 
 rm ~/.tmux.conf
 rm /usr/local/bin/vimux
