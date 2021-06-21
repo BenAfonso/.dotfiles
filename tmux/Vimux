@@ -1,8 +1,0 @@
-#!/bin/sh 
-tmux new-session -s 'VimIDE' -n 'ide' -d 'vim'
-tmux split-window -v -p 10 -t 'VimIDE'
-tmux split-window -h -t 'VimIDE'
-tmux new-window -n 'shell'
-tmux select-window -t VimIDE:1
-tmux select-pane -t 1
-tmux -2 attach-session -d 
