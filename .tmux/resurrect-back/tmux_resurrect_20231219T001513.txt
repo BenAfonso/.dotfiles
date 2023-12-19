@@ -1,0 +1,14 @@
+pane	nvim	1	1	:*	1	DESKTOP-O3CTGTI	:/home/ben/.config/nvim	1	nvim	:/tmp/.mount_nvimpOe4T6/usr/bin/nvim
+pane	nvim	1	1	:*	2	DESKTOP-O3CTGTI	:/home/ben/.config/nvim/snippets	0	zsh	:
+pane	nvim	1	1	:*	3	DESKTOP-O3CTGTI	:/home/ben/.config/nvim	0	zsh	:
+pane	nzk-edu-server	1	1	:*	1	DESKTOP-O3CTGTI	:/home/ben/Work/nzk/nzk-edu-server	1	zsh	:
+pane	nzk-edu-server	1	1	:*	2	DESKTOP-O3CTGTI	:/home/ben/Work/nzk/nzk-edu-server	0	node	:node /usr/local/bin/yarn dev
+pane	nzk-edu-server	1	1	:*	3	DESKTOP-O3CTGTI	:/home/ben/Work/nzk/nzk-edu-server	0	zsh	:
+pane	nzk-mobile-app	1	1	:*	1	DESKTOP-O3CTGTI	:/home/ben/Work/nzk/nzk-mobile-app	1	node	:node /usr/local/bin/yarn dev
+pane	nzk-mobile-app	1	1	:*	2	DESKTOP-O3CTGTI	:/home/ben/Work/nzk/nzk-mobile-app	0	zsh	:
+pane	nzk-next-app	1	1	:*	1	DESKTOP-O3CTGTI	:/home/ben/Work/nzk/nzk-next-app	1	nvim	:/tmp/.mount_nvimGy53yx/usr/bin/nvim /home/ben/.tmux.conf
+window	nvim	1	:nvim	1	:*	4a4c,173x42,0,0[173x34,0,0,1,173x7,0,35{87x7,0,35,2,85x7,88,35,3}]	:
+window	nzk-edu-server	1	:zsh	1	:*	6ab3,118x34,0,0[118x24,0,0,4,118x9,0,25{59x9,0,25,12,58x9,60,25,13}]	:
+window	nzk-mobile-app	1	:node	1	:*	07fc,125x25,0,0{77x25,0,0,6,47x25,78,0,7}	:
+window	nzk-next-app	1	:nvim	1	:*	bcc5,118x34,0,0,8	:
+state	nzk-next-app	

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+	selected=$1
+else
+	# selected=$(tmux list-sessions | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse)
+	selected=$(tmux list-sessions | sed -e "s/:.*//" | fzf)
+fi
+
+if [[ -z $selected ]]; then
+	exit 0
+fi
+
+selected_name=$(echo $selected | sed -e "s/:.*//")
+
+tmux switch-client -t $selected_name
