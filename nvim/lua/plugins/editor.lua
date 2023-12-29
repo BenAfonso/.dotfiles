@@ -1,17 +1,15 @@
 return {
-  -- {
-  --   enabled = false,
-  --   "folke/flash.nvim",
-  --   ---@type Flash.Config
-  --   opts = {
-  --     search = {
-  --       forward = true,
-  --       multi_window = false,
-  --       wrap = false,
-  --       incremental = true,
-  --     },
-  --   },
-  -- },
+  {
+    enabled = true,
+    "folke/flash.nvim",
+    ---@type Flash.Config
+    opts = {
+      { "s", false },
+    },
+  },
+  {
+    "ThePrimeagen/vim-be-good",
+  },
   {
     "ibhagwan/fzf-lua",
     -- optional for icon support
@@ -96,18 +94,10 @@ return {
   },
   {
     "ThePrimeagen/harpoon",
+    branch = "harpoon2",
     lazy = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
-    },
-    config = true,
-    keys = {
-      { "<leader>a", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "Mark file with harpoon" },
-      { "<C-t>", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "Show harpoon marks" },
-      { "<leader>hm", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "Mark file with harpoon" },
-      { "<leader>hn", "<cmd>lua require('harpoon.ui').nav_next()<cr>", desc = "Go to next harpoon mark" },
-      { "<leader>hp", "<cmd>lua require('harpoon.ui').nav_prev()<cr>", desc = "Go to previous harpoon mark" },
-      { "<leader>ha", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "Show harpoon marks" },
     },
   },
   -- {
@@ -146,7 +136,7 @@ return {
         function()
           local builtin = require("telescope.builtin")
           builtin.find_files({
-            no_ignore = false,
+            -- no_ignore = false,
             hidden = true,
           })
         end,
@@ -176,7 +166,7 @@ return {
         function()
           local builtin = require("telescope.builtin")
           builtin.find_files({
-            no_ignore = false,
+            -- no_ignore = false,
             hidden = true,
           })
         end,
