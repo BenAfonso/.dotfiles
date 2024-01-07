@@ -8,6 +8,9 @@ return {
     },
   },
   {
+    "akinsho/toggleterm.nvim",
+  },
+  {
     "ThePrimeagen/vim-be-good",
   },
   {
