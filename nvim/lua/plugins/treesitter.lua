@@ -22,6 +22,7 @@ return {
         "svelte",
         "typescript",
         "tsx",
+        "styled",
       },
 
       -- matchup = {

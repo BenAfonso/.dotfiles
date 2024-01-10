@@ -1,10 +1,10 @@
-# My Vim Config 
-**including tons of usefull plugins and some useless one**
+# My Vim Config
+
+**including tons of useful plugins and some useless one**
 
 ## Demo
 
 **Vim**
-
 
 ![Vim](https://cloud.githubusercontent.com/assets/14387764/22547000/c63612c6-e93f-11e6-996b-89cce2041d5e.png)
 

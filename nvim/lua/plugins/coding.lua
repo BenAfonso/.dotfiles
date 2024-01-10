@@ -13,7 +13,9 @@ return {
     },
     opts = { snippet_engine = "luasnip" },
   },
-
+  {
+    "styled-components/vim-styled-components",
+  },
   -- Incremental rename
   {
     "smjonas/inc-rename.nvim",

@@ -3,8 +3,9 @@ return {
     enabled = true,
     "folke/flash.nvim",
     ---@type Flash.Config
-    opts = {
-      { "s", false },
+    opts = {},
+    keys = {
+      { "S", mode = { "n", "x", "o" }, false },
     },
   },
   {
@@ -23,6 +24,7 @@ return {
     end,
   },
   {
+    -- <leader>F5
     "mbbill/undotree",
   },
   "folke/trouble.nvim",
@@ -123,6 +125,10 @@ return {
     "telescope.nvim",
     dependencies = {
       "nvim-telescope/telescope-file-browser.nvim",
+      {
+        "nvim-telescope/telescope-live-grep-args.nvim",
+        version = "^1.0.0",
+      },
     },
     keys = {
       {
@@ -143,15 +149,6 @@ return {
             hidden = true,
           })
         end,
-      },
-      {
-        "<leader>fP",
-        function()
-          require("telescope.builtin").find_files({
-            cwd = require("lazy.core.config").options.root,
-          })
-        end,
-        desc = "Find Plugin File",
       },
       {
         ";f",
@@ -186,8 +183,7 @@ return {
       {
         ";r",
         function()
-          local builtin = require("telescope.builtin")
-          builtin.live_grep()
+          require("telescope").extensions.live_grep_args.live_grep_args()
         end,
         desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
       },
@@ -256,6 +252,7 @@ return {
       local telescope = require("telescope")
       local actions = require("telescope.actions")
       local fb_actions = require("telescope").extensions.file_browser.actions
+      local lga_actions = require("telescope-live-grep-args.actions")
 
       opts.defaults = vim.tbl_deep_extend("force", opts.defaults, {
         wrap_result = true,
@@ -338,8 +335,17 @@ return {
             },
           },
         },
+        live_grep_args = {
+          auto_quoting = true,
+          mappings = {
+            ["i"] = {
+              ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+            },
+          },
+        },
       }
       telescope.setup(opts)
+      require("telescope").load_extension("live_grep_args")
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("file_browser")
     end,

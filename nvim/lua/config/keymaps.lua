@@ -25,7 +25,6 @@ keymap.set(
 )
 
 keymap.set("n", "<C-o>", "<C-O>")
--- keymap.set("n", "<C-S-o>", "<C-I>")
 
 -- LSP
 keymap.set(
