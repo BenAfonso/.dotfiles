@@ -38,7 +38,7 @@ config.keys = {
 local color = "#ff33b8"
 
 config.window_frame = {
-	active_titlebar_bg = color, -- "#011627",
+	-- active_titlebar_bg = color, -- "#011627",
 	active_titlebar_border_bottom = "#ff0000", --"#2b2042",
 	-- border_left_width = "2px",
 	-- border_right_width = "2px",

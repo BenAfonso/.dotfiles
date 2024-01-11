@@ -7,6 +7,7 @@ discipline.cowboy()
 
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
+local wk = require("which-key")
 
 keymap.set("n", "<C-b>", "<C-v>", { noremap = true, silent = true, desc = "Enter Visual Block mode" })
 
@@ -24,7 +25,8 @@ keymap.set(
   { noremap = true, silent = true, desc = "Close all buffers except this one" }
 )
 
-keymap.set("n", "<C-o>", "<C-O>")
+keymap.set("n", "<C-j>", "<C-I>", { noremap = true })
+keymap.set("n", "<C-k>", "<C-O>", { noremap = true })
 
 -- LSP
 keymap.set(
@@ -48,10 +50,6 @@ keymap.set(
 
 -- Pasting
 keymap.set("x", "<leader>p", '"_dP')
-
--- Vertical movement
-keymap.set("n", "<C-d>", "<C-d><cmd>:lua MiniAnimate.execute_after('scroll', 'normal! zz')<CR>", { noremap = true })
-keymap.set("n", "<C-u>", "<C-u><cmd>:lua MiniAnimate.execute_after('scroll', 'normal! zz')<CR>", { noremap = true })
 
 keymap.set("n", "n", "nzzzv", { noremap = true })
 keymap.set("n", "N", "Nzzzv", { noremap = true })
@@ -97,3 +95,28 @@ end, {
 
 -- Undotree
 vim.keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle)
+
+-- flash
+wk.register({
+  o = {
+    name = "flash",
+    s = {
+      function()
+        require("flash").jump()
+      end,
+      "Flash Jump",
+    },
+    t = {
+      function()
+        require("flash").treesitter()
+      end,
+      "Flash Treesitter",
+    },
+    r = {
+      function()
+        require("flash").treesitter_search()
+      end,
+      "Search Treesitter",
+    },
+  },
+}, { prefix = "<leader>" })

@@ -6,6 +6,7 @@ return {
     opts = {},
     keys = {
       { "S", mode = { "n", "x", "o" }, false },
+      { "f", mode = { "n", "x", "o" }, false },
     },
   },
   {
