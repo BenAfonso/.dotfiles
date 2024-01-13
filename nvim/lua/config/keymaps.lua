@@ -3,6 +3,8 @@
 -- Add any additional keymaps here
 
 local discipline = require("ben.discipline")
+require("utils.buffers")
+
 discipline.cowboy()
 
 local keymap = vim.keymap
@@ -12,7 +14,13 @@ local wk = require("which-key")
 keymap.set("n", "<C-b>", "<C-v>", { noremap = true, silent = true, desc = "Enter Visual Block mode" })
 
 -- Buffers management
-keymap.set("n", ";q", ":bd<CR>", { noremap = true, silent = true, desc = "Close Buffer" })
+keymap.set("n", ";q", close_current_buffer, { noremap = true, silent = true, desc = "Close Buffer" })
+keymap.set("n", "<C-q>", "<cmd>:q<CR>", { noremap = true, silent = true, desc = "Close window" })
+
+keymap.set("n", "<leader>bo", function()
+  close_all_buffers_except_current()
+end, { noremap = true })
+
 keymap.set("n", "<leader><right>", ":bnext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
 keymap.set("n", "<leader><left>", ":bprev<CR>", { noremap = true, silent = true, desc = "Previous Buffer" })
 keymap.set("n", "<C-right>", ":bnext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
@@ -25,8 +33,16 @@ keymap.set(
   { noremap = true, silent = true, desc = "Close all buffers except this one" }
 )
 
-keymap.set("n", "<C-j>", "<C-I>", { noremap = true })
-keymap.set("n", "<C-k>", "<C-O>", { noremap = true })
+-- keymap.set("n", "<C-j>", "<C-I>", { noremap = true })
+-- keymap.set("n", "<C-k>", "<C-O>", { noremap = true })
+
+-- increment decrement
+keymap.set("n", "+", "<C-a>", { noremap = true })
+keymap.set("n", "-", "<C-x>", { noremap = true })
+
+-- Scroll
+keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true })
+keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true })
 
 -- LSP
 keymap.set(
@@ -68,6 +84,7 @@ keymap.set("n", "<C-e>", "'Neotree toggle<Return>", {
 keymap.set("n", "<C-a>", "gg<S-v>G")
 -- New tab
 keymap.set("n", "te", ":tabedit<Return>", opts)
+keymap.set("n", "tb", ":tabedit %<Return>", opts)
 -- keymap.set("n", ";q", ":close<Return>", opts)
 keymap.set("n", "tq", ":tabclose<Return>", opts)
 keymap.set("n", "<tab>", ":tabnext<Return>", opts)
@@ -80,10 +97,10 @@ keymap.set("n", "<leader>|", ":vsplit<Return>", opts)
 keymap.set("n", "<leader>_", ":split<Return>", opts)
 
 -- Resize pane
-keymap.set("n", "<C-w><left>", "<C-w><")
-keymap.set("n", "<C-w><right>", "<C-w>>")
-keymap.set("n", "<C-w><up>", "<C-w>+")
-keymap.set("n", "<C-w><down>", "<C-w>-")
+keymap.set("n", "<A-left>", "<C-w><")
+keymap.set("n", "<A-right>", "<C-w>>")
+keymap.set("n", "<A-up>", "<C-w>+")
+keymap.set("n", "<A-down>", "<C-w>-")
 
 -- Rename
 keymap.set("n", "<leader>cj", function()
@@ -120,3 +137,8 @@ wk.register({
     },
   },
 }, { prefix = "<leader>" })
+
+-- Diagnostics
+keymap.set("n", "<C-x>", function()
+  vim.diagnostic.open_float()
+end, { noremap = true })

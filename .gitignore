@@ -1,3 +1,4 @@
-.tmux/plugins
-.tmux/resurrect
-.tmux/*.log
+tmux/.tmux/plugins
+tmux/.tmux/resurrect
+tmux/.tmux/*.log
+

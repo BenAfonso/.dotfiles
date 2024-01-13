@@ -1,6 +1,5 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
-local colors = require("colors")
 
 -- This table will hold the configuration.
 local config = {}
@@ -33,12 +32,16 @@ config.keys = {
 		mods = "CMD|SHIFT",
 		action = wezterm.action.ReloadConfiguration,
 	},
+	{ key = "P", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "p", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "P", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
 }
 
 local color = "#ff33b8"
 
+config.color_scheme = "Night Owl (Gogh)"
 config.window_frame = {
-	-- active_titlebar_bg = color, -- "#011627",
+	active_titlebar_bg = "#011627",
 	active_titlebar_border_bottom = "#ff0000", --"#2b2042",
 	-- border_left_width = "2px",
 	-- border_right_width = "2px",
@@ -51,7 +54,10 @@ config.window_frame = {
 }
 
 config.colors = {
+	-- cursor_bg = "#80a4c2",
+	-- cursor_fg = "#7f6057",
 	cursor_bg = color,
+	cursor_fg = "#01121f",
 	tab_bar = {
 		active_tab = {
 			bg_color = "#0b2942",
