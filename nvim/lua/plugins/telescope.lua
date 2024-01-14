@@ -109,6 +109,20 @@ local M = {
         desc = "List all marks",
       },
       {
+        "sF",
+        function()
+          telescope.extensions.file_browser.file_browser({
+            respect_gitignore = false,
+            hidden = true,
+            grouped = true,
+            previewer = false,
+            initial_mode = "normal",
+            layout_config = { height = 40 },
+          })
+        end,
+        desc = "Open File Browser with the base path",
+      },
+      {
         "sf",
         function()
           local function telescope_buffer_dir()
@@ -130,6 +144,7 @@ local M = {
     },
     config = function(_, opts)
       local actions = require("telescope.actions")
+      local action_state = require("telescope.actions.state")
       local fb_actions = require("telescope").extensions.file_browser.actions
       local lga_actions = require("telescope-live-grep-args.actions")
 
@@ -179,11 +194,23 @@ local M = {
           sort_lastused = true,
           mappings = {
             n = {
-              ["dd"] = require("telescope.actions").delete_buffer,
+              ["d"] = require("telescope.actions").delete_buffer,
               ["<C-d>"] = require("telescope.actions").delete_buffer,
+              ["w"] = function()
+                local selection = action_state.get_selected_entry()
+                vim.api.nvim_buf_call(selection.bufnr, function()
+                  vim.cmd("w")
+                end)
+              end,
             },
             i = {
               ["<C-d>"] = require("telescope.actions").delete_buffer,
+              ["<C-w>"] = function()
+                local selection = action_state.get_selected_entry()
+                vim.api.nvim_buf_call(selection.bufnr, function()
+                  vim.cmd("w")
+                end)
+              end,
             },
           },
         },
