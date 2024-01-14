@@ -1,4 +1,4 @@
-return {
+local M = {
   -- tools
   {
     "folke/lsp-colors.nvim",
@@ -33,6 +33,12 @@ return {
           end,
         },
         tsserver = {
+          commands = {
+            RenameFile = {
+              require("utils.ts-rename"),
+              description = "Rename File",
+            },
+          },
           root_dir = function(...)
             return require("lspconfig.util").root_pattern(".git")(...)
           end,
@@ -140,3 +146,5 @@ return {
     },
   },
 }
+
+return M
