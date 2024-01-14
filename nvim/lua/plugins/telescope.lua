@@ -1,3 +1,4 @@
+---@diagnostic disable: no-unknown
 -- Telescope configuration
 local map = vim.keymap.set
 local telescope = require("telescope")
@@ -197,6 +198,7 @@ local M = {
               ["d"] = require("telescope.actions").delete_buffer,
               ["<C-d>"] = require("telescope.actions").delete_buffer,
               ["w"] = function()
+                ---@diagnostic disable-next-line: no-unknown
                 local selection = action_state.get_selected_entry()
                 vim.api.nvim_buf_call(selection.bufnr, function()
                   vim.cmd("w")
@@ -206,6 +208,7 @@ local M = {
             i = {
               ["<C-d>"] = require("telescope.actions").delete_buffer,
               ["<C-w>"] = function()
+                ---@diagnostic disable-next-line: no-unknown
                 local selection = action_state.get_selected_entry()
                 vim.api.nvim_buf_call(selection.bufnr, function()
                   vim.cmd("w")
@@ -236,11 +239,13 @@ local M = {
                 vim.cmd("startinsert")
               end,
               ["<C-u>"] = function(prompt_bufnr)
+                ---@diagnostic disable-next-line: unused-local
                 for i = 1, 10 do
                   actions.move_selection_previous(prompt_bufnr)
                 end
               end,
               ["<C-d>"] = function(prompt_bufnr)
+                ---@diagnostic disable-next-line: unused-local
                 for i = 1, 10 do
                   actions.move_selection_next(prompt_bufnr)
                 end
