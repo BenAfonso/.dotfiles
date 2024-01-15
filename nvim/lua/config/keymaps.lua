@@ -38,7 +38,9 @@ keymap.set(
 
 -- increment decrement
 keymap.set("n", "+", "<C-a>", { noremap = true })
+keymap.set("v", "+", "<C-a>", { noremap = true })
 keymap.set("n", "-", "<C-x>", { noremap = true })
+keymap.set("v", "-", "<C-x>", { noremap = true })
 
 -- Scroll
 keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true })
@@ -81,7 +83,7 @@ keymap.set("n", "<C-e>", "'Neotree toggle<Return>", {
 })
 
 -- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
+keymap.set("n", "<C-A>", "gg<S-v>G")
 -- New tab
 keymap.set("n", "te", ":tabedit<Return>", opts)
 keymap.set("n", "tb", ":tabedit %<Return>", opts)
@@ -139,6 +141,6 @@ wk.register({
 }, { prefix = "<leader>" })
 
 -- Diagnostics
-keymap.set("n", "<C-x>", function()
+keymap.set("n", "H", function()
   vim.diagnostic.open_float()
 end, { noremap = true })
