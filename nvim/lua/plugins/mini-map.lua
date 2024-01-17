@@ -1,5 +1,5 @@
 local M = {
-  enabled = true,
+  enabled = false,
   "wfxr/minimap.vim",
   config = function()
     vim.keymap.set(

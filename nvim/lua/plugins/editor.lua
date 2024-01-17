@@ -13,7 +13,9 @@ return {
     "tpope/vim-fugitive",
   },
   {
-    "junkblocker/git-time-lapse",
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
   },
   {
     "ThePrimeagen/harpoon",
