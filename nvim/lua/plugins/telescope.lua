@@ -350,7 +350,7 @@ end
 -- set_keymap("<C-p>", use_layout(telescope_builtin.find_files, "popup_list"))
 set_keymap("<C-\\>", use_layout(telescope_builtin.buffers, "popup_list"))
 set_keymap("<leader>p", use_layout(telescope_builtin.commands, "command_pane"))
-set_keymap("<leader>g", use_layout(telescope_builtin.git_status, "popup_extended"))
+set_keymap(";g", use_layout(telescope_builtin.git_status, "popup_extended"))
 set_keymap("<leader>xz", use_layout(telescope_builtin.quickfix, "ivy_plus"))
 set_keymap("<leader>sy", use_layout(telescope_builtin.loclist, "ivy_plus"))
 set_keymap("<F1>", use_layout(telescope_builtin.help_tags, "popup_extended"))

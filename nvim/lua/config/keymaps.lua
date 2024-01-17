@@ -26,6 +26,10 @@ keymap.set("n", "<leader><left>", ":bprev<CR>", { noremap = true, silent = true,
 keymap.set("n", "<C-right>", ":bnext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
 keymap.set("n", "<C-left>", ":bprev<CR>", { noremap = true, silent = true, desc = "Previous Buffer" })
 
+-- Clipboard
+-- Visual select replace with override register
+keymap.set("x", "p", '"_dP', { noremap = true })
+
 keymap.set(
   "n",
   "<leader>qa",
@@ -103,8 +107,8 @@ keymap.set("n", "<A-left>", "<C-w><")
 keymap.set("n", "<A-right>", "<C-w>>")
 keymap.set("n", "<A-up>", "<C-w>+")
 keymap.set("n", "<A-down>", "<C-w>-")
-
 -- Rename
+
 keymap.set("n", "<leader>cj", function()
   return ":IncRename " .. vim.fn.expand("<cword>")
 end, {
@@ -144,3 +148,39 @@ wk.register({
 keymap.set("n", "H", function()
   vim.diagnostic.open_float()
 end, { noremap = true })
+
+--
+-- Git signs
+--
+local gs = require("gitsigns")
+
+-- Actions
+keymap.set(
+  { "n", "v" },
+  "<leader>hs",
+  ":Gitsigns stage_hunk<CR>",
+  { noremap = true, desc = ":Gitsigns stage_hunk<CR>" }
+)
+keymap.set(
+  { "n", "v" },
+  "<leader>hr",
+  ":Gitsigns reset_hunk<CR>",
+  { noremap = true, desc = ":Gitsigns reset_hunk<CR>" }
+)
+keymap.set("n", "<leader>hS", gs.stage_buffer, { noremap = true, desc = "Stage Buffer" })
+keymap.set("n", "<leader>ha", gs.stage_hunk, { noremap = true, desc = "Stage Hunk" })
+keymap.set("n", "<leader>hu", gs.undo_stage_hunk, { noremap = true, desc = "Undo Stage Hunk" })
+keymap.set("n", "<leader>hR", gs.reset_buffer, { noremap = true, desc = "Reset Buffer" })
+keymap.set("n", "<leader>hp", gs.preview_hunk, { noremap = true, desc = "Preview Hunk" })
+keymap.set("n", "<leader>hb", function()
+  gs.blame_line({ full = true })
+end, { noremap = true, desc = "Blame line" })
+keymap.set("n", "<leader>tb", gs.toggle_current_line_blame, { noremap = true, desc = "Toggle Line Blame" })
+keymap.set("n", "<leader>hd", gs.diffthis, { noremap = true, desc = "Diff this" })
+keymap.set("n", "<leader>hD", function()
+  gs.diffthis("~")
+end, { noremap = true, desc = "Diff this (~)" })
+keymap.set("n", "<leader>td", gs.toggle_deleted, { noremap = true, desc = "Toggle deleted" })
+
+-- Text object
+keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { noremap = true, silent = true })
