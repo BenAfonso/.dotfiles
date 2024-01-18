@@ -3,9 +3,10 @@
 -- Add any additional keymaps here
 
 local discipline = require("ben.discipline")
+-- local input = require("ben.input")
 require("utils.buffers")
 
-discipline.cowboy()
+-- discipline.cowboy()
 
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
@@ -19,16 +20,21 @@ keymap.set("n", "<C-q>", "<cmd>:q<CR>", { noremap = true, silent = true, desc = 
 
 keymap.set("n", "<leader>bo", function()
   close_all_buffers_except_current()
-end, { noremap = true })
+end, { noremap = true, silent = true, desc = "Close all buffers except this one" })
 
 keymap.set("n", "<leader><right>", ":bnext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
 keymap.set("n", "<leader><left>", ":bprev<CR>", { noremap = true, silent = true, desc = "Previous Buffer" })
 keymap.set("n", "<C-right>", ":bnext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
 keymap.set("n", "<C-left>", ":bprev<CR>", { noremap = true, silent = true, desc = "Previous Buffer" })
 
+-- Navigation
+-- Jumplist
+keymap.set("n", "<C-up>", "<C-o>", { noremap = true, silent = true, desc = "Jump back" })
+keymap.set("n", "<C-down>", "<C-i>", { noremap = true, silent = true, desc = "Jump forward" })
+
 -- Clipboard
 -- Visual select replace with override register
-keymap.set("x", "p", '"_dP', { noremap = true })
+keymap.set("x", "p", '"_dP', { noremap = true, desc = "Paste and keep yank register" })
 
 keymap.set(
   "n",
@@ -41,14 +47,12 @@ keymap.set(
 -- keymap.set("n", "<C-k>", "<C-O>", { noremap = true })
 
 -- increment decrement
-keymap.set("n", "+", "<C-a>", { noremap = true })
-keymap.set("v", "+", "<C-a>", { noremap = true })
-keymap.set("n", "-", "<C-x>", { noremap = true })
-keymap.set("v", "-", "<C-x>", { noremap = true })
+keymap.set({ "n", "v" }, "+", "<C-a>", { noremap = true, silent = true, desc = "Increment" })
+keymap.set({ "n", "v" }, "-", "<C-x>", { noremap = true, silent = true, desc = "Decrement" })
 
 -- Scroll
-keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true })
-keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true })
+keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true, desc = "Scroll down" })
+keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true, desc = "Scroll up" })
 
 -- LSP
 keymap.set(
@@ -84,40 +88,33 @@ keymap.set("", "˚", "<cmd>:m .-2<CR>", { noremap = true, silent = true })
 -- Sidenav
 keymap.set("n", "<C-e>", "'Neotree toggle<Return>", {
   silent = true,
+  desc = "Toggle Neotree",
 })
 
 -- Select all
 keymap.set("n", "<C-A>", "gg<S-v>G")
 -- New tab
-keymap.set("n", "te", ":tabedit<Return>", opts)
-keymap.set("n", "tb", ":tabedit %<Return>", opts)
+keymap.set("n", "te", ":tabedit<Return>", { noremap = true, silent = true, desc = "Create new tab" })
+keymap.set("n", "tb", ":tabedit %<Return>", { noremap = true, silent = true, desc = "Open current buffer in new tab" })
 -- keymap.set("n", ";q", ":close<Return>", opts)
-keymap.set("n", "tq", ":tabclose<Return>", opts)
-keymap.set("n", "<tab>", ":tabnext<Return>", opts)
-keymap.set("n", "<S-tab>", ":tabprev<Return>", opts)
+keymap.set("n", "tq", ":tabclose<Return>", { noremap = true, silent = true, desc = "Close tab" })
+keymap.set("n", "<tab>", ":tabnext<Return>", { noremap = true, silent = true, desc = "Next tab" })
+keymap.set("n", "<S-tab>", ":tabprev<Return>", { noremap = true, silent = true, desc = "Previous tab" })
 
 -- Splits
-keymap.set("n", "ss", ":split<Return>", opts)
-keymap.set("n", "vs", ":vsplit<Return>", opts)
-keymap.set("n", "<leader>|", ":vsplit<Return>", opts)
-keymap.set("n", "<leader>_", ":split<Return>", opts)
+keymap.set("n", "ss", ":split<Return>", { noremap = true, silent = true, desc = "Split window bottom" })
+keymap.set("n", "vs", ":vsplit<Return>", { noremap = true, silent = true, desc = "Split window right" })
+keymap.set("n", "<leader>|", ":vsplit<Return>", { noremap = true, silent = true, desc = "Split window right" })
+keymap.set("n", "<leader>_", ":split<Return>", { noremap = true, silent = true, desc = "Split window bottom" })
 
 -- Resize pane
-keymap.set("n", "<A-left>", "<C-w><")
-keymap.set("n", "<A-right>", "<C-w>>")
-keymap.set("n", "<A-up>", "<C-w>+")
-keymap.set("n", "<A-down>", "<C-w>-")
--- Rename
-
-keymap.set("n", "<leader>cj", function()
-  return ":IncRename " .. vim.fn.expand("<cword>")
-end, {
-  expr = true,
-  desc = "Custom Rename",
-})
+keymap.set("n", "<A-left>", "<C-w><", { noremap = true, desc = "Resize pane left" })
+keymap.set("n", "<A-right>", "<C-w>>", { noremap = true, desc = "Resize pane right" })
+keymap.set("n", "<A-up>", "<C-w>+", { noremap = true, desc = "Resize pane up" })
+keymap.set("n", "<A-down>", "<C-w>-", { noremap = true, desc = "Resize pane down" })
 
 -- Undotree
-vim.keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle)
+vim.keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle, { desc = "Toggle Undotree" })
 
 -- flash
 wk.register({
@@ -183,4 +180,9 @@ end, { noremap = true, desc = "Diff this (~)" })
 keymap.set("n", "<leader>td", gs.toggle_deleted, { noremap = true, desc = "Toggle deleted" })
 
 -- Text object
-keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { noremap = true, silent = true })
+keymap.set(
+  { "o", "x" },
+  "ih",
+  ":<C-U>Gitsigns select_hunk<CR>",
+  { noremap = true, silent = true, desc = "Select hunk" }
+)
