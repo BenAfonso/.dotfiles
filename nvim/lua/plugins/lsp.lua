@@ -16,6 +16,7 @@ local M = {
         "tailwindcss-language-server",
         "typescript-language-server",
         "css-lsp",
+        "gopls",
       })
     end,
   },
@@ -27,6 +28,15 @@ local M = {
       inlay_hints = { enabled = true },
       servers = {
         cssls = {},
+        gopls = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+            gofumpt = true,
+          },
+        },
         tailwindcss = {
           root_dir = function(...)
             return require("lspconfig.util").root_pattern(".git")(...)
