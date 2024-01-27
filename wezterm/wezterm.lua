@@ -10,6 +10,57 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+config.font_size = 14.0
+config.line_height = 1.2
+
+-- config.font = wezterm.font("Fira Code", { weight = "Medium", stretch = "Normal" })
+-- config.font_rules = {
+-- 	-- normal-intensity-and-italic
+-- 	{
+-- 		intensity = "Normal",
+-- 		italic = true,
+-- 		font = wezterm.font({
+-- 			family = "Fira Code",
+-- 			weight = "DemiBold",
+-- 			italic = true,
+-- 		}),
+-- 	},
+-- }
+
+-- Trying out Monaspace
+config.font = wezterm.font("Monaspace Neon", { weight = "Medium", stretch = "Normal" })
+config.font_rules = {
+	{
+		intensity = "Bold",
+		italic = false,
+		font = wezterm.font({
+			family = "Monaspace Argon",
+			weight = "Bold",
+			italic = false,
+		}),
+	},
+	-- Bold-and-italic
+	{
+		intensity = "Bold",
+		italic = true,
+		font = wezterm.font({
+			family = "Monaspace Radon",
+			weight = "Bold",
+			italic = true,
+		}),
+	},
+	-- normal-intensity-and-italic
+	{
+		intensity = "Normal",
+		italic = true,
+		font = wezterm.font({
+			family = "Monaspace Radon",
+			weight = "DemiBold",
+			italic = true,
+		}),
+	},
+}
+
 -- config.exit_behavior = "Close"
 config.window_close_confirmation = "NeverPrompt"
 -- config.tab_close_confirmation = "NeverPrompt"
