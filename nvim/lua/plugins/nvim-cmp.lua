@@ -90,7 +90,7 @@ M.config = function()
       end, { "i", "s" }),
     }),
     sources = cmp.config.sources({
-      -- { name = "copilot", priority = 800 },
+      { name = "copilot", priority = 800 },
       { name = "nvim_lsp", priority = 1000 },
       { name = "luasnip", priority = 750 },
       { name = "emoji", priority = 1000 },

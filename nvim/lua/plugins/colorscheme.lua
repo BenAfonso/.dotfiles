@@ -14,6 +14,11 @@ local M = {
       -- vim.cmd.hi("TreesitterContextBottom gui=underline guisp=Grey")
       vim.cmd.hi("TreesitterContextLineNumber guibg=" .. "#0b253a")
       vim.cmd.hi("TreesitterContext guibg=" .. "#0b253a")
+
+      -- Enable transparent background
+      -- vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
+      -- vim.api.nvim_set_hl(0, "NonText", { bg = "NONE", ctermbg = "NONE" })
+
       -- vim.api.nvim_set_hl(0, "@variable.object", { fg = "#ffffff", bg = "NONE" })
       -- vim.api.nvim_set_hl(0, "@field", { fg = "#ffffff", bg = "#ff0000" })
       -- vim.api.nvim_set_hl(0, "@lsp.type.property", { fg = colors.cyan2, bg = "NONE" })

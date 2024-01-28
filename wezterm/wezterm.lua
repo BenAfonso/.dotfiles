@@ -1,11 +1,8 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 
--- This table will hold the configuration.
 local config = {}
 
--- In newer versions of wezterm, use the config_builder which will
--- help provide clearer error messages
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
@@ -13,61 +10,62 @@ end
 config.font_size = 14.0
 config.line_height = 1.2
 
--- config.font = wezterm.font("Fira Code", { weight = "Medium", stretch = "Normal" })
--- config.font_rules = {
--- 	-- normal-intensity-and-italic
--- 	{
--- 		intensity = "Normal",
--- 		italic = true,
--- 		font = wezterm.font({
--- 			family = "Fira Code",
--- 			weight = "DemiBold",
--- 			italic = true,
--- 		}),
--- 	},
--- }
+config.font = wezterm.font("Fira Code", { weight = "Medium" })
 
--- Trying out Monaspace
-config.font = wezterm.font("Monaspace Neon", { weight = "Medium", stretch = "Normal" })
 config.font_rules = {
-	{
-		intensity = "Bold",
-		italic = false,
-		font = wezterm.font({
-			family = "Monaspace Argon",
-			weight = "Bold",
-			italic = false,
-		}),
-	},
-	-- Bold-and-italic
-	{
-		intensity = "Bold",
-		italic = true,
-		font = wezterm.font({
-			family = "Monaspace Radon",
-			weight = "Bold",
-			italic = true,
-		}),
-	},
 	-- normal-intensity-and-italic
 	{
 		intensity = "Normal",
 		italic = true,
 		font = wezterm.font({
-			family = "Monaspace Radon",
+			family = "Fira Code",
 			weight = "DemiBold",
 			italic = true,
 		}),
 	},
 }
 
+-- Trying out Monaspace
+-- config.font = wezterm.font("Monaspace Neon", { weight = "Medium", stretch = "Normal" })
+-- config.font_rules = {
+-- 	{
+-- 		intensity = "Bold",
+-- 		italic = false,
+-- 		font = wezterm.font({
+-- 			family = "Monaspace Argon",
+-- 			weight = "Bold",
+-- 			italic = false,
+-- 		}),
+-- 	},
+-- 	-- Bold-and-italic
+-- 	{
+-- 		intensity = "Bold",
+-- 		italic = true,
+-- 		font = wezterm.font({
+-- 			family = "Monaspace Radon",
+-- 			weight = "Bold",
+-- 			italic = true,
+-- 		}),
+-- 	},
+-- 	-- normal-intensity-and-italic
+-- 	{
+-- 		intensity = "Normal",
+-- 		italic = true,
+-- 		font = wezterm.font({
+-- 			family = "Monaspace Radon",
+-- 			weight = "DemiBold",
+-- 			italic = true,
+-- 		}),
+-- 	},
+-- }
+--
 -- config.exit_behavior = "Close"
 config.window_close_confirmation = "NeverPrompt"
--- config.tab_close_confirmation = "NeverPrompt"
 config.exit_behavior_messaging = "None"
 
 -- This is where you actually apply your config choices
 
+-- config.window_decorations = "RESIZE"
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.default_domain = "WSL:Ubuntu"
 config.window_padding = {
@@ -91,9 +89,9 @@ config.keys = {
 local color = "#ff33b8"
 
 config.color_scheme = "Night Owl (Gogh)"
+config.window_background_opacity = 0.97
 config.window_frame = {
 	active_titlebar_bg = "#011627",
-	active_titlebar_border_bottom = "#ff0000", --"#2b2042",
 	-- border_left_width = "2px",
 	-- border_right_width = "2px",
 	-- border_bottom_height = "2px",

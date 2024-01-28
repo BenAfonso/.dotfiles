@@ -1,0 +1,50 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = false
+
+format = """
+[╭─](bold #c792ea)$username\
+[](fg:#0b2942)\
+$directory\
+[ ](fg:#0b2942)\
+$git_branch\
+$git_state\
+$git_status\
+$nodejs\
+$line_break\
+[╰──](bold #c792ea)$character"""
+
+right_format = "$all"
+command_timeout = 1000
+
+[directory]
+style = "bg:#0b2942 bold"
+format = "[ $path ]($style)"
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[➜](bold #c792ea)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+error_symbol = "[➜](red)"
+vimcmd_symbol = "[❮](green)"
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($styles) '
+cherry_pick = '[🍒 PICKING](bold red)'
+disabled = false
+
+[git_branch]
+# symbol = '🌱 '
+truncation_length = 15
+truncation_symbol = ''
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[nodejs]
+# format = 'via [$symbol($version )]($style)'
+format = 'via [$symbol($version )]($style)'
