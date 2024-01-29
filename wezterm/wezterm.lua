@@ -7,10 +7,10 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.font_size = 14.0
+config.font_size = 15.0
 config.line_height = 1.2
 
-config.font = wezterm.font("Fira Code", { weight = "Medium" })
+config.font = wezterm.font("FiraCode Nerd Font", { weight = "Medium" })
 
 config.font_rules = {
 	-- normal-intensity-and-italic
@@ -18,7 +18,7 @@ config.font_rules = {
 		intensity = "Normal",
 		italic = true,
 		font = wezterm.font({
-			family = "Fira Code",
+			family = "FiraCode Nerd Font",
 			weight = "DemiBold",
 			italic = true,
 		}),
@@ -67,7 +67,7 @@ config.exit_behavior_messaging = "None"
 
 -- config.window_decorations = "RESIZE"
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
-config.default_domain = "WSL:Ubuntu"
+-- config.default_domain = "WSL:Ubuntu"
 config.window_padding = {
 	left = 0,
 	right = 0,
