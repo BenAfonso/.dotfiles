@@ -60,6 +60,7 @@ config.font_rules = {
 -- }
 --
 -- config.exit_behavior = "Close"
+config.hide_tab_bar_if_only_one_tab = true
 config.window_close_confirmation = "NeverPrompt"
 config.exit_behavior_messaging = "None"
 
@@ -69,9 +70,9 @@ config.exit_behavior_messaging = "None"
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 -- config.default_domain = "WSL:Ubuntu"
 config.window_padding = {
-	left = 0,
-	right = 0,
-	top = 0,
+	left = 30,
+	right = 30,
+	top = 60,
 	bottom = 0,
 }
 
@@ -92,14 +93,6 @@ config.color_scheme = "Night Owl (Gogh)"
 config.window_background_opacity = 0.97
 config.window_frame = {
 	active_titlebar_bg = "#011627",
-	-- border_left_width = "2px",
-	-- border_right_width = "2px",
-	-- border_bottom_height = "2px",
-	-- border_top_height = "2px",
-	-- border_left_color = color,
-	-- border_right_color = color,
-	-- border_bottom_color = color,
-	-- border_top_color = color,
 }
 
 config.colors = {
