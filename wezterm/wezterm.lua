@@ -70,7 +70,24 @@ config.exit_behavior_messaging = "None"
 
 -- config.window_decorations = "RESIZE"
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
-config.default_domain = "WSL:Ubuntu"
+
+if string.find(wezterm.target_triple, "windows") ~= nil then
+	config.default_domain = "WSL:Ubuntu"
+end
+
+config.font_rules = {
+	-- normal-intensity-and-italic
+	{
+		intensity = "Normal",
+		italic = true,
+		font = wezterm.font({
+			family = "FiraCode Nerd Font",
+			weight = "DemiBold",
+			italic = true,
+		}),
+	},
+}
+
 config.window_padding = {
 	left = 10,
 	right = 10,
