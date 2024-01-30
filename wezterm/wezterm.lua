@@ -7,7 +7,9 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.font_size = 15.0
+config.term = "wezterm"
+
+config.font_size = 14.0
 config.line_height = 1.2
 
 config.font = wezterm.font("FiraCode Nerd Font", { weight = "Medium" })
@@ -60,7 +62,7 @@ config.font_rules = {
 -- }
 --
 -- config.exit_behavior = "Close"
-config.hide_tab_bar_if_only_one_tab = true
+-- config.hide_tab_bar_if_only_one_tab = true
 config.window_close_confirmation = "NeverPrompt"
 config.exit_behavior_messaging = "None"
 
@@ -70,10 +72,10 @@ config.exit_behavior_messaging = "None"
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 -- config.default_domain = "WSL:Ubuntu"
 config.window_padding = {
-	left = 30,
-	right = 30,
-	top = 60,
-	bottom = 0,
+	left = 10,
+	right = 10,
+	top = 10,
+	bottom = 10,
 }
 
 config.keys = {
@@ -90,7 +92,9 @@ config.keys = {
 local color = "#ff33b8"
 
 config.color_scheme = "Night Owl (Gogh)"
-config.window_background_opacity = 0.97
+config.window_background_opacity = 0.90
+-- config.window_background_opacity = 0.3
+config.macos_window_background_blur = 10
 config.window_frame = {
 	active_titlebar_bg = "#011627",
 }
