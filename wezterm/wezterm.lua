@@ -70,7 +70,7 @@ config.exit_behavior_messaging = "None"
 
 -- config.window_decorations = "RESIZE"
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
--- config.default_domain = "WSL:Ubuntu"
+config.default_domain = "WSL:Ubuntu"
 config.window_padding = {
 	left = 10,
 	right = 10,
@@ -97,6 +97,9 @@ config.window_background_opacity = 0.90
 config.macos_window_background_blur = 10
 config.window_frame = {
 	active_titlebar_bg = "#011627",
+	active_titlebar_fg = "#011627",
+	inactive_titlebar_bg = "#061d30",
+	inactive_titlebar_fg = "#060d30",
 }
 
 config.colors = {
