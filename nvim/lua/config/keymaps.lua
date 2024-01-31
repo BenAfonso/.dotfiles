@@ -12,6 +12,8 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 local wk = require("which-key")
 
+keymap.set({ "n", "x" }, "<leader>d", '"_d', { noremap = true, silent = true, desc = "Deletes in blackhole register" })
+
 keymap.set("n", "<C-b>", "<C-v>", { noremap = true, silent = true, desc = "Enter Visual Block mode" })
 
 -- Buffers management
