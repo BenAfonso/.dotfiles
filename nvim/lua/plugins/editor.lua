@@ -5,6 +5,7 @@ return {
   {
     "ThePrimeagen/vim-be-good",
   },
+  { "akinsho/git-conflict.nvim", version = "*", config = true },
   {
     -- <leader>F5
     "mbbill/undotree",
@@ -13,6 +14,7 @@ return {
     "tpope/vim-fugitive",
   },
   {
+    enabled = false,
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {},

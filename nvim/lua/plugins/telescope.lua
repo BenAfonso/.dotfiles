@@ -175,6 +175,10 @@ local M = {
         mappings = {
           n = {
             ["<C-t>"] = require("trouble.providers.telescope").open_with_trouble,
+            ["<C-a>"] = function(bufnr)
+              print(bufnr)
+              require("trouble.providers.telescope").open_with_trouble(bufnr, "quickfix")
+            end,
             ["<C-\\>"] = actions.select_tab,
             ["t"] = actions.select_tab,
             ["vs"] = actions.select_vertical,
@@ -184,6 +188,9 @@ local M = {
           },
           i = {
             ["<C-t>"] = require("trouble.providers.telescope").open_with_trouble,
+            ["<C-a>"] = function(bufnr)
+              require("trouble.providers.telescope").open_with_trouble(bufnr, "quickfix")
+            end,
             ["<C-\\>"] = actions.select_tab,
             ["<C-v>"] = actions.select_vertical,
             ["<C-h>"] = actions.select_horizontal,
