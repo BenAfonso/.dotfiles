@@ -1,5 +1,6 @@
 ---@diagnostic disable: no-unknown, undefined-global
 local M = {
+  enabled = true,
   "nvim-cmp",
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
@@ -50,6 +51,9 @@ M.config = function()
       completion = cmp.config.window.bordered(),
       documentation = cmp.config.window.bordered(),
     },
+    performance = {
+      max_view_entries = 7,
+    },
     mapping = cmp.mapping.preset.insert({
       ["<C-b>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -90,11 +94,11 @@ M.config = function()
       end, { "i", "s" }),
     }),
     sources = cmp.config.sources({
-      { name = "copilot", priority = 800 },
+      -- { name = "copilot", priority = 800 },
       { name = "nvim_lsp", priority = 1000 },
       { name = "luasnip", priority = 750 },
       { name = "emoji", priority = 1000 },
-      { name = "buffer", priority = 500 },
+      -- { name = "buffer", priority = 500 },
       { name = "path", priority = 250 },
       { name = "calc" },
       -- { name = "vim-dadbod-completion", priority = 700 }, -- add new source
