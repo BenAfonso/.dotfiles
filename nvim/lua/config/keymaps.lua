@@ -14,6 +14,9 @@ local wk = require("which-key")
 
 keymap.set({ "n", "x" }, "<leader>d", '"_d', { noremap = true, silent = true, desc = "Deletes in blackhole register" })
 
+keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
 keymap.set("n", "<C-b>", "<C-v>", { noremap = true, silent = true, desc = "Enter Visual Block mode" })
 
 -- Buffers management
