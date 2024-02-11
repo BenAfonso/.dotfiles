@@ -109,9 +109,9 @@ config.keys = {
 local color = "#ff33b8"
 
 config.color_scheme = "Night Owl (Gogh)"
-config.window_background_opacity = 0.90
+-- config.window_background_opacity = 0.90
 -- config.window_background_opacity = 0.3
-config.macos_window_background_blur = 10
+-- config.macos_window_background_blur = 10
 config.window_frame = {
 	active_titlebar_bg = "#011627",
 	active_titlebar_fg = "#011627",

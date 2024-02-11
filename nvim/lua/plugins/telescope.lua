@@ -4,6 +4,15 @@ local map = vim.keymap.set
 local telescope = require("telescope")
 local telescope_builtin = require("telescope.builtin")
 
+local function filenameFirst(_, path)
+  local tail = vim.fs.basename(path)
+  local parent = vim.fs.dirname(path)
+  if parent == "." then
+    return tail
+  end
+  return string.format("%s\t\t%s", tail, parent)
+end
+
 local M = {
   {
     "telescope.nvim",
@@ -167,14 +176,16 @@ local M = {
         layout_config = {
           prompt_position = "top",
         },
-        path_display = {
-          "smart",
-        },
+        path_display = { "shorten" },
         sorting_strategy = "ascending",
         winblend = 0,
         mappings = {
           n = {
             ["<C-t>"] = require("trouble.providers.telescope").open_with_trouble,
+            ["<C-q>"] = function(bufnr)
+              actions.send_to_qflist(bufnr)
+              require("trouble").open("quickfix")
+            end,
             ["<C-a>"] = function(bufnr)
               print(bufnr)
               require("trouble.providers.telescope").open_with_trouble(bufnr, "quickfix")
@@ -187,6 +198,10 @@ local M = {
             ["<C-h>"] = actions.select_horizontal,
           },
           i = {
+            ["<C-q>"] = function(bufnr)
+              actions.send_to_qflist(bufnr)
+              require("trouble").open("quickfix")
+            end,
             ["<C-t>"] = require("trouble.providers.telescope").open_with_trouble,
             ["<C-a>"] = function(bufnr)
               require("trouble.providers.telescope").open_with_trouble(bufnr, "quickfix")
@@ -199,6 +214,7 @@ local M = {
       })
       opts.pickers = {
         buffers = {
+          path_display = filenameFirst,
           sort_lastused = true,
           mappings = {
             n = {
@@ -223,6 +239,12 @@ local M = {
               end,
             },
           },
+        },
+        git_status = {
+          path_display = filenameFirst,
+        },
+        find_files = {
+          path_display = filenameFirst,
         },
         diagnostics = {
           theme = "ivy",
@@ -361,5 +383,15 @@ set_keymap(";g", use_layout(telescope_builtin.git_status, "popup_extended"))
 set_keymap("<leader>xz", use_layout(telescope_builtin.quickfix, "ivy_plus"))
 set_keymap("<leader>sy", use_layout(telescope_builtin.loclist, "ivy_plus"))
 set_keymap("<F1>", use_layout(telescope_builtin.help_tags, "popup_extended"))
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "TelescopeResults",
+  callback = function(ctx)
+    vim.api.nvim_buf_call(ctx.buf, function()
+      vim.fn.matchadd("TelescopeParent", "\t\t.*$")
+      vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
+    end)
+  end,
+})
 
 return M
