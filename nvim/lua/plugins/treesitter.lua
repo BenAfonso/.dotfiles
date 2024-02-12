@@ -16,6 +16,7 @@ return {
         "scss",
         "sql",
         "svelte",
+        "javascript",
         "typescript",
         "tsx",
         "styled",
