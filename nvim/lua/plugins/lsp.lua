@@ -17,6 +17,8 @@ local M = {
         "typescript-language-server",
         "css-lsp",
         "gopls",
+        "eslint-lsp",
+        -- "quick-lint-js",
       })
     end,
   },
@@ -42,6 +44,23 @@ local M = {
             return require("lspconfig.util").root_pattern(".git")(...)
           end,
         },
+        eslint = {
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+          },
+        },
+        -- quick_lint_js = {
+        --   filetypes = {
+        --     "javascript",
+        --     "javascriptreact",
+        --     "typescript",
+        --     "typescriptreact",
+        --   },
+        --   root_pattern = { ".git" },
+        -- },
         tsserver = {
           commands = {
             RenameFile = {
@@ -52,30 +71,38 @@ local M = {
           root_dir = function(...)
             return require("lspconfig.util").root_pattern(".git")(...)
           end,
-          single_file_support = false,
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx",
+          },
+          single_file_support = true,
           settings = {
-            typescript = {
-              inlayHints = {
-                includeInlayParameterNameHints = "literal",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = false,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-              },
-            },
-            javascript = {
-              inlayHints = {
-                includeInlayParameterNameHints = "all",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-              },
-            },
+            --   typescript = {
+            --     inlayHints = {
+            --       includeInlayParameterNameHints = "literal",
+            --       includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+            --       includeInlayFunctionParameterTypeHints = true,
+            --       includeInlayVariableTypeHints = false,
+            --       includeInlayPropertyDeclarationTypeHints = true,
+            --       includeInlayFunctionLikeReturnTypeHints = true,
+            --       includeInlayEnumMemberValueHints = true,
+            --     },
+            --   },
+            --   javascript = {
+            --     inlayHints = {
+            --       includeInlayParameterNameHints = "all",
+            --       includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+            --       includeInlayFunctionParameterTypeHints = true,
+            --       includeInlayVariableTypeHints = true,
+            --       includeInlayPropertyDeclarationTypeHints = true,
+            --       includeInlayFunctionLikeReturnTypeHints = true,
+            --       includeInlayEnumMemberValueHints = true,
+            --     },
+            --   },
           },
         },
         html = {},
