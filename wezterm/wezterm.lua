@@ -9,7 +9,7 @@ end
 
 config.term = "wezterm"
 
-config.font_size = 14.0
+config.font_size = 16.0
 config.line_height = 1.2
 
 config.font = wezterm.font("FiraCode Nerd Font", { weight = "Medium" })

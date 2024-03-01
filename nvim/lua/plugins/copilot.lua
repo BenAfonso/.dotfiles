@@ -7,7 +7,7 @@ local M = {
   -- },
   { -- Sets up copilot.lua
     "zbirenbaum/copilot.lua",
-    enabled = true,
+    enabled = false,
     opts = {
       branch = "main",
       panel = { enabled = false },

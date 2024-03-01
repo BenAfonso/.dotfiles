@@ -30,8 +30,20 @@ return {
   {
     "rcarriga/nvim-notify",
     opts = {
-      timeout = 5000,
+      timeout = 3000,
+      max_height = 5,
+      max_width = 50,
       background_colour = "#1e222a",
+    },
+    keys = {
+      {
+        "<Esc>",
+        function()
+          local notify = require("notify")
+          notify.dismiss({})
+        end,
+        desc = "Clear notification",
+      },
     },
   },
   -- buffer line
