@@ -16,12 +16,14 @@ end
 local M = {
   {
     "telescope.nvim",
+    branch = "0.1.x",
     dependencies = {
       "nvim-telescope/telescope-file-browser.nvim",
       {
         "nvim-telescope/telescope-live-grep-args.nvim",
         version = "^1.0.0",
       },
+      { "nvim-telescope/telescope-ui-select.nvim" },
     },
     keys = {
       {
@@ -295,9 +297,9 @@ local M = {
         },
       }
       telescope.setup(opts)
-      require("telescope").load_extension("live_grep_args")
-      require("telescope").load_extension("fzf")
-      require("telescope").load_extension("file_browser")
+      pcall(require("telescope").load_extension("live_grep_args"))
+      pcall(require("telescope").load_extension("fzf"))
+      pcall(require("telescope").load_extension("file_browser"))
     end,
   },
 }

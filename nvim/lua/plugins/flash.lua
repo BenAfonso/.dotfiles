@@ -1,7 +1,6 @@
 return {
   enabled = true,
   "folke/flash.nvim",
-  ---@type Flash.Config
   opts = {},
   keys = {
     { "s", mode = { "n" }, false },

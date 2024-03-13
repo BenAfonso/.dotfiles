@@ -1,5 +1,6 @@
 return {
   -- Create annotations with one keybind, and jump your cursor in the inserted annotation
+  { "mini.pairs", enabled = false },
   {
     "danymat/neogen",
     keys = {

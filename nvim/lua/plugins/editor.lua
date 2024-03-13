@@ -14,7 +14,7 @@ return {
     "tpope/vim-fugitive",
   },
   {
-    enabled = false,
+    enabled = true,
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {},
