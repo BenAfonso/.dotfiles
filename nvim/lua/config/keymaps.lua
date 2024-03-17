@@ -154,35 +154,50 @@ end, { noremap = true })
 --
 -- Git signs
 --
+
 local gs = require("gitsigns")
 
--- Actions
-keymap.set(
-  { "n", "v" },
-  "<leader>hs",
-  ":Gitsigns stage_hunk<CR>",
-  { noremap = true, desc = ":Gitsigns stage_hunk<CR>" }
-)
-keymap.set(
-  { "n", "v" },
-  "<leader>hr",
-  ":Gitsigns reset_hunk<CR>",
-  { noremap = true, desc = ":Gitsigns reset_hunk<CR>" }
-)
-keymap.set("n", "<leader>hS", gs.stage_buffer, { noremap = true, desc = "Stage Buffer" })
-keymap.set("n", "<leader>ha", gs.stage_hunk, { noremap = true, desc = "Stage Hunk" })
-keymap.set("n", "<leader>hu", gs.undo_stage_hunk, { noremap = true, desc = "Undo Stage Hunk" })
-keymap.set("n", "<leader>hR", gs.reset_buffer, { noremap = true, desc = "Reset Buffer" })
-keymap.set("n", "<leader>hp", gs.preview_hunk, { noremap = true, desc = "Preview Hunk" })
-keymap.set("n", "<leader>hb", function()
+-- Navigation
+keymap.set("n", "]c", function()
+  if vim.wo.diff then
+    return "]c"
+  end
+  vim.schedule(function()
+    gs.next_hunk()
+  end)
+  return "<Ignore>"
+end, { noremap = true, expr = true })
+
+keymap.set("n", "[c", function()
+  if vim.wo.diff then
+    return "[c"
+  end
+  vim.schedule(function()
+    gs.prev_hunk()
+  end)
+  return "<Ignore>"
+end, { noremap = true, expr = true })
+
+require("which-key").register({
+  ["<leader>gt"] = { name = "[G]it [T]oggle", _ = "which_key_ignore" },
+})
+
+keymap.set({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>", { noremap = true, desc = "[G]it [S]tage Hunk" })
+keymap.set({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>", { noremap = true, desc = "[G]it [R]eset Hunk" })
+keymap.set("n", "<leader>gS", gs.stage_buffer, { noremap = true, desc = "[G]it [S]tage Buffer" })
+keymap.set("n", "<leader>ga", gs.stage_hunk, { noremap = true, desc = "[G]it [S]tage Hunk" })
+keymap.set("n", "<leader>gu", gs.undo_stage_hunk, { noremap = true, desc = "[G]it [U]ndo Stage Hunk" })
+keymap.set("n", "<leader>gR", gs.reset_buffer, { noremap = true, desc = "[G]it [R]eset Buffer" })
+keymap.set("n", "<leader>gp", gs.preview_hunk, { noremap = true, desc = "[G]it [P]review Hunk" })
+keymap.set("n", "<leader>gb", function()
   gs.blame_line({ full = true })
-end, { noremap = true, desc = "Blame line" })
-keymap.set("n", "<leader>tb", gs.toggle_current_line_blame, { noremap = true, desc = "Toggle Line Blame" })
-keymap.set("n", "<leader>hd", gs.diffthis, { noremap = true, desc = "Diff this" })
-keymap.set("n", "<leader>hD", function()
+end, { noremap = true, desc = "[G]it [B]lame line" })
+keymap.set("n", "<leader>gtb", gs.toggle_current_line_blame, { noremap = true, desc = "[G]it [T]oggle [B]lame" })
+keymap.set("n", "<leader>gd", gs.diffthis, { noremap = true, desc = "[G]it [D]iff this" })
+keymap.set("n", "<leader>gD", function()
   gs.diffthis("~")
 end, { noremap = true, desc = "Diff this (~)" })
-keymap.set("n", "<leader>td", gs.toggle_deleted, { noremap = true, desc = "Toggle deleted" })
+keymap.set("n", "<leader>gtd", gs.toggle_deleted, { noremap = true, desc = "[G]it [T]oggle [D]eleted" })
 
 -- Text object
 keymap.set(
