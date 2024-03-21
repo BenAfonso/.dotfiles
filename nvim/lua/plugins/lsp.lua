@@ -120,6 +120,9 @@ local M = {
             Lua = {
               workspace = {
                 checkThirdParty = false,
+                library = {
+                  "${3rd}/love2d/library",
+                },
               },
               completion = {
                 workspaceWord = true,

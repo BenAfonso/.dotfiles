@@ -3,6 +3,7 @@ local M = {
   cmd = "LoveRun",
   opts = {
     path_to_love_bin = os.getenv("LOVE2D_PATH"),
+    restart_on_save = false,
     -- path_to_love_bin = "/home/ben/love/love-11.5-x86_64.AppImage",
   },
   keys = {
