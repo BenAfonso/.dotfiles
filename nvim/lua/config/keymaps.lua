@@ -113,10 +113,10 @@ keymap.set("n", "<leader>|", ":vsplit<Return>", { noremap = true, silent = true,
 keymap.set("n", "<leader>_", ":split<Return>", { noremap = true, silent = true, desc = "Split window bottom" })
 
 -- Resize pane
-keymap.set("n", "<A-left>", "<C-w><", { noremap = true, desc = "Resize pane left" })
-keymap.set("n", "<A-right>", "<C-w>>", { noremap = true, desc = "Resize pane right" })
-keymap.set("n", "<A-up>", "<C-w>+", { noremap = true, desc = "Resize pane up" })
-keymap.set("n", "<A-down>", "<C-w>-", { noremap = true, desc = "Resize pane down" })
+-- keymap.set("n", "<A-S-h>", "<C-w><", { noremap = true, desc = "Resize pane left" })
+-- keymap.set("n", "<A-S-l>", "<C-w>>", { noremap = true, desc = "Resize pane right" })
+-- keymap.set("n", "<A-S-k>", "<C-w>+", { noremap = true, desc = "Resize pane up" })
+-- keymap.set("n", "<A-S-j>", "<C-w>-", { noremap = true, desc = "Resize pane down" })
 
 -- Undotree
 vim.keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle, { desc = "Toggle Undotree" })
@@ -179,25 +179,25 @@ keymap.set("n", "[c", function()
 end, { noremap = true, expr = true })
 
 require("which-key").register({
-  ["<leader>gt"] = { name = "[G]it [T]oggle", _ = "which_key_ignore" },
+  ["<leader>ht"] = { name = "[G]it [T]oggle", _ = "which_key_ignore" },
 })
 
-keymap.set({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>", { noremap = true, desc = "[G]it [S]tage Hunk" })
-keymap.set({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>", { noremap = true, desc = "[G]it [R]eset Hunk" })
-keymap.set("n", "<leader>gS", gs.stage_buffer, { noremap = true, desc = "[G]it [S]tage Buffer" })
-keymap.set("n", "<leader>ga", gs.stage_hunk, { noremap = true, desc = "[G]it [S]tage Hunk" })
-keymap.set("n", "<leader>gu", gs.undo_stage_hunk, { noremap = true, desc = "[G]it [U]ndo Stage Hunk" })
-keymap.set("n", "<leader>gR", gs.reset_buffer, { noremap = true, desc = "[G]it [R]eset Buffer" })
-keymap.set("n", "<leader>gp", gs.preview_hunk, { noremap = true, desc = "[G]it [P]review Hunk" })
-keymap.set("n", "<leader>gb", function()
+keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", { noremap = true, desc = "[G]it [S]tage Hunk" })
+keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", { noremap = true, desc = "[G]it [R]eset Hunk" })
+keymap.set("n", "<leader>hS", gs.stage_buffer, { noremap = true, desc = "[G]it [S]tage Buffer" })
+keymap.set("n", "<leader>ha", gs.stage_hunk, { noremap = true, desc = "[G]it [S]tage Hunk" })
+keymap.set("n", "<leader>hu", gs.undo_stage_hunk, { noremap = true, desc = "[G]it [U]ndo Stage Hunk" })
+keymap.set("n", "<leader>hR", gs.reset_buffer, { noremap = true, desc = "[G]it [R]eset Buffer" })
+keymap.set("n", "<leader>hp", gs.preview_hunk, { noremap = true, desc = "[G]it [P]review Hunk" })
+keymap.set("n", "<leader>hb", function()
   gs.blame_line({ full = true })
 end, { noremap = true, desc = "[G]it [B]lame line" })
-keymap.set("n", "<leader>gtb", gs.toggle_current_line_blame, { noremap = true, desc = "[G]it [T]oggle [B]lame" })
-keymap.set("n", "<leader>gd", gs.diffthis, { noremap = true, desc = "[G]it [D]iff this" })
-keymap.set("n", "<leader>gD", function()
+keymap.set("n", "<leader>htb", gs.toggle_current_line_blame, { noremap = true, desc = "[G]it [T]oggle [B]lame" })
+keymap.set("n", "<leader>hd", gs.diffthis, { noremap = true, desc = "[G]it [D]iff this" })
+keymap.set("n", "<leader>hD", function()
   gs.diffthis("~")
 end, { noremap = true, desc = "Diff this (~)" })
-keymap.set("n", "<leader>gtd", gs.toggle_deleted, { noremap = true, desc = "[G]it [T]oggle [D]eleted" })
+keymap.set("n", "<leader>htd", gs.toggle_deleted, { noremap = true, desc = "[G]it [T]oggle [D]eleted" })
 
 -- Text object
 keymap.set(
