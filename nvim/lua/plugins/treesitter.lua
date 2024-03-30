@@ -72,8 +72,10 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    config = function()
+    config = function(_, opts)
+      ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup({
+        opts,
         textobjects = {
           select = {
             enable = true,
@@ -81,6 +83,7 @@ return {
             keymaps = {
               ["af"] = "@function.outer",
               ["if"] = "@function.inner",
+              ["aP"] = "@parameter.outer",
               ["ac"] = "@class.outer",
               ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
               ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
@@ -88,9 +91,37 @@ return {
             selection_modes = {
               ["@parameter.outer"] = "v", -- charwise
               ["@function.outer"] = "V", -- linewise
-              ["@class.outer"] = "<c-v>", -- blockwise
+              ["@class.outer"] = "V", -- blockwise
             },
             include_surrounding_whitespace = true,
+          },
+          move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+              ["]p"] = "@parameter.inner",
+              --
+              -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
+              ["]o"] = "@loop.*",
+            },
+            goto_next_end = {
+              ["]P"] = "@parameter.inner",
+            },
+            goto_previous_start = {
+              ["[p"] = "@parameter.inner",
+            },
+            goto_previous_end = {
+              ["[P"] = "@parameter.inner",
+            },
+            -- Below will go to either the start or the end, whichever is closer.
+            -- Use if you want more granular movements
+            -- Make it even more gradual by adding multiple queries and regex.
+            goto_next = {
+              ["]c"] = "@conditional.outer",
+            },
+            goto_previous = {
+              ["[c"] = "@conditional.outer",
+            },
           },
         },
       })
