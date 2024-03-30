@@ -171,3 +171,5 @@ require("lazy").setup({
 
 require("config.keymaps")
 require("ben.autocmds")
+
+require("trouble")

@@ -2,15 +2,17 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-local discipline = require("ben.discipline")
+require("ben.discipline")
 -- local input = require("ben.input")
 require("utils.buffers")
 
 -- discipline.cowboy()
 
 local keymap = vim.keymap
-local opts = { noremap = true, silent = true }
-local wk = require("which-key")
+-- local opts = { noremap = true, silent = true }
+-- local wk = require("which-key")
+
+keymap.set({ "n", "x" }, "<leader>L", "<Cmd>:Lazy<CR>", { noremap = true, silent = true, desc = "Lazy" })
 
 keymap.set({ "n", "x" }, "<leader>d", '"_d', { noremap = true, silent = true, desc = "Deletes in blackhole register" })
 
@@ -30,7 +32,7 @@ keymap.set("n", ";q", close_current_buffer, { noremap = true, silent = true, des
 keymap.set("n", "<C-q>", "<cmd>:q<CR>", { noremap = true, silent = true, desc = "Close window" })
 
 keymap.set("n", "<leader>bo", function()
-	close_all_buffers_except_current()
+  close_all_buffers_except_current()
 end, { noremap = true, silent = true, desc = "Close all buffers except this one" })
 
 keymap.set("n", "<leader><right>", ":bnext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
@@ -98,9 +100,9 @@ vim.keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle, { desc = "Toggle Und
 
 -- Diagnostics
 keymap.set("n", "H", function()
-	vim.diagnostic.open_float({
-		border = "rounded",
-	})
+  vim.diagnostic.open_float({
+    border = "rounded",
+  })
 end, { noremap = true })
 
 --
@@ -110,7 +112,7 @@ end, { noremap = true })
 local gs = require("gitsigns")
 
 require("which-key").register({
-	["<leader>gt"] = { name = "[G]it [T]oggle", _ = "which_key_ignore" },
+  ["<leader>gt"] = { name = "[G]it [T]oggle", _ = "which_key_ignore" },
 })
 
 keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", { noremap = true, desc = "[H]unk [S]tage Hunk" })
@@ -121,19 +123,19 @@ keymap.set("n", "<leader>hu", gs.undo_stage_hunk, { noremap = true, desc = "[H]u
 keymap.set("n", "<leader>hR", gs.reset_buffer, { noremap = true, desc = "[H]unk [R]eset Buffer" })
 keymap.set("n", "<leader>hp", gs.preview_hunk, { noremap = true, desc = "[H]unk [P]review Hunk" })
 keymap.set("n", "<leader>hb", function()
-	gs.blame_line({ full = true })
+  gs.blame_line({ full = true })
 end, { noremap = true, desc = "[H]unk [B]lame line" })
 keymap.set("n", "<leader>htb", gs.toggle_current_line_blame, { noremap = true, desc = "[H]unk [T]oggle [B]lame" })
 keymap.set("n", "<leader>hd", gs.diffthis, { noremap = true, desc = "[H]unk [D]iff this" })
 keymap.set("n", "<leader>hD", function()
-	gs.diffthis("~")
+  gs.diffthis("~")
 end, { noremap = true, desc = "Diff this (~)" })
 keymap.set("n", "<leader>htd", gs.toggle_deleted, { noremap = true, desc = "[H]unk [T]oggle [D]eleted" })
 
 -- Text object
 keymap.set(
-	{ "o", "x" },
-	"ih",
-	":<C-U>Gitsigns select_hunk<CR>",
-	{ noremap = true, silent = true, desc = "Select hunk" }
+  { "o", "x" },
+  "ih",
+  ":<C-U>Gitsigns select_hunk<CR>",
+  { noremap = true, silent = true, desc = "Select hunk" }
 )
