@@ -20,6 +20,7 @@ return {
         "typescript",
         "tsx",
         "styled",
+        "markdown_inline",
       },
 
       -- matchup = {

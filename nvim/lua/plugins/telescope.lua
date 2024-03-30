@@ -183,14 +183,14 @@ local M = {
         winblend = 0,
         mappings = {
           n = {
-            ["<C-t>"] = require("trouble.providers.telescope").open_with_trouble,
+            ["<C-t>"] = require("trouble.sources.telescope").open,
             ["<C-q>"] = function(bufnr)
               actions.send_to_qflist(bufnr)
               require("trouble").open("quickfix")
             end,
             ["<C-a>"] = function(bufnr)
-              print(bufnr)
-              require("trouble.providers.telescope").open_with_trouble(bufnr, "quickfix")
+              require("trouble.sources.telescope").open(bufnr)
+              -- require("trouble.providers.telescope").open_with_trouble(bufnr, "quickfix")
             end,
             ["<C-\\>"] = actions.select_tab,
             ["t"] = actions.select_tab,
@@ -204,9 +204,10 @@ local M = {
               actions.send_to_qflist(bufnr)
               require("trouble").open("quickfix")
             end,
-            ["<C-t>"] = require("trouble.providers.telescope").open_with_trouble,
+            ["<C-t>"] = require("trouble.sources.telescope").open,
             ["<C-a>"] = function(bufnr)
-              require("trouble.providers.telescope").open_with_trouble(bufnr, "quickfix")
+              require("trouble.sources.telescope").open(bufnr)
+              -- require("trouble.providers.telescope").open_with_trouble(bufnr, "quickfix")
             end,
             ["<C-\\>"] = actions.select_tab,
             ["<C-v>"] = actions.select_vertical,
