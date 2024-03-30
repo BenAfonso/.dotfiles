@@ -1,1 +1,0 @@
--- Function that generates fibonacci

@@ -14,8 +14,14 @@ local wk = require("which-key")
 
 keymap.set({ "n", "x" }, "<leader>d", '"_d', { noremap = true, silent = true, desc = "Deletes in blackhole register" })
 
-keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
-keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move line down" })
+keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move line up" })
+
+keymap.set({ "i", "n" }, "<A-j>", "<Cmd>m .+1<CR>==", { noremap = true, silent = true, desc = "Move line down" })
+keymap.set({ "v" }, "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move line down" })
+
+keymap.set({ "i", "n" }, "<A-k>", "<Cmd>m .-2<CR>==", { noremap = true, silent = true, desc = "Move line up" })
+keymap.set({ "v" }, "<A-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move line up" })
 
 keymap.set("n", "<C-b>", "<C-v>", { noremap = true, silent = true, desc = "Enter Visual Block mode" })
 
@@ -24,7 +30,7 @@ keymap.set("n", ";q", close_current_buffer, { noremap = true, silent = true, des
 keymap.set("n", "<C-q>", "<cmd>:q<CR>", { noremap = true, silent = true, desc = "Close window" })
 
 keymap.set("n", "<leader>bo", function()
-  close_all_buffers_except_current()
+	close_all_buffers_except_current()
 end, { noremap = true, silent = true, desc = "Close all buffers except this one" })
 
 keymap.set("n", "<leader><right>", ":bnext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
@@ -41,12 +47,7 @@ keymap.set("n", "<C-down>", "<C-i>", { noremap = true, silent = true, desc = "Ju
 -- Visual select replace with override register
 keymap.set("x", "p", '"_dP', { noremap = true, desc = "Paste and keep yank register" })
 
-keymap.set(
-  "n",
-  "<leader>qa",
-  ":%bd|e#|bd#<cr>|'\"",
-  { noremap = true, silent = true, desc = "Close all buffers except this one" }
-)
+-- keymap.set('n', '<leader>qa', ':%bd|e#|bd#<cr>|\'"', { noremap = true, silent = true, desc = 'Close all buffers except this one' })
 
 -- keymap.set("n", "<C-j>", "<C-I>", { noremap = true })
 -- keymap.set("n", "<C-k>", "<C-O>", { noremap = true })
@@ -59,26 +60,6 @@ keymap.set({ "n", "v" }, "-", "<C-x>", { noremap = true, silent = true, desc = "
 keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true, desc = "Scroll down" })
 keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true, desc = "Scroll up" })
 
--- LSP
-keymap.set(
-  "n",
-  "<leader>gi",
-  "<cmd>Telescope lsp_implementations<CR>",
-  { noremap = true, silent = true, desc = "LSP Implementations" }
-)
-keymap.set(
-  "n",
-  "<leader>gd",
-  "<cmd>Telescope lsp_definitions<CR>",
-  { noremap = true, silent = true, desc = "LSP Definitions" }
-)
-keymap.set(
-  "n",
-  "<leader>gr",
-  "<cmd>Telescope lsp_references<CR>",
-  { noremap = true, silent = true, desc = "LSP References" }
-)
-
 -- Pasting
 keymap.set("x", "<leader>p", '"_dP')
 
@@ -89,12 +70,6 @@ keymap.set("n", "N", "Nzzzv", { noremap = true })
 keymap.set("", "∆", "<cmd>:m .+1<CR>", { noremap = true, silent = true })
 -- Option + K ˚
 keymap.set("", "˚", "<cmd>:m .-2<CR>", { noremap = true, silent = true })
-
--- Sidenav
-keymap.set("n", "<C-e>", "'Neotree toggle<Return>", {
-  silent = true,
-  desc = "Toggle Neotree",
-})
 
 -- Select all
 keymap.set("n", "<C-A>", "gg<S-v>G")
@@ -113,42 +88,19 @@ keymap.set("n", "<leader>|", ":vsplit<Return>", { noremap = true, silent = true,
 keymap.set("n", "<leader>_", ":split<Return>", { noremap = true, silent = true, desc = "Split window bottom" })
 
 -- Resize pane
--- keymap.set("n", "<A-S-h>", "<C-w><", { noremap = true, desc = "Resize pane left" })
--- keymap.set("n", "<A-S-l>", "<C-w>>", { noremap = true, desc = "Resize pane right" })
--- keymap.set("n", "<A-S-k>", "<C-w>+", { noremap = true, desc = "Resize pane up" })
--- keymap.set("n", "<A-S-j>", "<C-w>-", { noremap = true, desc = "Resize pane down" })
+keymap.set("n", "<A-left>", "<C-w><", { noremap = true, desc = "Resize pane left" })
+keymap.set("n", "<A-right>", "<C-w>>", { noremap = true, desc = "Resize pane right" })
+keymap.set("n", "<A-up>", "<C-w>+", { noremap = true, desc = "Resize pane up" })
+keymap.set("n", "<A-down>", "<C-w>-", { noremap = true, desc = "Resize pane down" })
 
 -- Undotree
 vim.keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle, { desc = "Toggle Undotree" })
 
--- flash
-wk.register({
-  o = {
-    name = "flash",
-    s = {
-      function()
-        require("flash").jump()
-      end,
-      "Flash Jump",
-    },
-    t = {
-      function()
-        require("flash").treesitter()
-      end,
-      "Flash Treesitter",
-    },
-    r = {
-      function()
-        require("flash").treesitter_search()
-      end,
-      "Search Treesitter",
-    },
-  },
-}, { prefix = "<leader>" })
-
 -- Diagnostics
 keymap.set("n", "H", function()
-  vim.diagnostic.open_float()
+	vim.diagnostic.open_float({
+		border = "rounded",
+	})
 end, { noremap = true })
 
 --
@@ -157,72 +109,31 @@ end, { noremap = true })
 
 local gs = require("gitsigns")
 
--- Navigation
-keymap.set("n", "]c", function()
-  if vim.wo.diff then
-    return "]c"
-  end
-  vim.schedule(function()
-    gs.next_hunk()
-  end)
-  return "<Ignore>"
-end, { noremap = true, expr = true })
-
-keymap.set("n", "[c", function()
-  if vim.wo.diff then
-    return "[c"
-  end
-  vim.schedule(function()
-    gs.prev_hunk()
-  end)
-  return "<Ignore>"
-end, { noremap = true, expr = true })
-
 require("which-key").register({
-  ["<leader>ht"] = { name = "[G]it [T]oggle", _ = "which_key_ignore" },
+	["<leader>gt"] = { name = "[G]it [T]oggle", _ = "which_key_ignore" },
 })
 
-keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", { noremap = true, desc = "[G]it [S]tage Hunk" })
-keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", { noremap = true, desc = "[G]it [R]eset Hunk" })
-keymap.set("n", "<leader>hS", gs.stage_buffer, { noremap = true, desc = "[G]it [S]tage Buffer" })
-keymap.set("n", "<leader>ha", gs.stage_hunk, { noremap = true, desc = "[G]it [S]tage Hunk" })
-keymap.set("n", "<leader>hu", gs.undo_stage_hunk, { noremap = true, desc = "[G]it [U]ndo Stage Hunk" })
-keymap.set("n", "<leader>hR", gs.reset_buffer, { noremap = true, desc = "[G]it [R]eset Buffer" })
-keymap.set("n", "<leader>hp", gs.preview_hunk, { noremap = true, desc = "[G]it [P]review Hunk" })
+keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", { noremap = true, desc = "[H]unk [S]tage Hunk" })
+keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", { noremap = true, desc = "[H]unk [R]eset Hunk" })
+keymap.set("n", "<leader>hS", gs.stage_buffer, { noremap = true, desc = "[H]unk [S]tage Buffer" })
+keymap.set("n", "<leader>ha", gs.stage_hunk, { noremap = true, desc = "[H]unk [S]tage Hunk" })
+keymap.set("n", "<leader>hu", gs.undo_stage_hunk, { noremap = true, desc = "[H]unk [U]ndo Stage Hunk" })
+keymap.set("n", "<leader>hR", gs.reset_buffer, { noremap = true, desc = "[H]unk [R]eset Buffer" })
+keymap.set("n", "<leader>hp", gs.preview_hunk, { noremap = true, desc = "[H]unk [P]review Hunk" })
 keymap.set("n", "<leader>hb", function()
-  gs.blame_line({ full = true })
-end, { noremap = true, desc = "[G]it [B]lame line" })
-keymap.set("n", "<leader>htb", gs.toggle_current_line_blame, { noremap = true, desc = "[G]it [T]oggle [B]lame" })
-keymap.set("n", "<leader>hd", gs.diffthis, { noremap = true, desc = "[G]it [D]iff this" })
+	gs.blame_line({ full = true })
+end, { noremap = true, desc = "[H]unk [B]lame line" })
+keymap.set("n", "<leader>htb", gs.toggle_current_line_blame, { noremap = true, desc = "[H]unk [T]oggle [B]lame" })
+keymap.set("n", "<leader>hd", gs.diffthis, { noremap = true, desc = "[H]unk [D]iff this" })
 keymap.set("n", "<leader>hD", function()
-  gs.diffthis("~")
+	gs.diffthis("~")
 end, { noremap = true, desc = "Diff this (~)" })
-keymap.set("n", "<leader>htd", gs.toggle_deleted, { noremap = true, desc = "[G]it [T]oggle [D]eleted" })
+keymap.set("n", "<leader>htd", gs.toggle_deleted, { noremap = true, desc = "[H]unk [T]oggle [D]eleted" })
 
 -- Text object
 keymap.set(
-  { "o", "x" },
-  "ih",
-  ":<C-U>Gitsigns select_hunk<CR>",
-  { noremap = true, silent = true, desc = "Select hunk" }
+	{ "o", "x" },
+	"ih",
+	":<C-U>Gitsigns select_hunk<CR>",
+	{ noremap = true, silent = true, desc = "Select hunk" }
 )
-
--- Trouble
-vim.keymap.set("n", "<leader>xx", function()
-  require("trouble").toggle()
-end)
-vim.keymap.set("n", "<leader>xw", function()
-  require("trouble").toggle("workspace_diagnostics")
-end)
-vim.keymap.set("n", "<leader>xd", function()
-  require("trouble").toggle("document_diagnostics")
-end)
-vim.keymap.set("n", "<leader>xq", function()
-  require("trouble").toggle("quickfix")
-end)
-vim.keymap.set("n", "<leader>xl", function()
-  require("trouble").toggle("loclist")
-end)
-vim.keymap.set("n", "gR", function()
-  require("trouble").toggle("lsp_references")
-end)
