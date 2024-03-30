@@ -1,4 +1,5 @@
 tmux/.tmux/plugins
 tmux/.tmux/resurrect
 tmux/.tmux/*.log
+litellm/
 
