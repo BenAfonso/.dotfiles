@@ -1,1 +1,1 @@
-# 💤 BenVim (based on LazyVim)
+# 💤 BenVim (based on Kickstart.nvim)
