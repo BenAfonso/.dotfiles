@@ -1,10 +1,16 @@
 local function filenameFirst(_, path)
-  local tail = vim.fs.basename(path)
   local parent = vim.fs.dirname(path)
+  local tail = vim.fs.basename(path)
   if parent == "." then
     return tail
+  else
+    -- Truncate end of path to something like '.../modules/path/extra/file.ts'
+    local length = #parent
+    if length >= 25 then
+      parent = "..." .. parent:sub(length - 25, length)
+    end
+    return string.format("%s\t\t%s", tail, parent)
   end
-  return string.format("%s\t\t%s", tail, parent)
 end
 
 local M = { -- Fuzzy Finder (files, lsp, etc)
@@ -82,6 +88,9 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
             ["ss"] = actions.select_horizontal,
             ["<C-v>"] = actions.select_vertical,
             ["<C-h>"] = actions.select_horizontal,
+            ["/"] = function()
+              vim.cmd("startinsert")
+            end,
           },
           i = {
             ["<C-q>"] = function(bufnr)
@@ -130,7 +139,9 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
           path_display = filenameFirst,
         },
         find_files = {
-          path_display = filenameFirst,
+          path_display = {
+            truncate = 3,
+          },
         },
         diagnostics = {
           theme = "ivy",
@@ -153,9 +164,6 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
               -- Custom normal mode mappings
               ["N"] = fb_actions.create,
               ["h"] = fb_actions.goto_parent_dir,
-              ["/"] = function()
-                vim.cmd("startinsert")
-              end,
               ["<C-u>"] = function(prompt_bufnr)
                 ---@diagnostic disable-next-line: unused-local
                 for i = 1, 10 do
@@ -207,9 +215,17 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "[S]earch [F]iles" })
     vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
     vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
+    vim.keymap.set("n", "<leader>sb", builtin.current_buffer_fuzzy_find, { desc = "[S]earch current [B]uffer" })
 
-    vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-    vim.keymap.set("n", ";r", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+    -- vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+    vim.keymap.set(
+      "n",
+      "<leader>sg",
+      telescope.extensions.live_grep_args.live_grep_args,
+      { desc = "[S]earch by [G]rep" }
+    )
+    -- vim.keymap.set("n", ";r", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+    vim.keymap.set("n", ";r", telescope.extensions.live_grep_args.live_grep_args, { desc = "[S]earch by [G]rep" })
 
     vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
     vim.keymap.set("n", ";;", builtin.resume, { desc = "[S]earch [R]esume" })
