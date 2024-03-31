@@ -7,7 +7,21 @@ local function filenameFirst(_, path)
     -- Truncate end of path to something like '.../modules/path/extra/file.ts'
     local length = #parent
     if length >= 25 then
-      parent = "..." .. parent:sub(length - 25, length)
+      local splits = {}
+      for split in string.gmatch(parent, "[^/]+") do
+        table.insert(splits, split)
+      end
+      local len = 0
+      local path = ""
+      for i = #splits, 1, -1 do
+        if len + #splits[i] > 25 then
+          break
+        else
+          len = len + #splits[i]
+          path = splits[i] .. "/" .. path
+        end
+      end
+      parent = "..." .. path
     end
     return string.format("%s\t\t%s", tail, parent)
   end
