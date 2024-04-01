@@ -8,9 +8,14 @@ vim.o.wrap = false
 -- Make line numbers default
 vim.opt.number = true
 
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
-vim.opt.smarttab = true
+-- vim.opt.tabstop = 2
+-- vim.opt.shiftwidth = 2
+-- vim.o.expandtab = true
+-- vim.bo.softtabstop = 2
+
+vim.cmd("set expandtab")
+vim.cmd("set tabstop=2")
+vim.cmd("set shiftwidth=2")
 
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
@@ -109,21 +114,6 @@ require("lazy").setup({
         ["<leader>t"] = { name = "[T]erminal", _ = "which_key_ignore" },
       })
     end,
-  },
-
-  { -- Autoformat
-    "stevearc/conform.nvim",
-    opts = {
-      notify_on_error = false,
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_fallback = true,
-      },
-      formatters_by_ft = {
-        lua = { "stylua" },
-        javascript = { { "prettierd", "prettier" } },
-      },
-    },
   },
   {
     "folke/tokyonight.nvim",
