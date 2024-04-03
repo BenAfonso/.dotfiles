@@ -2,13 +2,27 @@ local M = {
   {
     enabled = true,
     "nvim-lualine/lualine.nvim",
+    dependencies = {
+      "folke/noice.nvim",
+    },
     event = "VeryLazy",
     opts = {
-      options = {
-        -- globalstatus = false,
-        theme = "night-owl",
-      },
     },
+    config = function(_, opts)
+      opts.options = {
+        theme = require("plugins.colorscheme")[1].lualine_key
+      }
+      opts.sections = {
+        lualine_x = {
+          {
+            require("noice").api.statusline.mode.get,
+            cond = require("noice").api.statusline.mode.has,
+            color = { fg = "#ff9e64" },
+          },
+        },
+      }
+      require("lualine").setup(opts)
+    end,
   },
   {
     "folke/noice.nvim",
@@ -16,7 +30,7 @@ local M = {
     event = "VeryLazy",
     opts = {
       presets = {
-        bottom_search = false,
+        bottom_search = true,
         command_palette = true,
         long_message_to_split = true,
         inc_rename = true,

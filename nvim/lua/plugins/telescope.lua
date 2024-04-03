@@ -178,6 +178,14 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
               -- Custom normal mode mappings
               ["N"] = fb_actions.create,
               ["h"] = fb_actions.goto_parent_dir,
+              -- ["r"] = function(prompt_bufnr)
+              --   local fb_utils = require("telescope._extensions.file_browser.utils")
+              --   local picker = action_state.get_current_picker(prompt_bufnr)
+              --   local entry = action_state.get_selected_entry()
+              --   local old_path = entry.Path
+              --   print(old_path)
+              --   require("utils.ts-rename").prompt_ts_rename(old_path)
+              -- end,
               ["<C-u>"] = function(prompt_bufnr)
                 ---@diagnostic disable-next-line: unused-local
                 for i = 1, 10 do
@@ -230,6 +238,7 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
     vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
     vim.keymap.set("n", "<leader>sb", builtin.current_buffer_fuzzy_find, { desc = "[S]earch current [B]uffer" })
+    vim.keymap.set("n", "<leader>st", builtin.colorscheme, { desc = "[S]earch [T]heme" })
 
     -- vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
     vim.keymap.set(

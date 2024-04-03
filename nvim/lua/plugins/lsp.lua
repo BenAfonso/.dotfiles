@@ -127,7 +127,7 @@ local M = {
         tsserver = {
           commands = {
             RenameFile = {
-              require("utils.ts-rename"),
+              require("utils.ts-rename").prompt_ts_rename,
               description = "Rename File",
             },
           },
