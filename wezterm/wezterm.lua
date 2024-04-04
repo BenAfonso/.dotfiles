@@ -89,10 +89,10 @@ config.font_rules = {
 }
 
 config.window_padding = {
-	left = 10,
-	right = 10,
-	top = 10,
-	bottom = 10,
+	left = 0,
+	right = 0,
+	top = 0,
+	bottom = 0,
 }
 
 config.keys = {
@@ -108,17 +108,57 @@ config.keys = {
 
 local color = "#ff33b8"
 
-config.color_scheme = "Night Owl (Gogh)"
+-- config.color_scheme = "Night Owl (Gogh)"
+config.color_scheme = "Catppuccin Mocha"
+
 -- config.window_background_opacity = 0.90
 -- config.window_background_opacity = 0.3
 -- config.macos_window_background_blur = 10
-config.window_frame = {
-	active_titlebar_bg = "#011627",
-	active_titlebar_fg = "#011627",
-	inactive_titlebar_bg = "#061d30",
-	inactive_titlebar_fg = "#060d30",
-}
 
+-- Night owl
+-- config.window_frame = {
+-- 	active_titlebar_bg = "#011627",
+-- 	active_titlebar_fg = "#011627",
+-- 	inactive_titlebar_bg = "#061d30",
+-- 	inactive_titlebar_fg = "#060d30",
+-- }
+--
+-- config.colors = {
+-- 	-- cursor_bg = "#80a4c2",
+-- 	-- cursor_fg = "#7f6057",
+-- 	cursor_bg = color,
+-- 	cursor_fg = "#01121f",
+-- 	tab_bar = {
+-- 		active_tab = {
+-- 			bg_color = "#0b2942",
+-- 			fg_color = "#ffffff",
+-- 		},
+-- 		inactive_tab = {
+-- 			bg_color = "#061d30",
+-- 			fg_color = "#5c7886",
+-- 		},
+-- 		inactive_tab_hover = {
+-- 			bg_color = "#061d30",
+-- 			fg_color = "#5c7886",
+-- 		},
+-- 		new_tab = {
+-- 			bg_color = "#011627",
+-- 			fg_color = "#5c7886",
+-- 		},
+-- 		new_tab_hover = {
+-- 			bg_color = "#0b2942",
+-- 			fg_color = "#ffffff",
+-- 		},
+-- 	},
+-- }
+
+-- Catpuccin
+config.window_frame = {
+	active_titlebar_bg = "#181825",
+	active_titlebar_fg = "#181825",
+	inactive_titlebar_bg = "#2a2b3c",
+	inactive_titlebar_fg = "#2a2b3c",
+}
 config.colors = {
 	-- cursor_bg = "#80a4c2",
 	-- cursor_fg = "#7f6057",
@@ -126,24 +166,24 @@ config.colors = {
 	cursor_fg = "#01121f",
 	tab_bar = {
 		active_tab = {
-			bg_color = "#0b2942",
-			fg_color = "#ffffff",
+			bg_color = "#181825",
+			fg_color = "#181825",
 		},
 		inactive_tab = {
-			bg_color = "#061d30",
+			bg_color = "#2a2b3c",
 			fg_color = "#5c7886",
 		},
 		inactive_tab_hover = {
-			bg_color = "#061d30",
-			fg_color = "#5c7886",
+			bg_color = "#2a2b3c",
+			fg_color = "#c5ceeb",
 		},
 		new_tab = {
-			bg_color = "#011627",
-			fg_color = "#5c7886",
+			bg_color = "#181825",
+			fg_color = "#181825",
 		},
 		new_tab_hover = {
-			bg_color = "#0b2942",
-			fg_color = "#ffffff",
+			bg_color = "#2a2b3c",
+			fg_color = "#c5ceeb",
 		},
 	},
 }

@@ -6,11 +6,10 @@ local M = {
       "folke/noice.nvim",
     },
     event = "VeryLazy",
-    opts = {
-    },
+    opts = {},
     config = function(_, opts)
       opts.options = {
-        theme = require("plugins.colorscheme")[1].lualine_key
+        theme = "catppuccin", -- require("plugins.colorscheme")[1].lualine_key
       }
       opts.sections = {
         lualine_x = {

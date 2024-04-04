@@ -46,6 +46,13 @@ local Catppuccin = {
         nvimtree = true,
         treesitter = true,
         notify = false,
+        neotree = true,
+        harpoon = true,
+        telescope = {
+          enabled = true,
+        },
+        lsp_trouble = true,
+        notify = true,
         mini = {
           enabled = true,
           indentscope_color = "",
@@ -59,9 +66,9 @@ local Catppuccin = {
     -- setup must be called before loading
     vim.cmd.colorscheme("catppuccin")
 
-    vim.cmd.hi("TreesitterContextLineNumber guibg=" .. "#0b253a")
-    vim.cmd.hi("TreesitterContext guibg=" .. "#0b253a")
-    vim.cmd.hi("TelescopeMatching guifg=" .. "#ff33b8")
+    -- vim.cmd.hi("TreesitterContextLineNumber guibg=" .. "#0b253a")
+    -- vim.cmd.hi("TreesitterContext guibg=" .. "#0b253a")
+    -- vim.cmd.hi("TelescopeMatching guifg=" .. "#ff33b8")
   end,
 }
 
@@ -82,6 +89,7 @@ local TokyoNight = {
 local NightOwl = {
   {
     "oxfist/night-owl.nvim",
+    lualine_key = "night-owl",
     lazy = false,
     priority = 1000,
     config = function()

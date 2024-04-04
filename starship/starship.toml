@@ -3,11 +3,26 @@
 # Inserts a blank line between shell prompts
 add_newline = false
 
+
+# NightOwl
+# format = """
+# [╭─](bold #c792ea)$username\
+# [](fg:#0b2942)\
+# $directory\
+# [ ](fg:#0b2942)\
+# $git_branch\
+# $git_state\
+# $git_status\
+# $nodejs\
+# $line_break\
+# [╰──](bold #c792ea)$character"""
+
+
 format = """
 [╭─](bold #c792ea)$username\
-[](fg:#0b2942)\
+[](fg:#2a2b3c)\
 $directory\
-[ ](fg:#0b2942)\
+[ ](fg:#2a2b3c)\
 $git_branch\
 $git_state\
 $git_status\
@@ -15,11 +30,14 @@ $nodejs\
 $line_break\
 [╰──](bold #c792ea)$character"""
 
+
 right_format = "$all"
 command_timeout = 1000
 
 [directory]
-style = "bg:#0b2942 bold"
+# NightOwl
+# style = "bg:#0b2942 bold"
+style = "bg:#2a2b3c fg:#f2cdcd bold"
 format = "[ $path ]($style)"
 
 # Replace the '❯' symbol in the prompt with '➜'
