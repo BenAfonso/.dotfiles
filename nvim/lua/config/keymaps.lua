@@ -12,6 +12,8 @@ local keymap = vim.keymap
 -- local opts = { noremap = true, silent = true }
 -- local wk = require("which-key")
 
+keymap.set({ "n" }, "<CR>", ":noh<CR><CR>", { noremap = true, silent = true, desc = "Disable search highlight" })
+
 keymap.set({ "n", "x" }, "<leader>L", "<Cmd>:Lazy<CR>", { noremap = true, silent = true, desc = "Lazy" })
 
 keymap.set({ "n", "x" }, "<leader>d", '"_d', { noremap = true, silent = true, desc = "Deletes in blackhole register" })

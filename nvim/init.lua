@@ -92,8 +92,6 @@ require("lazy").setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 
-  -- "gc" to comment visual regions/lines
-  { "numToStr/Comment.nvim", opts = {} },
   { -- Useful plugin to show you pending keybinds.
     "folke/which-key.nvim",
     event = "VimEnter", -- Sets the loading event to 'VimEnter'
@@ -115,30 +113,7 @@ require("lazy").setup({
       })
     end,
   },
-  -- Highlight todo, notes, etc in comments
-  {
-    "folke/todo-comments.nvim",
-    event = "VimEnter",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = { signs = false },
-  },
-
-  { -- Collection of various small independent plugins/modules
-    "echasnovski/mini.nvim",
-    config = function()
-      -- Better Around/Inside textobjects
-      require("mini.ai").setup({ n_lines = 500 })
-      -- require('mini.surround').setup()
-    end,
-  },
-
-  -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for kickstart
-  --
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-
   { import = "plugins" },
 })
 
@@ -147,5 +122,4 @@ require("lazy").setup({
 
 require("config.keymaps")
 require("ben.autocmds")
-
-require("trouble")
+-- require("trouble")

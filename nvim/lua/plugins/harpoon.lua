@@ -84,7 +84,7 @@ local M = {
       end, { desc = "Open harpoon window" })
 
       vim.keymap.set("n", "<leader>a", function()
-        harpoon:list():append()
+        harpoon:list():add()
       end, { desc = "Harpoon" })
 
       vim.keymap.set("n", "<C-t>", function()
