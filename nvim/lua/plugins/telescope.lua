@@ -70,8 +70,8 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
         file_ignore_patterns = {
           ".git/",
           ".cache",
-          "%.o",
-          "%.a",
+          "%.o$",
+          "%.a$",
           "%.out",
           "%.class",
           "%.pdf",
