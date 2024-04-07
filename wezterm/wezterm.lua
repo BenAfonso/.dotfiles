@@ -60,7 +60,7 @@ config.font_rules = {
 -- 		}),
 -- 	},
 -- }
---
+
 -- config.exit_behavior = "Close"
 -- config.hide_tab_bar_if_only_one_tab = true
 config.window_close_confirmation = "NeverPrompt"
@@ -74,19 +74,6 @@ config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 if string.find(wezterm.target_triple, "windows") ~= nil then
 	config.default_domain = "WSL:Ubuntu"
 end
-
-config.font_rules = {
-	-- normal-intensity-and-italic
-	{
-		intensity = "Normal",
-		italic = true,
-		font = wezterm.font({
-			family = "FiraCode Nerd Font",
-			weight = "DemiBold",
-			italic = true,
-		}),
-	},
-}
 
 config.window_padding = {
 	left = 0,
