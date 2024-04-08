@@ -88,6 +88,9 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
         winblend = 0,
         mappings = {
           n = {
+            ["q"] = function(bufnr)
+              actions.close(bufnr)
+            end,
             ["<C-t>"] = require("trouble.sources.telescope").open,
             ["<C-q>"] = function(bufnr)
               actions.send_to_qflist(bufnr)
@@ -97,9 +100,9 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
               require("trouble.sources.telescope").open(bufnr)
             end,
             ["<C-\\>"] = actions.select_tab,
-            ["t"] = actions.select_tab,
-            ["vs"] = actions.select_vertical,
-            ["ss"] = actions.select_horizontal,
+            ["te"] = actions.select_tab,
+            ["sv"] = actions.select_vertical,
+            ["sh"] = actions.select_horizontal,
             ["<C-v>"] = actions.select_vertical,
             ["<C-h>"] = actions.select_horizontal,
             ["/"] = function()

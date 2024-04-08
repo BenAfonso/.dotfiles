@@ -58,7 +58,7 @@ keymap.set("x", "p", '"_dP', { noremap = true, desc = "Paste and keep yank regis
 
 -- increment decrement
 keymap.set({ "n", "v" }, "+", "<C-a>", { noremap = true, silent = true, desc = "Increment" })
-keymap.set({ "n", "v" }, "-", "<C-x>", { noremap = true, silent = true, desc = "Decrement" })
+-- keymap.set({ "n", "v" }, "-", "<C-x>", { noremap = true, silent = true, desc = "Decrement" })
 
 -- Scroll
 keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true, desc = "Scroll down" })
@@ -86,8 +86,8 @@ keymap.set("n", "<tab>", ":tabnext<Return>", { noremap = true, silent = true, de
 keymap.set("n", "<S-tab>", ":tabprev<Return>", { noremap = true, silent = true, desc = "Previous tab" })
 
 -- Splits
-keymap.set("n", "ss", ":split<Return>", { noremap = true, silent = true, desc = "Split window bottom" })
-keymap.set("n", "vs", ":vsplit<Return>", { noremap = true, silent = true, desc = "Split window right" })
+keymap.set("n", "sh", ":split<Return>", { noremap = true, silent = true, desc = "Split window bottom" })
+keymap.set("n", "sv", ":vsplit<Return>", { noremap = true, silent = true, desc = "Split window right" })
 keymap.set("n", "<leader>|", ":vsplit<Return>", { noremap = true, silent = true, desc = "Split window right" })
 keymap.set("n", "<leader>_", ":split<Return>", { noremap = true, silent = true, desc = "Split window bottom" })
 
