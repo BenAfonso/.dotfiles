@@ -1,6 +1,7 @@
 local M = {
   {
     "ThePrimeagen/harpoon",
+    enabled = true,
     branch = "harpoon2",
     requires = { { "nvim-lua/plenary.nvim" } },
     config = function()
@@ -126,12 +127,6 @@ local M = {
       vim.keymap.set("n", ";4", function()
         harpoon:list():select(4)
       end, { desc = "[H]arpoon: file [4]" })
-    end,
-  },
-  {
-    "WolfeCub/harpeek.nvim",
-    config = function()
-      require("harpeek").setup()
     end,
   },
 }
