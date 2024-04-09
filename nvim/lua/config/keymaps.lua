@@ -124,6 +124,9 @@ keymap.set("n", "<leader>ha", gs.stage_hunk, { noremap = true, desc = "[H]unk [S
 keymap.set("n", "<leader>hu", gs.undo_stage_hunk, { noremap = true, desc = "[H]unk [U]ndo Stage Hunk" })
 keymap.set("n", "<leader>hR", gs.reset_buffer, { noremap = true, desc = "[H]unk [R]eset Buffer" })
 keymap.set("n", "<leader>hp", gs.preview_hunk, { noremap = true, desc = "[H]unk [P]review Hunk" })
+keymap.set("n", "]h", gs.next_hunk, { noremap = true, desc = "Next [H]unk" })
+keymap.set("n", "[h", gs.prev_hunk, { noremap = true, desc = "Prev [H]unk" })
+
 keymap.set("n", "<leader>hb", function()
   gs.blame_line({ full = true })
 end, { noremap = true, desc = "[H]unk [B]lame line" })
