@@ -47,7 +47,10 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
       end,
     },
     { "nvim-telescope/telescope-ui-select.nvim" },
-    "nvim-telescope/telescope-file-browser.nvim",
+    {
+      "nvim-telescope/telescope-file-browser.nvim",
+      enabled = false,
+    },
     {
       "nvim-telescope/telescope-live-grep-args.nvim",
       version = "^1.0.0",
@@ -61,7 +64,7 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
   config = function()
     local actions = require("telescope.actions")
     local action_state = require("telescope.actions.state")
-    local fb_actions = require("telescope").extensions.file_browser.actions
+    -- local fb_actions = require("telescope").extensions.file_browser.actions
     local lga_actions = require("telescope-live-grep-args.actions")
 
     require("telescope").setup({
@@ -172,41 +175,33 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
         ["ui-select"] = {
           require("telescope.themes").get_dropdown(),
         },
-        file_browser = {
-          theme = "dropdown",
-          -- disables netw and use telescope file browser in its place
-          hijack_netrw = true,
-          mappings = {
-            ["n"] = {
-              -- Custom normal mode mappings
-              ["N"] = fb_actions.create,
-              ["h"] = fb_actions.goto_parent_dir,
-              -- ["r"] = function(prompt_bufnr)
-              --   local fb_utils = require("telescope._extensions.file_browser.utils")
-              --   local picker = action_state.get_current_picker(prompt_bufnr)
-              --   local entry = action_state.get_selected_entry()
-              --   local old_path = entry.Path
-              --   print(old_path)
-              --   require("utils.ts-rename").prompt_ts_rename(old_path)
-              -- end,
-              ["<C-u>"] = function(prompt_bufnr)
-                ---@diagnostic disable-next-line: unused-local
-                for i = 1, 10 do
-                  actions.move_selection_previous(prompt_bufnr)
-                end
-              end,
-              ["<C-d>"] = function(prompt_bufnr)
-                ---@diagnostic disable-next-line: unused-local
-                for i = 1, 10 do
-                  actions.move_selection_next(prompt_bufnr)
-                end
-              end,
-              ["<C-\\>"] = actions.select_tab,
-              ["<PageUp>"] = actions.preview_scrolling_up,
-              ["<PageDown>"] = actions.preview_scrolling_down,
-            },
-          },
-        },
+        -- file_browser = {
+        --   theme = "dropdown",
+        --   -- disables netw and use telescope file browser in its place
+        --   hijack_netrw = true,
+        --   mappings = {
+        --     ["n"] = {
+        --       -- Custom normal mode mappings
+        --       ["N"] = fb_actions.create,
+        --       ["h"] = fb_actions.goto_parent_dir,
+        --       ["<C-u>"] = function(prompt_bufnr)
+        --         ---@diagnostic disable-next-line: unused-local
+        --         for i = 1, 10 do
+        --           actions.move_selection_previous(prompt_bufnr)
+        --         end
+        --       end,
+        --       ["<C-d>"] = function(prompt_bufnr)
+        --         ---@diagnostic disable-next-line: unused-local
+        --         for i = 1, 10 do
+        --           actions.move_selection_next(prompt_bufnr)
+        --         end
+        --       end,
+        --       ["<C-\\>"] = actions.select_tab,
+        --       ["<PageUp>"] = actions.preview_scrolling_up,
+        --       ["<PageDown>"] = actions.preview_scrolling_down,
+        --     },
+        --   },
+        -- },
         live_grep_args = {
           auto_quoting = true,
           mappings = {
@@ -223,7 +218,8 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
     pcall(require("telescope").load_extension, "ui-select")
 
     pcall(require("telescope").load_extension("live_grep_args"))
-    pcall(require("telescope").load_extension("file_browser"))
+
+    -- pcall(require("telescope").load_extension("file_browser"))
 
     -- See `:help telescope.builtin`
     local telescope = require("telescope")
@@ -259,26 +255,24 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set("n", "\\\\", builtin.buffers, { desc = "Find existing buffers" })
 
     -- NOTE: File Browser
-    local open_file_browser = function()
-      local function telescope_buffer_dir()
-        return vim.fn.expand("%:p:h")
-      end
-      telescope.extensions.file_browser.file_browser({
-        path = "%:p:h",
-        cwd = telescope_buffer_dir(),
-        respect_gitignore = false,
-        hidden = true,
-        grouped = true,
-        previewer = false,
-        initial_mode = "normal",
-        layout_config = { height = 40 },
-      })
-    end
-    vim.keymap.set("n", "<leader>sf", open_file_browser, { desc = "Open file browser" })
+    -- local open_file_browser = function()
+    --   local function telescope_buffer_dir()
+    --     return vim.fn.expand("%:p:h")
+    --   end
+    --   telescope.extensions.file_browser.file_browser({
+    --     path = "%:p:h",
+    --     cwd = telescope_buffer_dir(),
+    --     respect_gitignore = false,
+    --     hidden = true,
+    --     grouped = true,
+    --     previewer = false,
+    --     initial_mode = "normal",
+    --     layout_config = { height = 40 },
+    --   })
+    -- end
+    -- vim.keymap.set("n", "<leader>sf", open_file_browser, { desc = "Open file browser" })
 
-    vim.keymap.set("n", "sf", open_file_browser, { desc = "Open file browser" })
-
-    vim.keymap.set("n", "<C-f>", open_file_browser, { desc = "Open file browser" })
+    -- vim.keymap.set("n", "sf", open_file_browser, { desc = "Open file browser" })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set("n", "<leader>/", function()
