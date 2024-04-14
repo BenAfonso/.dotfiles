@@ -33,6 +33,7 @@ local M = {
       list = false,
       conceallevel = 3,
       concealcursor = "nvic",
+      winbar = "%{v:lua.require('oil').get_current_dir()}",
     },
     -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
     delete_to_trash = false,
@@ -147,6 +148,7 @@ local M = {
       ["<C-l>"] = false,
       ["<C-p>"] = "actions.preview",
       ["<C-c>"] = "actions.close",
+      ["q"] = "actions.close",
       ["<C-r>"] = "actions.refresh",
       ["-"] = "actions.parent",
       ["_"] = "actions.open_cwd",
