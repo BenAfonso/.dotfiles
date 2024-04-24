@@ -103,8 +103,8 @@ return { -- Autocompletion
       }),
       sources = cmp.config.sources({
         -- { name = "copilot", priority = 800 },
-        { name = "nvim_lsp", priority = 1000 },
-        { name = "luasnip", priority = 1200 },
+        { name = "nvim_lsp", priority = 1200 },
+        { name = "luasnip", priority = 1000 },
         { name = "emoji", priority = 800 },
         { name = "buffer", priority = 500 },
         { name = "path", priority = 250 },

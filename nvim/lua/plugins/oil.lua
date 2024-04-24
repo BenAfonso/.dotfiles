@@ -135,6 +135,17 @@ local M = {
       ["<CR>"] = "actions.select",
       ["sv"] = "actions.select_vsplit",
       ["sh"] = "actions.select_split",
+      ["<leader><CR>"] = {
+        callback = function()
+          local env = os.getenv("MACHINE")
+          -- WSL environment open current directory
+          if env == "windows" then
+            os.execute(
+              "/mnt/c/Windows/explorer.exe `wslpath -w " .. require("oil").get_current_dir() .. "` > /dev/null"
+            )
+          end
+        end,
+      },
       ["te"] = {
         callback = function()
           actions["select_tab"].callback()

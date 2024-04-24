@@ -134,7 +134,6 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
           mappings = {
             n = {
               ["d"] = require("telescope.actions").delete_buffer,
-              ["<C-d>"] = require("telescope.actions").delete_buffer,
               ["w"] = function()
                 ---@diagnostic disable-next-line: no-unknown
                 local selection = action_state.get_selected_entry()

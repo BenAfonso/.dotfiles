@@ -68,20 +68,45 @@ local M = {
       local servers = {
         cssls = {},
         gopls = {
-          gopls = {
-            analyses = {
-              unusedparams = true,
-            },
-            staticcheck = true,
-            gofumpt = true,
+          analyses = {
+            unusedparams = true,
           },
+          staticcheck = true,
+          gofumpt = true,
         },
         tailwindcss = {
-          root_dir = function(...)
-            return require("lspconfig.util").root_pattern(".git")(...)
-          end,
+          -- root_dir = function()
+          --   return require("lspconfig.util").root_pattern(
+          --     "tailwind.config.js",
+          --     "tailwind.config.cjs",
+          --     "tailwind.config.mjs",
+          --     "tailwind.config.ts",
+          --     "postcss.config.js",
+          --     "postcss.config.cjs",
+          --     "postcss.config.mjs",
+          --     "postcss.config.ts",
+          --     "package.json",
+          --     "node_modules",
+          --     ".git"
+          --   )
+          -- end,
+          settings = {
+            tailwindCSS = {
+              classAttributes = { "class", "className", "tw" },
+              validate = true,
+              experimental = {
+                classRegex = {
+                  "tw`([^`]*)",
+                  'tw="([^"]*)',
+                  'tw={"([^"}]*)',
+                  "tw\\.\\w+`([^`]*)",
+                  "tw\\(.*?\\)`([^`]*)",
+                },
+              },
+            },
+          },
         },
-        eslint = {
+        eslint_d = {
           filetypes = {
             "javascript",
             "javascriptreact",
@@ -110,6 +135,7 @@ local M = {
           single_file_support = true,
           settings = {},
         },
+        svelte = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -140,8 +166,9 @@ local M = {
         "typescript-language-server",
         "css-lsp",
         "gopls",
-        "eslint-lsp",
+        "eslint_d",
         "prettier",
+        "svelte-language-server",
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

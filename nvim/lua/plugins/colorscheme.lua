@@ -47,6 +47,7 @@ local Catppuccin = {
         treesitter = true,
         notify = false,
         neotree = true,
+        neotest = true,
         harpoon = true,
         telescope = {
           enabled = true,
