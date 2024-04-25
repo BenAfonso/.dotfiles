@@ -2,4 +2,6 @@ tmux/.tmux/plugins
 tmux/.tmux/resurrect
 tmux/.tmux/*.log
 litellm/
+ts-test/
+node_modules/
 
