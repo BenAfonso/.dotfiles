@@ -89,14 +89,6 @@ source $ZSH/oh-my-zsh.sh
 export KEEPASS_FOLDER="C:\\Users\Ben\Synced\Keepass"
 export LOVE2D_PATH=/mnt/c/Users/Ben/Downloads/love-11.5-win64/love-11.5-win64/love.exe
 
-export PATH="$PATH:/opt/nvim-linux64/bin"
-
-# Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
- else
-   export EDITOR='nvim'
- fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -136,6 +128,18 @@ export PATH="$HOME/.local/bin:$PATH"
 eval "$(starship init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Neovim
+
+export PATH=$PATH:~/Applications/nvim/bin
+# export PATH="$PATH:/opt/nvim-linux64/bin"
+
+# Preferred editor for local and remote sessions
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+ else
+   export EDITOR='nvim'
+ fi
 
 # Flutter
 export PATH=$HOME/Applications/flutter/bin:$PATH

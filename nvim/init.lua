@@ -1,5 +1,7 @@
 require("ben")
 
+vim.cmd("packadd cfilter")
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -122,4 +124,5 @@ require("lazy").setup({
 
 require("config.keymaps")
 require("ben.autocmds")
+
 -- require("trouble")
