@@ -145,6 +145,7 @@ local M = {
                 library = {
                   "${3rd}/luv/library",
                   vim.env.VIMRUNTIME,
+                  "~/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
                 },
               },
               completion = {
