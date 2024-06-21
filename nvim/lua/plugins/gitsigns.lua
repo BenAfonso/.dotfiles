@@ -16,7 +16,7 @@ local M = {
     --   changedelete = { text = '~' },
     --   untracked = { text = '┆' },
     -- },
-    _signs_staged_enable = true,
+    -- _signs_staged_enable = true,
     signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
     numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
     linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
@@ -47,9 +47,9 @@ local M = {
       row = 0,
       col = 1,
     },
-    yadm = {
-      enable = false,
-    },
+    -- yadm = {
+    --   enable = false,
+    -- },
   },
   config = function(_, opts)
     require("gitsigns").setup(opts)
