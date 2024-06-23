@@ -1,6 +1,7 @@
 configs/tmux/.tmux/plugins
 configs/tmux/.tmux/resurrect
 configs/tmux/.tmux/*.log
+scripts/homebrew.sh
 litellm/
 ts-test/
 node_modules/
