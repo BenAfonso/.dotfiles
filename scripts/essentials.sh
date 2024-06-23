@@ -2,6 +2,7 @@
 
 nix-env -iA nixpkgs.tmux
 nix-env -iA nixpkgs.neovim
+nix-env -iA nixpkgs.pass
 nix-env -iA nixpkgs.age
 nix-env -iA nixpkgs.btop
 nix-env -iA nixpkgs.duf
