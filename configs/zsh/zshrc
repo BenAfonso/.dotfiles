@@ -72,7 +72,13 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git nvm fzf-zsh-plugin)
+plugins=(
+  git
+  nvm
+  fzf-zsh-plugin
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -85,22 +91,8 @@ source $ZSH/oh-my-zsh.sh
 
 
 #### Exports
-# export KEEPASS_FOLDER="/mnt/c/Users/ben/Synced/Keepass"
-export KEEPASS_FOLDER="C:\\Users\Ben\Synced\Keepass"
 export LOVE2D_PATH=/mnt/c/Users/Ben/Downloads/love-11.5-win64/love-11.5-win64/love.exe
 
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export GOPATH=$HOME/go
 # export GO111MODULE=on
@@ -129,11 +121,6 @@ eval "$(starship init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Neovim
-
-export PATH=$PATH:~/Applications/nvim/bin
-# export PATH="$PATH:/opt/nvim-linux64/bin"
-
 # Preferred editor for local and remote sessions
  if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
@@ -148,6 +135,8 @@ export PATH=$HOME/Applications/flutter/bin:$PATH
 export JAVA_HOME="/usr/"
 
 alias vim="nvim"
+alias cat="bat"
+alias ls="exa"
 
 
 # Android

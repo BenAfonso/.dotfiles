@@ -1,7 +1,8 @@
-tmux/.tmux/plugins
-tmux/.tmux/resurrect
-tmux/.tmux/*.log
+configs/tmux/.tmux/plugins
+configs/tmux/.tmux/resurrect
+configs/tmux/.tmux/*.log
 litellm/
 ts-test/
 node_modules/
+private/
 
