@@ -40,6 +40,7 @@ vim.opt.undofile = true
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.inccommand = "split" -- Incsearch while sub
 
 -- Keep signcolumn on by default
 vim.opt.signcolumn = "yes"

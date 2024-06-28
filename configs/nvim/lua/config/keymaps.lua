@@ -47,6 +47,14 @@ keymap.set("n", "<C-left>", ":bprev<CR>", { noremap = true, silent = true, desc 
 keymap.set("n", "<C-up>", "<C-o>", { noremap = true, silent = true, desc = "Jump back" })
 keymap.set("n", "<C-down>", "<C-i>", { noremap = true, silent = true, desc = "Jump forward" })
 
+-- Neogen
+keymap.set(
+  "n",
+  "<leader>cg",
+  ":lua require('neogen').generate()<CR>",
+  { noremap = true, silent = true, desc = "Generate comment" }
+)
+
 -- Clipboard
 -- Visual select replace with override register
 keymap.set("x", "p", '"_dP', { noremap = true, desc = "Paste and keep yank register" })
@@ -98,7 +106,7 @@ keymap.set("n", "<A-up>", "<C-w>+", { noremap = true, desc = "Resize pane up" })
 keymap.set("n", "<A-down>", "<C-w>-", { noremap = true, desc = "Resize pane down" })
 
 -- Undotree
-vim.keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle, { desc = "Toggle Undotree" })
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle Undotree" })
 
 -- Diagnostics
 keymap.set("n", "H", function()
@@ -136,6 +144,8 @@ keymap.set("n", "<leader>hD", function()
   gs.diffthis("~")
 end, { noremap = true, desc = "Diff this (~)" })
 keymap.set("n", "<leader>htd", gs.toggle_deleted, { noremap = true, desc = "[H]unk [T]oggle [D]eleted" })
+
+keymap.set({ "n" }, "<leader>Go", ":DiffviewOpen<CR>", { noremap = true, desc = "[Git] Diff [Open]" })
 
 -- Text object
 keymap.set(

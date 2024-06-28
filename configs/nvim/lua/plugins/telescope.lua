@@ -27,6 +27,57 @@ local function filenameFirst(_, path)
   end
 end
 
+local actions = require("telescope.actions")
+local previewers = require("telescope.previewers")
+local Job = require("plenary.job")
+local _bad = { ".*%.csv", ".*%.min.js" } -- Put all filetypes that slow you down in this array
+local bad_files = function(filepath)
+  for _, v in ipairs(_bad) do
+    if filepath:match(v) then
+      return false
+    end
+  end
+  return true
+end
+
+-- Prevent showing large files in telescope
+---@diagnostic disable-next-line: redefined-local
+local new_maker = function(filepath, bufnr, opts)
+  opts = opts or {}
+  if opts.use_ft_detect == nil then
+    opts.use_ft_detect = true
+  end
+  opts.use_ft_detect = opts.use_ft_detect == false and false or bad_files(filepath)
+  filepath = vim.fn.expand(filepath)
+
+  Job:new({
+    command = "file",
+    args = { "--mime-type", "-b", filepath },
+    on_exit = function(j)
+      local mime_type = vim.split(j:result()[1], "/")[1]
+      if mime_type == "text" then
+        vim.loop.fs_stat(filepath, function(_, stat)
+          if not stat then
+            return
+          end
+          if stat.size > 100000 then
+            vim.schedule(function()
+              vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "FILE TOO LARGE" })
+            end)
+          else
+            previewers.buffer_previewer_maker(filepath, bufnr, opts)
+          end
+        end)
+      else
+        -- maybe we want to write something to the buffer here
+        vim.schedule(function()
+          vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "BINARY" })
+        end)
+      end
+    end,
+  }):sync()
+end
+
 local M = { -- Fuzzy Finder (files, lsp, etc)
   "nvim-telescope/telescope.nvim",
   event = "VimEnter",
@@ -69,6 +120,8 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
 
     require("telescope").setup({
       defaults = {
+        file_sorter = require("telescope.sorters").get_fzy_sorter,
+        buffer_previewer_maker = new_maker,
         wrap_result = true,
         file_ignore_patterns = {
           ".git/",

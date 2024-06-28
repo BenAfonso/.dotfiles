@@ -122,7 +122,7 @@ local M = {
             },
           },
           root_dir = function(...)
-            return require("lspconfig.util").root_pattern(".git")(...)
+            return require("lspconfig.util").root_pattern(".git") -- (...)
           end,
           filetypes = {
             "javascript",
