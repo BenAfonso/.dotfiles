@@ -15,6 +15,8 @@ nix-env -iA nixpkgs.tealdeer
 nix-env -iA nixpkgs.ripgrep
 nix-env -iA nixpkgs.go
 nix-env -iA nixpkgs.fzf
+nix-env -iA nixpkgs.lua
+nix-env -iA nixpkgs.lua54Packages.luarocks-nix
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 curl -sS https://starship.rs/install.sh | sh
