@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -e
+executable=$(find $DOTFILES/bin -maxdepth 1 -perm -111 -type f -not -name 'local-scripts' -printf "%f\n" | fzf --tmux center)
+# executable=$(ls $DOTFILES/bin | fzf)
+$executable
+

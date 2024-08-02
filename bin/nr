@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+if ! (pip list 2>/dev/null | grep -q neovim-remote); then
+  pip3 install neovim-remote
+fi
+
+# if test "$1" = '--stay' ; then
+#   shift 1
+# else
+#   tmux select-window -t vim
+# fi
+# tmux select-pane -t 0
+
+_server_name="$(nvim-server-name)" 
+
+if test "$(echo "$1" | cut -c1-1)" = ":"; then
+  (
+    set -x
+    nvr --servername "$_server_name" --remote-send "$*"
+  )
+  exit 0
+fi
+
+(
+  set -x
+  nvr --servername "$_server_name" "$@"
+)

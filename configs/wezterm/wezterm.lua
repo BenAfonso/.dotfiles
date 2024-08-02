@@ -97,6 +97,7 @@ local color = "#ff33b8"
 
 -- config.color_scheme = "Night Owl (Gogh)"
 config.color_scheme = "Catppuccin Mocha"
+-- config.color_scheme = "Tokyo Night"
 
 -- config.window_background_opacity = 0.90
 -- config.window_background_opacity = 0.3

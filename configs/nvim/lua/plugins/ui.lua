@@ -55,7 +55,7 @@ local M = {
         theme = bubbles_theme,
         component_separators = "",
         section_separators = { left = "", right = "" },
-        fmt = string.lower,
+        -- fmt = string.lower,
       }
       opts.sections = {
         lualine_a = {
@@ -187,6 +187,7 @@ local M = {
         },
       })
     end,
+
     -- add any options here
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries

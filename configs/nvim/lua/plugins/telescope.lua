@@ -121,11 +121,12 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
     require("telescope").setup({
       defaults = {
         file_sorter = require("telescope.sorters").get_fzy_sorter,
-        buffer_previewer_maker = new_maker,
+        -- buffer_previewer_maker = new_maker,
         wrap_result = true,
         file_ignore_patterns = {
           ".git/",
           ".cache",
+          "%.min.js$",
           "%.o$",
           "%.a$",
           "%.out",
@@ -181,12 +182,23 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
         },
       },
       pickers = {
+        help_tags = {
+          mappings = {
+            i = {
+              ["<CR>"] = actions.select_vertical,
+            },
+            n = {
+              ["<CR>"] = actions.select_vertical,
+              ["ff"] = actions.select_default,
+            },
+          },
+        },
         buffers = {
           path_display = filenameFirst,
           sort_lastused = true,
           mappings = {
             n = {
-              ["d"] = require("telescope.actions").delete_buffer,
+              ["dd"] = require("telescope.actions").delete_buffer,
               ["w"] = function()
                 ---@diagnostic disable-next-line: no-unknown
                 local selection = action_state.get_selected_entry()
@@ -348,6 +360,20 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set("n", "<leader>sn", function()
       builtin.find_files({ cwd = vim.fn.stdpath("config") })
     end, { desc = "[S]earch [N]eovim files" })
+
+    vim.keymap.set({ "n" }, "<leader>eb", function()
+      require("ben.telescope.find_files").find_files({
+        prompt_title = "Scripts",
+        cwd = vim.fn.getenv("DOTFILES") .. "/bin",
+      })
+    end, { noremap = true, desc = "Search custom [B]inaries" })
+
+    vim.keymap.set(
+      { "n" },
+      "<leader>sc",
+      require("ben.telescope.config_picker"),
+      { noremap = true, desc = "[S]earch [C]onfig" }
+    )
 
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "TelescopeResults",

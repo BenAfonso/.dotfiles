@@ -6,11 +6,15 @@ return {
     opts = {
       highlight = {
         enable = true,
+        -- disable = function(lang, bufnr)
+        --   return true
+        -- end,
       },
       ensure_installed = {
         "cmake",
         "cpp",
         "css",
+        "comment",
         "gitignore",
         "go",
         "graphql",
@@ -23,6 +27,7 @@ return {
         "javascript",
         "typescript",
         "tsx",
+        "jsdoc",
         "styled",
         "vimdoc",
         "lua",

@@ -118,6 +118,7 @@ require("lazy").setup({
   },
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   { import = "plugins" },
+  { import = "plugins.lsp" },
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
@@ -125,5 +126,6 @@ require("lazy").setup({
 
 require("config.keymaps")
 require("ben.autocmds")
+require("ben.cmds")
 
 -- require("trouble")
