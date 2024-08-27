@@ -17,9 +17,6 @@ local M = {
   {
     enabled = true,
     "nvim-lualine/lualine.nvim",
-    dependencies = {
-      "folke/noice.nvim",
-    },
     event = "VeryLazy",
     opts = {},
     config = function(_, opts)
@@ -128,23 +125,22 @@ local M = {
         },
         lualine_x = {
           {
-            require("noice").api.status.command.get,
-            cond = require("noice").api.status.command.has,
-            color = { fg = "#ff9e64" },
-          },
-          {
             function()
-              local t = require("noice").api.status.mode.get()
-              return t:gsub("recording ", "")
+              local reg = vim.fn.reg_recording()
+              if reg == "" then
+                return ""
+              end
+              return "@" .. reg
             end,
-            cond = require("noice").api.status.mode.has,
+            cond = function()
+              local reg = vim.fn.reg_recording()
+              if reg == "" then
+                return false
+              end
+              return true
+            end,
             separator = { left = "", right_padding = 2 },
             color = { bg = "#ff9e64", fg = "#000000", gui = "bold" },
-          },
-          {
-            require("noice").api.status.search.get,
-            cond = require("noice").api.status.search.has,
-            color = { fg = "#ff9e64" },
           },
         },
         lualine_y = {
@@ -160,34 +156,34 @@ local M = {
   },
   {
     "folke/noice.nvim",
-    enabled = true,
+    enabled = false,
     event = "VeryLazy",
     opts = {
-      presets = {
-        bottom_search = true,
-        command_palette = true,
-        long_message_to_split = true,
-        inc_rename = true,
-        lsp_doc_border = true,
-      },
-    },
-    config = function(_, opts)
-      require("noice").setup(opts)
-      vim.diagnostic.config({
-        signs = true,
-        underline = true,
-        virtual_text = false,
-        virtual_lines = false,
-        update_in_insert = true,
-        float = {
-          -- UI.
-          header = false,
-          border = "rounded",
-          focusable = true,
+      lsp = {
+        progress = {
+          enabled = true,
         },
-      })
-    end,
-
+        message = {
+          enabled = true,
+        },
+        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+        },
+      },
+      cmdline = {
+        enabled = true,
+      },
+      -- presets = {
+      --   bottom_search = true,
+      --   command_palette = true,
+      --   long_message_to_split = true,
+      --   inc_rename = true,
+      --   lsp_doc_border = true,
+      -- },
+    },
     -- add any options here
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -201,6 +197,7 @@ local M = {
 
   {
     "rcarriga/nvim-notify",
+    enabled = true,
     opts = {
       timeout = 3000,
       max_height = 5,

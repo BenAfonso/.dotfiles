@@ -119,6 +119,44 @@ require("lazy").setup({
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   { import = "plugins" },
   { import = "plugins.lsp" },
+}, {
+  ui = {
+    size = {
+      width = 0.9,
+      height = 0.9,
+    },
+
+    border = "rounded",
+    title = "💤 Lazy.nvim",
+
+    wrap = false,
+
+    icons = {
+      cmd = "  ", ---+ ${ui, Lazy.nvim UI icons}
+
+      config = "  ",
+      event = "  ",
+      ft = "  ",
+
+      init = "  ",
+      imports = "  ",
+
+      keys = "  ",
+
+      lazy = " ",
+      loaded = " ",
+      not_loaded = " ",
+
+      plugin = "  ",
+      runtime = "  ",
+      require = "  ",
+
+      source = " ",
+      start = "",
+
+      task = "  ", ---_
+    },
+  },
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`

@@ -1,3 +1,7 @@
+function P(table)
+  print(vim.inspect(table))
+end
+
 vim.opt.scrolloff = 10
 
 vim.opt_local.wrap = true

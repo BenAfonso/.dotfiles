@@ -68,6 +68,23 @@ local Catppuccin = {
     -- setup must be called before loading
     vim.cmd.colorscheme("catppuccin")
 
+    local palette = require("catppuccin.palettes").get_palette("mocha")
+
+    vim.api.nvim_set_hl(0, "CmdBlue", { bg = "NONE", fg = palette.blue })
+    vim.api.nvim_set_hl(0, "CmdText", { bg = palette.blue, fg = "#000000" })
+
+    vim.api.nvim_set_hl(0, "CmdYellow", { bg = "NONE", fg = palette.yellow })
+    vim.api.nvim_set_hl(0, "SearchDownText", { fg = "#000000", bg = palette.yellow })
+
+    vim.api.nvim_set_hl(0, "CmdOrange", { bg = "NONE", fg = palette.peach })
+    vim.api.nvim_set_hl(0, "SearchUpText", { fg = "#000000", bg = palette.peach })
+
+    vim.api.nvim_set_hl(0, "CmdViolet", { bg = "NONE", fg = palette.mauve })
+    vim.api.nvim_set_hl(0, "LuaText", { bg = palette.mauve, fg = "#000000" })
+
+    vim.api.nvim_set_hl(0, "CmdGreen", { bg = "NONE", fg = palette.green })
+    vim.api.nvim_set_hl(0, "CalculateText", { fg = "#000000", bg = palette.green })
+
     -- vim.cmd.hi("TreesitterContextLineNumber guibg=" .. "#0b253a")
     -- vim.cmd.hi("TreesitterContext guibg=" .. "#0b253a")
     -- vim.cmd.hi("TelescopeMatching guifg=" .. "#ff33b8")

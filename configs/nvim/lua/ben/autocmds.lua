@@ -23,8 +23,8 @@ vim.api.nvim_create_autocmd("FileType", {
         match_str = current_line
       end
       local cmd = "Cfilter! " .. vim.fn.escape(match_str, " ")
-      vim.notify(cmd)
-      vim.cmd(cmd)
+      -- vim.notify(cmd)
+      -- vim.cmd(cmd)
     end, { buffer = true })
   end,
 })

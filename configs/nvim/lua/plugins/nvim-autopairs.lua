@@ -1,8 +1,8 @@
 local M = {
   {
     enabled = true,
-    'windwp/nvim-autopairs',
-    event = 'InsertEnter',
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
     opts = {},
   },
 }

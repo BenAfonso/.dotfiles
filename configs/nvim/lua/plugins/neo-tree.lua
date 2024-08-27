@@ -1,6 +1,7 @@
 local M = {
   {
     "nvim-neo-tree/neo-tree.nvim",
+    enabled = false,
     dependencies = {
       "MunifTanjim/nui.nvim",
     },

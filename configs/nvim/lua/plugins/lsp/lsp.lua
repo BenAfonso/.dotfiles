@@ -197,26 +197,24 @@ return {
     -- Lua LS
     lspconfig.lua_ls.setup({
       capabilities = capabilities,
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { "vim" },
-          },
-          runtime = { version = "LuaJIT" },
-          workspace = {
-            checkThirdParty = false,
-            library = {
-              "${3rd}/luv/library",
-              vim.env.VIMRUNTIME,
-              "~/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
-            },
-          },
-          completion = {
-            callSnippet = "Replace",
-          },
-        },
-      },
+      -- settings = {
+      --   Lua = {
+      --     diagnostics = {
+      --       globals = { "vim" },
+      --     },
+      --     runtime = { version = "LuaJIT" },
+      --     -- workspace = {
+      --     --   checkThirdParty = false,
+      --     --   library = {
+      --     --   },
+      --     -- },
+      --     completion = {
+      --       callSnippet = "Replace",
+      --     },
+      --   },
+      -- },
     })
+
     -- CSS LS
     lspconfig.cssls.setup({
       capabilities = capabilities,
