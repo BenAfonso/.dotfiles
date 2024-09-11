@@ -107,12 +107,18 @@ if [ -f '/home/ben/google-cloud-sdk/path.zsh.inc' ]; then . '/home/ben/google-cl
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/ben/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/ben/google-cloud-sdk/completion.zsh.inc'; fi
 
+
+
+export PATH="$DOTFILES/bin:$PATH"
+
+
 export MACHINE=windows
 export PATH=$PATH:/usr/bin
 
 export PATH=$PATH:$GOPATH/bin
 
 export TERM=xterm-256color
+
 
 # Flutter
 export PATH=$HOME/Applications/flutter/bin:$PATH
@@ -135,6 +141,8 @@ export PATH=$HOME/Applications/flutter/bin:$PATH
 
 # Java
 export JAVA_HOME="/usr/"
+
+export WSL_GPG="/mnt/c/Program Files (x86)/gnupg/bin/gpg.exe"
 
 alias vim="nvim"
 alias cat="bat"
@@ -163,6 +171,5 @@ export NVM_DIR="$HOME/.nvm"
 
 export DOTFILES="$HOME/.dotfiles"
 
-export PATH="$DOTFILES/bin:$PATH"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

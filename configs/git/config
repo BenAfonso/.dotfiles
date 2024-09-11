@@ -1,8 +1,16 @@
 [user]
   name = Ben Afonso
-	email = ben@nightzookeeper.com
+  email = ben@nightzookeeper.com
+  signinkey = "53D247567DC6A9D588E57D134D6A371A17A97C4C"
 [credential]
 	helper = cache
+[gpg]
+  ;program = $WSL_GPG
+  program = gpg
+[commit]
+  gpgsign = true
+[tag]
+  gpgsign = true
 [core]
   pager = delta
 	editor = nvim
