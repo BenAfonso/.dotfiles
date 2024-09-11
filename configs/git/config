@@ -5,7 +5,7 @@
 [credential]
 	helper = cache
 [gpg]
-	program = /mnt/c/Program Files (x86)/gnupg/bin/gpg.exe
+	;program = /mnt/c/Program Files (x86)/gnupg/bin/gpg.exe
   ;program = gpg
 [commit]
   gpgsign = true
