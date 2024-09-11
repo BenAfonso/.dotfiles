@@ -5,8 +5,8 @@
 [credential]
 	helper = cache
 [gpg]
-  ;program = $WSL_GPG
-  program = gpg
+	program = /mnt/c/Program Files (x86)/gnupg/bin/gpg.exe
+  ;program = gpg
 [commit]
   gpgsign = true
 [tag]
