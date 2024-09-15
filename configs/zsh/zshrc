@@ -92,14 +92,8 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 
-#### Exports
-export LOVE2D_PATH=/mnt/c/Users/Ben/Downloads/love-11.5-win64/love-11.5-win64/love.exe
-
-
-export GOPATH=$HOME/go
-# export GO111MODULE=on
-
-# tmux attach
+## Tmux
+export TERM=xterm-256color
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/ben/google-cloud-sdk/path.zsh.inc' ]; then . '/home/ben/google-cloud-sdk/path.zsh.inc'; fi
@@ -108,21 +102,21 @@ if [ -f '/home/ben/google-cloud-sdk/path.zsh.inc' ]; then . '/home/ben/google-cl
 if [ -f '/home/ben/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/ben/google-cloud-sdk/completion.zsh.inc'; fi
 
 
-
-export PATH="$DOTFILES/bin:$PATH"
-
-
+## Windows
 export MACHINE=windows
 export PATH=$PATH:/usr/bin
+export LOVE2D_PATH=/mnt/c/Users/Ben/Downloads/love-11.5-win64/love-11.5-win64/love.exe
 
-export PATH=$PATH:$GOPATH/bin
+## Dotfiles scripts
+export DOTFILES="$HOME/.dotfiles"
+export PATH="$DOTFILES/bin:$PATH"
 
-export TERM=xterm-256color
-
+## Go
+export GOPATH=$HOME/go
+export PATH="$PATH:$GOPATH/bin"
 
 # Flutter
-export PATH=$HOME/Applications/flutter/bin:$PATH
-
+export PATH="$HOME/Applications/flutter/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 eval "$(starship init zsh)"
@@ -167,9 +161,5 @@ export NVM_DIR="$HOME/.nvm"
  # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
  
 # zprof
-
-
-export DOTFILES="$HOME/.dotfiles"
-
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
