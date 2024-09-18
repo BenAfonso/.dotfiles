@@ -121,10 +121,6 @@ end, { noremap = true })
 
 local gs = require("gitsigns")
 
-require("which-key").register({
-  ["<leader>gt"] = { name = "[G]it [T]oggle", _ = "which_key_ignore" },
-})
-
 keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", { noremap = true, desc = "[H]unk [S]tage Hunk" })
 keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", { noremap = true, desc = "[H]unk [R]eset Hunk" })
 keymap.set("n", "<leader>hS", gs.stage_buffer, { noremap = true, desc = "[H]unk [S]tage Buffer" })

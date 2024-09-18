@@ -76,10 +76,6 @@ local M = {
         end,
       })
 
-      require("which-key").register({
-        ["<leader>h"] = { name = "[H]arpoon", _ = "which_key_ignore" },
-      })
-
       vim.keymap.set("n", "<C-e>", function()
         toggle_telescope(harpoon:list())
       end, { desc = "Open harpoon window" })
