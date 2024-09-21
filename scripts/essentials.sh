@@ -6,7 +6,7 @@ nix-env -iA nixpkgs.pass
 nix-env -iA nixpkgs.age
 nix-env -iA nixpkgs.btop
 nix-env -iA nixpkgs.duf
-nix-env -iA nixpkgs.eza
+nix-env -iA nixpkgs.lsd
 nix-env -iA nixpkgs.jq
 nix-env -iA nixpkgs.keepassxc
 nix-env -iA nixpkgs.nix

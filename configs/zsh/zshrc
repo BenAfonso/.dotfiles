@@ -138,9 +138,11 @@ export JAVA_HOME="/usr/"
 
 export WSL_GPG="/mnt/c/Program Files (x86)/gnupg/bin/gpg.exe"
 
+export GPG_TTY=$(tty)
+
 alias vim="nvim"
 alias cat="bat"
-alias ls="eza"
+alias ls="lsd"
 alias nvim="v"
 alias nvdis="nvr --servername $(nvim-server-name) -s"
 
@@ -163,3 +165,5 @@ export NVM_DIR="$HOME/.nvm"
 # zprof
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
