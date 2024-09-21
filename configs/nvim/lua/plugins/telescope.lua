@@ -302,14 +302,18 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
     vim.keymap.set("n", "<leader>sb", builtin.current_buffer_fuzzy_find, { desc = "[S]earch current [B]uffer" })
     vim.keymap.set("n", "<leader>st", builtin.colorscheme, { desc = "[S]earch [T]heme" })
-
-    -- vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-    vim.keymap.set(
-      "n",
-      "<leader>sg",
-      telescope.extensions.live_grep_args.live_grep_args,
-      { desc = "[S]earch by [G]rep" }
-    )
+    vim.keymap.set("n", "<leader>st", builtin.colorscheme, { desc = "[S]earch [T]heme" })
+    vim.keymap.set("n", "<leader>sg", function()
+      require("fzf-lua").grep({
+        raw_cmd = [[git status -su | rg "^\s*M" | cut -d ' ' -f3 | xargs rg --hidden --column --line-number --no-heading --color=always --with-filename -e '']],
+      })
+    end, { desc = "[S]earch in [G]it diff" })
+    -- vim.keymap.set(
+    --   "n",
+    --   "<leader>sg",
+    --   telescope.extensions.live_grep_args.live_grep_args,
+    --   { desc = "[S]earch by [G]rep" }
+    -- )
     -- vim.keymap.set("n", ";r", builtin.live_grep, { desc = "[S]earch by [G]rep" })
     vim.keymap.set("n", ";r", telescope.extensions.live_grep_args.live_grep_args, { desc = "[S]earch by [G]rep" })
 
