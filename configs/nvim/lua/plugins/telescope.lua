@@ -138,10 +138,10 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
         },
         layout_strategy = "horizontal",
         layout_config = {
-          prompt_position = "top",
+          prompt_position = "bottom",
         },
         path_display = { "shorten" },
-        sorting_strategy = "ascending",
+        sorting_strategy = "descending",
         winblend = 0,
         mappings = {
           n = {
