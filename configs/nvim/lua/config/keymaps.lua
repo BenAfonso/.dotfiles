@@ -90,8 +90,12 @@ keymap.set("n", "te", ":tabedit<Return>", { noremap = true, silent = true, desc 
 keymap.set("n", "tb", ":tabedit %<Return>", { noremap = true, silent = true, desc = "Open current buffer in new tab" })
 -- keymap.set("n", ";q", ":close<Return>", opts)
 keymap.set("n", "tq", ":tabclose<Return>", { noremap = true, silent = true, desc = "Close tab" })
-keymap.set("n", "<tab>", ":tabnext<Return>", { noremap = true, silent = true, desc = "Next tab" })
+
 keymap.set("n", "<S-tab>", ":tabprev<Return>", { noremap = true, silent = true, desc = "Previous tab" })
+keymap.set("n", "th", ":tabprev<Return>", { noremap = true, silent = true, desc = "Previous tab" })
+
+keymap.set("n", "<tab>", ":tabnext<Return>", { noremap = true, silent = true, desc = "Next tab" })
+keymap.set("n", "tl", ":tabnext<Return>", { noremap = true, silent = true, desc = "Next tab" })
 
 -- Splits
 keymap.set("n", "sh", ":split<Return>", { noremap = true, silent = true, desc = "Split window bottom" })

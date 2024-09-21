@@ -85,6 +85,11 @@ local Catppuccin = {
     vim.api.nvim_set_hl(0, "CmdGreen", { bg = "NONE", fg = palette.green })
     vim.api.nvim_set_hl(0, "CalculateText", { fg = "#000000", bg = palette.green })
 
+    -- Diffview
+
+    -- vim.api.nvim_set_hl(0, "DiffviewDiffDelete", { fg = palette.red, bg = palette.maroon })
+    vim.api.nvim_set_hl(0, "DiffviewDiffDelete", { link = "NeogitDiffDeleteHighlight" })
+
     -- vim.cmd.hi("TreesitterContextLineNumber guibg=" .. "#0b253a")
     -- vim.cmd.hi("TreesitterContext guibg=" .. "#0b253a")
     -- vim.cmd.hi("TelescopeMatching guifg=" .. "#ff33b8")
