@@ -1,0 +1,19 @@
+#!/bin/sh
+
+
+FZF_DEFAULT_OPTS="-e --header \"Most recent first\" --tmux center --prompt \"Find> \" --border-label \"Restore TMUX Session\""
+
+RESURRECT_PATH=~/.local/share/tmux/resurrect
+SAVE=$(ls $RESURRECT_PATH -s -r | \
+grep tmux_resurrect | \
+sed 's/.*tmux_resurrect_\(.*\)\.txt/\1/g' | \
+sed 's/\(....\)\(..\)\(..\)T\(..\)\(..\)\(..\)/\1-\2-\3 \4:\5:\6/' | \
+fzf $FZF_OPTS)
+
+ORIGINAL=$(echo $SAVE | sed 's/-//g; s/://g; s/ /T/')
+
+FILE=$RESURRECT_PATH/tmux_resurrect_$ORIGINAL.txt
+
+echo ln -sf $RESURRECT_PATH/tmux_resurrect_$ORIGINAL.txt $RESURRECT_PATH/last
+ln -sf $RESURRECT_PATH/tmux_resurrect_$ORIGINAL.txt $RESURRECT_PATH/last
+
