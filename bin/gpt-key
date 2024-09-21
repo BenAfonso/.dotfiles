@@ -1,0 +1,1 @@
+echo $(pass show keepass-noha | keepassxc-cli show ~/.keepass/keepass-noha.kdbx gpt-neovim2 -a Password -s -q)
