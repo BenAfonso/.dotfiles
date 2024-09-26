@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Check if gpg is unlocked
+echo "test" | gpg2 --sign --batch --no-tty --pinentry-mode error -o /dev/null > /dev/null
+
+if [ $? -eq 2 ]
+then
+  # Show pinentry in tmux popup
+  tmux popup -w 50 -h 4 'echo "A" | gpg -s > /dev/null && tmux popup -C'
+fi
+
