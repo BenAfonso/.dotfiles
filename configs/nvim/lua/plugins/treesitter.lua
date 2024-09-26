@@ -11,17 +11,24 @@ return {
         -- end,
       },
       ensure_installed = {
+        "yaml",
+        "toml",
+        "vimdoc",
+        "markdown_inline",
+
         "cmake",
         "cpp",
         "css",
         "comment",
         "gitignore",
         "go",
-        "graphql",
         "http",
         "rust",
-        "scss",
         "sql",
+        "lua",
+
+        "scss",
+        "graphql",
         "html",
         "svelte",
         "javascript",
@@ -29,9 +36,7 @@ return {
         "tsx",
         "jsdoc",
         "styled",
-        "vimdoc",
-        "lua",
-        "markdown_inline",
+        "astro",
       },
 
       -- matchup = {

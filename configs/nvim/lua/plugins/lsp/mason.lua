@@ -18,23 +18,28 @@ return {
         "cssls",
         "marksman",
       },
-      automatic_installation = true,
+      automatic_installation = false,
     })
 
     mason_tool_installer.setup({
       ensure_installed = {
-        { "stylua" },
         { "shellcheck" },
         { "shfmt" },
+        -- Lua
+        { "stylua" },
+        -- Go
+        { "gopls" },
+        -- Web
+        { "prettier" },
+        { "eslint_d" },
         -- { "vtsls" },
         { "typescript-language-server" },
         { "tailwindcss-language-server" },
         { "css-lsp" },
-        { "gopls" },
-        { "eslint_d" },
-        { "prettier" },
         { "svelte-language-server" },
+        { "astro-language-server" },
       },
+      automatic_installation = false,
       auto_update = true,
       run_on_start = true,
       start_delay = 3000, -- 3 second delay
