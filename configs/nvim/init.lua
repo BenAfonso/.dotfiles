@@ -130,6 +130,7 @@ require("lazy").setup({
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   { import = "plugins" },
   { import = "plugins.lsp" },
+  { import = "plugins.telescope" },
 }, {
   ui = {
     size = {

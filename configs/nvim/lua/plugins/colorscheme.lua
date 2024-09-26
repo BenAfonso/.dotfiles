@@ -4,6 +4,8 @@ local Catppuccin = {
   priority = 1000,
   lualine_key = "catppuccin",
   config = function()
+    local palette = require("catppuccin.palettes").get_palette("mocha")
+
     require("catppuccin").setup({
       flavour = "mocha", -- latte, frappe, macchiato, mocha
       -- flavour = "auto" -- will respect terminal's background
@@ -38,7 +40,25 @@ local Catppuccin = {
         -- miscs = {}, -- Uncomment to turn off hard-coded styles
       },
       color_overrides = {},
-      custom_highlights = {},
+      custom_highlights = {
+        CmdBlue = { bg = "NONE", fg = palette.blue },
+        CmdText = { bg = palette.blue, fg = "#000000" },
+        CmdYellow = { bg = "NONE", fg = palette.yellow },
+        SearchDownText = { fg = "#000000", bg = palette.yellow },
+        CmdOrange = { bg = "NONE", fg = palette.peach },
+        SearchUpText = { fg = "#000000", bg = palette.peach },
+        CmdViolet = { bg = "NONE", fg = palette.mauve },
+        LuaText = { bg = palette.mauve, fg = "#000000" },
+        CmdGreen = { bg = "NONE", fg = palette.green },
+        CalculateText = { fg = "#000000", bg = palette.green },
+        DiffviewDiffDelete = { link = "NeogitDiffDeleteHighlight" },
+        TelescopeBorder = { fg = "#ff33b8" },
+        TelescopeMatching = { fg = "#ff33b8", bold = true },
+        TelescopeSelection = { bg = "#361e3f" },
+        TelescopeSelectionCaret = { bg = "#361e3f", fg = "#ff33b8" },
+        TelescopeMultiSelection = { fg = "#ff33b8" },
+        TelescopeMultiIcon = { fg = "#ff33b8" },
+      },
       default_integrations = true,
       integrations = {
         cmp = true,
@@ -52,6 +72,7 @@ local Catppuccin = {
         harpoon = true,
         telescope = {
           enabled = true,
+          -- style = "nvchad",
         },
         -- lsp_trouble = true,
         notify = true,
@@ -63,36 +84,17 @@ local Catppuccin = {
       },
     })
 
+    -- vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#ff33b8", bold = true })
+
     -- vim.cmd.hi("Substitute guibg=" .. colors.yellow2 .. " guifg=#000000")
 
     -- setup must be called before loading
     vim.cmd.colorscheme("catppuccin")
 
-    local palette = require("catppuccin.palettes").get_palette("mocha")
-
-    vim.api.nvim_set_hl(0, "CmdBlue", { bg = "NONE", fg = palette.blue })
-    vim.api.nvim_set_hl(0, "CmdText", { bg = palette.blue, fg = "#000000" })
-
-    vim.api.nvim_set_hl(0, "CmdYellow", { bg = "NONE", fg = palette.yellow })
-    vim.api.nvim_set_hl(0, "SearchDownText", { fg = "#000000", bg = palette.yellow })
-
-    vim.api.nvim_set_hl(0, "CmdOrange", { bg = "NONE", fg = palette.peach })
-    vim.api.nvim_set_hl(0, "SearchUpText", { fg = "#000000", bg = palette.peach })
-
-    vim.api.nvim_set_hl(0, "CmdViolet", { bg = "NONE", fg = palette.mauve })
-    vim.api.nvim_set_hl(0, "LuaText", { bg = palette.mauve, fg = "#000000" })
-
-    vim.api.nvim_set_hl(0, "CmdGreen", { bg = "NONE", fg = palette.green })
-    vim.api.nvim_set_hl(0, "CalculateText", { fg = "#000000", bg = palette.green })
-
     -- Diffview
-
-    -- vim.api.nvim_set_hl(0, "DiffviewDiffDelete", { fg = palette.red, bg = palette.maroon })
-    vim.api.nvim_set_hl(0, "DiffviewDiffDelete", { link = "NeogitDiffDeleteHighlight" })
 
     -- vim.cmd.hi("TreesitterContextLineNumber guibg=" .. "#0b253a")
     -- vim.cmd.hi("TreesitterContext guibg=" .. "#0b253a")
-    -- vim.cmd.hi("TelescopeMatching guifg=" .. "#ff33b8")
   end,
 }
 
@@ -109,6 +111,14 @@ local TokyoNight = {
     vim.cmd.hi("Comment gui=none")
   end,
 }
+
+-- local Eldritch = {
+--   "eldritch-theme/eldritch.nvim",
+--   enabled = true,
+--   lazy = false, -- make sure we load this during startup if it is your main colorscheme
+--   priority = 1000, -- make sure to load this before all the other start plugins
+--   opts = {},
+-- }
 
 local NightOwl = {
   {
@@ -149,7 +159,4 @@ local NightOwl = {
 }
 
 local Theme = Catppuccin
-
-return {
-  Theme,
-}
+return Theme

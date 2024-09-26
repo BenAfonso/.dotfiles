@@ -113,13 +113,20 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
     -- { 'nvim-tree/nvim-web-devicons' }
   },
   config = function()
-    local actions = require("telescope.actions")
     local action_state = require("telescope.actions.state")
     -- local fb_actions = require("telescope").extensions.file_browser.actions
     local lga_actions = require("telescope-live-grep-args.actions")
 
     require("telescope").setup({
       defaults = {
+        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+
+        -- Icons
+        prompt_prefix = "  ",
+        selection_caret = "  ",
+        entry_prefix = " ",
+        multi_icon = "  ",
+
         file_sorter = require("telescope.sorters").get_fzy_sorter,
         -- buffer_previewer_maker = new_maker,
         wrap_result = true,
@@ -138,7 +145,17 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
         },
         layout_strategy = "horizontal",
         layout_config = {
-          prompt_position = "bottom",
+          horizontal = {
+            prompt_position = "bottom",
+            preview_width = 0.55,
+            results_width = 0.8,
+          },
+          vertical = {
+            mirror = false,
+          },
+          width = 0.87,
+          height = 0.80,
+          preview_cutoff = 120,
         },
         path_display = { "shorten" },
         sorting_strategy = "descending",
@@ -196,6 +213,20 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
         buffers = {
           path_display = filenameFirst,
           sort_lastused = true,
+          theme = "ivy",
+          layout_config = {
+            horizontal = {
+              prompt_position = "bottom",
+              preview_width = 0.55,
+              results_width = 0.8,
+            },
+            vertical = {
+              mirror = false,
+            },
+            width = 0.87,
+            height = 0.80,
+            preview_cutoff = 120,
+          },
           mappings = {
             n = {
               ["dd"] = require("telescope.actions").delete_buffer,
@@ -223,9 +254,10 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
           path_display = filenameFirst,
         },
         find_files = {
-          path_display = {
-            truncate = 3,
-          },
+          path_display = filenameFirst,
+          -- path_display = {
+          --   truncate = 3,
+          -- },
         },
         diagnostics = {
           theme = "ivy",
