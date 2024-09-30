@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CONFIGS_PATH=~/.dotfiles/configs
 
@@ -23,6 +23,9 @@ ln -sfv $CONFIGS_PATH/zsh/zshrc ~/.zshrc
 
 # Gnupg
 ln -sfv $CONFIGS_PATH/gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+
+# Lazygit
+ln -sfv $CONFIGS_PATH/lazygit/config.yml ~/.config/lazygit/config.yml
 
 ## Mac specifics
 if [[ $OSTYPE == 'darwin'* ]]; then 

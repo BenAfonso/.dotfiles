@@ -4,6 +4,7 @@ return {
     require("toggleterm").setup({
       shade_terminals = false,
       shell = "zsh",
+      persist_mode = false,
       highlights = {
         StatusLine = { guifg = "#ffffff", guibg = "#0E1018" },
         StatusLineNC = { guifg = "#ffffff", guibg = "#0E1018" },
@@ -63,7 +64,9 @@ return {
       ":ToggleTerm size=60 direction=vertical<cr>",
       { silent = true, desc = "[T]erminal [H]orizontal" }
     )
-    vim.keymap.set("n", "<leader>go", "<cmd>lua Lazygit_toggle()<CR>", { silent = true, desc = "[O]pen Lazygit" })
+    vim.keymap.set("n", "<leader>go", function()
+      Lazygit_toggle()
+    end, { silent = true, desc = "[O]pen Lazygit" })
 
     -- local Util = require("lazyvim.util")
     --
