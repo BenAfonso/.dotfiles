@@ -55,3 +55,5 @@
         unstage = reset HEAD --
         s = status
         diff-stat = diff --stat --ignore-space-change -r
+[url "git@github.com:"]
+	insteadOf = https://github.com/
