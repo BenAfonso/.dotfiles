@@ -100,7 +100,7 @@ return {
           { name = "nvim_lua", priority = 100, max_item_count = 20 },
           { name = "lazydev", group_index = 0, max_item_count = 20 },
           -- { name = "copilot", priority = 800 },
-          -- { name = "vim-dadbod-completion", priority = 700 }, -- add new source
+          { name = "vim-dadbod-completion", priority = 700 }, -- add new source
         }, {
           -- { name = "buffer", priority = 500, keyword_length = 3, max_item_count = 10 },
           { name = "emoji", priority = 800, max_item_count = 100 },
