@@ -18,6 +18,7 @@ return {
         "javascript",
         "javascriptreact",
         "javascript.jsx",
+        "astro",
         "typescript",
         "typescriptreact",
         "typescript.tsx",

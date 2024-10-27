@@ -1,53 +1,18 @@
-local function custom_code_action_handler(params, callback)
-  -- Get the list of available code actions from the server
-  vim.lsp.buf_request_all(0, "textDocument/codeAction", params, function(results)
-    local actions = {}
-
-    -- Add server provided code actions
-    for _, res in pairs(results) do
-      for _, action in pairs(res.result or {}) do
-        table.insert(actions, action)
-      end
-    end
-
-    -- Add custom "Organize Imports" action
-    table.insert(actions, {
-      title = "Organize Imports",
-      kind = "source.organizeImports",
-      command = {
-        title = "Organize Imports",
-        command = "_typescript.organizeImports",
-        arguments = { vim.api.nvim_buf_get_name(0) },
-      },
-    })
-
-    -- Add custom "Format Code" action
-    table.insert(actions, {
-      title = "Format Code",
-      kind = "source.format",
-      command = {
-        title = "Format Code",
-        command = "editor.action.formatDocument",
-        arguments = { vim.api.nvim_buf_get_name(0) },
-      },
-    })
-
-    -- Return all code actions including custom ones
-    callback(actions)
-  end)
-end
-
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
+    { "williamboman/mason.nvim", config = true },
+    "williamboman/mason-lspconfig.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+
+    { "j-hui/fidget.nvim", opts = {} },
+
     "hrsh7th/cmp-nvim-lsp",
   },
   config = function()
     local lspconfig = require("lspconfig")
     local lspui = require("lspconfig.ui.windows")
-    local cmp_nvim_lsp = require("cmp_nvim_lsp")
-    local capabilities = cmp_nvim_lsp.default_capabilities()
 
     vim.diagnostic.config({
       diagnostic = {
@@ -180,60 +145,102 @@ return {
     --   },
     -- })
 
-    -- html
-    lspconfig.html.setup({
-      capabilities = capabilities,
-    })
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-    lspconfig.gopls.setup({
-      capabilities = capabilities,
-      analyses = {
-        unusedparams = true,
+    local servers = {
+      html = {},
+      clangd = {},
+      rust_analyzer = {},
+      go_pls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+        gofumpt = true,
       },
-      staticcheck = true,
-      gofumpt = true,
-    })
-
-    -- Lua LS
-    lspconfig.lua_ls.setup({
-      capabilities = capabilities,
-      -- settings = {
-      --   Lua = {
-      --     diagnostics = {
-      --       globals = { "vim" },
-      --     },
-      --     runtime = { version = "LuaJIT" },
-      --     -- workspace = {
-      --     --   checkThirdParty = false,
-      --     --   library = {
-      --     --   },
-      --     -- },
-      --     completion = {
-      --       callSnippet = "Replace",
-      --     },
-      --   },
-      -- },
-    })
-
-    -- CSS LS
-    lspconfig.cssls.setup({
-      capabilities = capabilities,
-    })
-
-    lspconfig.tailwindcss.setup({
-      capabilities = capabilities,
-    })
-
-    lspconfig.eslint.setup({
-      capabilities = capabilities,
-      filetypes = {
-        "javascript",
-        "javascriptreact",
-        "javascript.jsx",
-        "typescript",
-        "typescriptreact",
-        "typescript.tsx",
+      lua_ls = {
+        capabilities = capabilities,
+        -- settings = {
+        --   Lua = {
+        --     diagnostics = {
+        --       globals = { "vim" },
+        --     },
+        --     runtime = { version = "LuaJIT" },
+        --     -- workspace = {
+        --     --   checkThirdParty = false,
+        --     --   library = {
+        --     --   },
+        --     -- },
+        --     completion = {
+        --       callSnippet = "Replace",
+        --     },
+        --   },
+        -- },
       },
+
+      -- Web development
+      ts_ls = {
+        root_dir = lspconfig.util.root_pattern("package.json"),
+        single_file_support = true,
+      },
+      denols = {
+        root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+      },
+      cssls = {},
+      tailwindcss = {
+        filetypes = {
+          "javascript",
+          "javascriptreact",
+          "javascript.jsx",
+          "typescript",
+          "typescriptreact",
+          "typescript.tsx",
+          "astro",
+        },
+      },
+      astro = {},
+      eslint = {
+        filetypes = {
+          "javascript",
+          "javascriptreact",
+          "javascript.jsx",
+          "typescript",
+          "typescriptreact",
+          "typescript.tsx",
+        },
+      },
+    }
+
+    require("mason").setup()
+
+    local ensure_installed = vim.tbl_keys(servers or {})
+    vim.list_extend(ensure_installed, {
+      "stylua",
+      "prettier",
+      "eslint_d",
+      "shfmt",
+      "spellcheck",
+    })
+
+    require("mason-tool-installer").setup({
+      ensure_installed = ensure_installed,
+      automatic_installation = false,
+      auto_update = true,
+      run_on_start = true,
+      start_delay = 3000, -- 3 second delay
+      debounce_hours = 5, -- at least 5 hours between attempts to install/update
+    })
+
+    require("mason-lspconfig").setup({
+      handlers = {
+        function(server_name)
+          local server = servers[server_name] or {}
+          server.capabilities = vim.tbl_deep_extend("force", {}, server.capabilities or {})
+          require("lspconfig")[server_name].setup(server)
+        end,
+      },
+      automatic_installation = false,
     })
   end,
 }

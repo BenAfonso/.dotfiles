@@ -7,6 +7,8 @@ vim.g.maplocalleader = " "
 
 vim.o.wrap = false
 
+vim.opt.cmdheight = 0
+
 -- Make line numbers default
 vim.opt.number = true
 
