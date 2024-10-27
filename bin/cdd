@@ -1,0 +1,4 @@
+#!/bin/bash
+
+FZF_DEFAULT_OPTS="-e --tmux bottom --prompt \"Query> \" --border-label \"Select a project\""
+cd $(find ~/Work -maxdepth 2 -mindepth 2 -type d | fzf)
