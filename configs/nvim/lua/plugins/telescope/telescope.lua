@@ -29,6 +29,7 @@ end
 
 local actions = require("telescope.actions")
 local previewers = require("telescope.previewers")
+
 local Job = require("plenary.job")
 local _bad = { ".*%.csv", ".*%.min.js" } -- Put all filetypes that slow you down in this array
 local bad_files = function(filepath)
@@ -266,6 +267,9 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
             preview_cutoff = 9999,
           },
         },
+        colorscheme = {
+          enable_preview = true,
+        },
       },
       extensions = {
         ["ui-select"] = {
@@ -333,7 +337,6 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
     vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
     vim.keymap.set("n", "<leader>sb", builtin.current_buffer_fuzzy_find, { desc = "[S]earch current [B]uffer" })
-    vim.keymap.set("n", "<leader>st", builtin.colorscheme, { desc = "[S]earch [T]heme" })
     vim.keymap.set("n", "<leader>st", builtin.colorscheme, { desc = "[S]earch [T]heme" })
     vim.keymap.set("n", "<leader>sg", function()
       require("fzf-lua").grep({

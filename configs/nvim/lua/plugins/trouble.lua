@@ -44,6 +44,12 @@ return {
       desc = "Quickfix List (Trouble)",
     },
     {
+      "<leader>xT",
+      "<cmd>Trouble todo filter = { tag = { TODO} }<cr>",
+      desc = "[T]odo List (Trouble)",
+    },
+
+    {
       "gR",
       function()
         require("trouble").toggle("lsp_references")

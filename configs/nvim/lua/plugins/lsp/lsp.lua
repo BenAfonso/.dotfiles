@@ -39,14 +39,23 @@ return {
       border = "rounded",
     })
 
-    vim.lsp.handlers["textDocument/signatureHelp"] =
-      vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+      border = "rounded",
+      focusable = false,
+      focus = false,
+      -- close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
+      close_events = { "CursorMoved", "BufHidden", "InsertCharPre", "InsertEnter" },
+    })
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
       callback = function(event)
         local map = function(keys, func, desc)
           vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+        end
+
+        local imap = function(keys, func, desc)
+          vim.keymap.set("i", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
 
         map("<leader>gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
@@ -62,25 +71,32 @@ return {
         map("K", vim.lsp.buf.hover, "Hover Documentation")
         map("<leader>gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
+        map("<leader>gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+
+        imap("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
+
+        vim.keymap.set("i", "<c-s>", function()
+          vim.lsp.buf.signature_help()
+        end, { buffer = true })
+
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client ~= nil then
           local cap = client.server_capabilities
-          if
-            client
-            and client.server_capabilities.documentHighlightProvider
-            and cap ~= nil
-            ---@diagnostic disable-next-line: undefined-field
-            and cap.document_highlight
-          then
-            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-              buffer = event.buf,
-              callback = vim.lsp.buf.document_highlight,
-            })
+          if client and client.server_capabilities.documentHighlightProvider and cap ~= nil then
+            -- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+            --   buffer = event.buf,
+            --   callback = vim.lsp.buf.document_highlight,
+            -- })
 
-            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-              buffer = event.buf,
-              callback = vim.lsp.buf.clear_references,
-            })
+            -- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+            --   buffer = event.buf,
+            --   callback = vim.lsp.buf.signature_help,
+            -- })
+
+            -- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+            --   buffer = event.buf,
+            --   callback = vim.lsp.buf.clear_references,
+            -- })
           end
         end
       end,
@@ -89,96 +105,34 @@ return {
     --LspInfo Borders
     lspui.default_options.border = "double"
 
-    -- tsserver
-    -- lspconfig.vtsls.setup({
-    -- lspconfig.tsserver.setup({
-    --   enabled = true,
-    --   capabilities = capabilities,
-    --   on_attach = function(client, bufnr)
-    --     local map = function(keys, func, desc)
-    --       vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
-    --     end
-    --     map("<leader>co", "<cmd>:TSToolsOrganizeImports<CR>", "[O]rganize imports")
-    --   end,
-    --   filetypes = {
-    --     "javascript",
-    --     "javascriptreact",
-    --     "javascript.jsx",
-    --     "typescript",
-    --     "typescriptreact",
-    --     "typescript.tsx",
-    --   },
-    --   root_dir = function(filename, bufnr)
-    --     if string.find(filename, "node_modules/") then
-    --       return nil
-    --     end
-    --     if string.find(filename, ".min.js") then
-    --       return nil
-    --     end
-    --     return lspconfig.util.root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")()
-    --   end,
-    --   settings = {
-    --     complete_function_calls = true,
-    --     vtsls = {
-    --       enableMoveToFileCodeAction = true,
-    --       autoUseWorkspaceTsdk = true,
-    --       experimental = {
-    --         completion = {
-    --           enableServerSideFuzzyMatch = true,
-    --         },
-    --       },
-    --     },
-    --     typescript = {
-    --       updateImportsOnFileMove = { enabled = "always" },
-    --       suggest = {
-    --         completeFunctionCalls = true,
-    --       },
-    --       inlayHints = {
-    --         enumMemberValues = { enabled = true },
-    --         functionLikeReturnTypes = { enabled = true },
-    --         parameterNames = { enabled = "literals" },
-    --         parameterTypes = { enabled = true },
-    --         propertyDeclarationTypes = { enabled = true },
-    --         variableTypes = { enabled = false },
-    --       },
-    --     },
-    --   },
-    -- })
-
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
     local servers = {
       html = {},
       clangd = {},
-      rust_analyzer = {},
-      go_pls = {
-        analyses = {
-          unusedparams = true,
+      rust_analyzer = {
+        filetypes = { "rust" },
+        root_dir = lspconfig.util.root_pattern("Cargo.toml"),
+        settings = {
+          ["rust_analyzer"] = {
+            cargo = {
+              allFeatures = true,
+            },
+          },
         },
-        staticcheck = true,
-        gofumpt = true,
       },
-      lua_ls = {
-        capabilities = capabilities,
-        -- settings = {
-        --   Lua = {
-        --     diagnostics = {
-        --       globals = { "vim" },
-        --     },
-        --     runtime = { version = "LuaJIT" },
-        --     -- workspace = {
-        --     --   checkThirdParty = false,
-        --     --   library = {
-        --     --   },
-        --     -- },
-        --     completion = {
-        --       callSnippet = "Replace",
-        --     },
-        --   },
-        -- },
-      },
+      go_pls = {
+        settings = {
 
+          analyses = {
+            unusedparams = true,
+          },
+          staticcheck = true,
+          gofumpt = true,
+        },
+      },
+      lua_ls = {},
       -- Web development
       ts_ls = {
         root_dir = lspconfig.util.root_pattern("package.json"),

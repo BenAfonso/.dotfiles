@@ -100,16 +100,30 @@ local Catppuccin = {
 
 local TokyoNight = {
   "folke/tokyonight.nvim",
-  enabled = false,
+  enabled = true,
   lazy = false, -- make sure we load this during startup if it is your main colorscheme
   priority = 1000, -- make sure to load this before all the other start plugins
-  config = function()
-    -- Load the colorscheme here
-    vim.cmd.colorscheme("tokyonight-night")
-
-    -- You can configure highlights by doing something like
-    vim.cmd.hi("Comment gui=none")
-  end,
+  opts = {
+    on_highlights = function(hl, c)
+      hl.TelescopeBorder = { fg = "#ff33b8" }
+      hl.TelescopeBorder = { fg = "#ff33b8" }
+      hl.TelescopeMatching = { fg = "#ff33b8", bold = true }
+      hl.TelescopeSelection = { bg = "#361e3f" }
+      hl.TelescopeSelectionCaret = { bg = "#361e3f", fg = "#ff33b8" }
+      hl.TelescopeMultiSelection = { fg = "#ff33b8" }
+      hl.TelescopeMultiIcon = { fg = "#ff33b8" }
+    end,
+  },
+  -- config = function(_, opts)
+  --   -- Load the colorscheme here
+  --   vim.cmd.colorscheme("tokyonight-night")
+  --
+  --
+  --
+  --
+  --   -- You can configure highlights by doing something like
+  --   vim.cmd.hi("Comment gui=none")
+  -- end,
 }
 
 -- local Eldritch = {
@@ -139,6 +153,13 @@ local NightOwl = {
       vim.cmd.hi("TreesitterContext guibg=" .. "#0b253a")
       vim.cmd.hi("TelescopeMatching guifg=" .. "#ff33b8")
 
+      vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = "#ff33b8" })
+      vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#ff33b8", bold = true })
+      vim.api.nvim_set_hl(0, "TelescopeSelection", { bg = "#361e3f" })
+      vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { bg = "#361e3f", fg = "#ff33b8" })
+      vim.api.nvim_set_hl(0, "TelescopeMultiSelection", { fg = "#ff33b8" })
+      vim.api.nvim_set_hl(0, "TelescopeMultiIcon", { fg = "#ff33b8" })
+
       -- Enable transparent background
       -- vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
       -- vim.api.nvim_set_hl(0, "NonText", { bg = "NONE", ctermbg = "NONE" })
@@ -158,5 +179,39 @@ local NightOwl = {
   },
 }
 
-local Theme = Catppuccin
-return Theme
+local Kanagawa = {
+  "rebelot/kanagawa.nvim",
+  opts = {
+    compile = false, -- enable compiling the colorscheme
+    undercurl = true, -- enable undercurls
+    commentStyle = { italic = true },
+    functionStyle = {},
+    keywordStyle = { italic = true },
+    statementStyle = { bold = true },
+    typeStyle = {},
+    transparent = false, -- do not set background color
+    dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+    terminalColors = true, -- define vim.g.terminal_color_{0,17}
+    colors = { -- add/modify theme and palette colors
+      palette = {},
+      theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+    },
+    overrides = function(colors) -- add/modify highlights
+      return {}
+    end,
+    theme = "wave", -- Load "wave" theme when 'background' option is not set
+    background = { -- map the value of 'background' option to a theme
+      dark = "wave", -- try "dragon" !
+      light = "lotus",
+    },
+  },
+}
+
+local themes = {
+  -- Kanagawa,
+  -- NightOwl,
+  Catppuccin,
+  -- TokyoNight,
+}
+
+return themes
