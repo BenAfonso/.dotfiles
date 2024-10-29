@@ -120,7 +120,7 @@ return {
             else
               local cmp_kind = require("utils.lsp_icons")[vim_item.kind]
               vim_item.menu = cmp_kind or ""
-              vim_item.kind = cmp_kind .. " " .. vim_item.kind
+              vim_item.kind = (cmp_kind or "") .. " " .. vim_item.kind
             end
             return vim_item
           end,

@@ -1,6 +1,6 @@
 local M = {
   {
-    enabled = true,
+    enabled = false,
     "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
     config = function()
