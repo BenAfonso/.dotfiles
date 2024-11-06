@@ -12,5 +12,12 @@ return {
         },
       },
     })
+
+    vim.keymap.set(
+      "n",
+      "<leader>cg",
+      ":lua require('neogen').generate()<CR>",
+      { noremap = true, silent = true, desc = "Generate comment" }
+    )
   end,
 }

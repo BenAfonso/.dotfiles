@@ -1,3 +1,29 @@
+local lspkind_comparator = function(conf)
+  local lsp_types = require("cmp.types").lsp
+  return function(entry1, entry2)
+    if entry1.source.name ~= "nvim_lsp" then
+      if entry2.source.name == "nvim_lsp" then
+        return false
+      else
+        return nil
+      end
+    end
+    local kind1 = lsp_types.CompletionItemKind[entry1:get_kind()]
+    local kind2 = lsp_types.CompletionItemKind[entry2:get_kind()]
+
+    local priority1 = conf.kind_priority[kind1] or 0
+    local priority2 = conf.kind_priority[kind2] or 0
+    if priority1 == priority2 then
+      return nil
+    end
+    return priority2 < priority1
+  end
+end
+
+local label_comparator = function(entry1, entry2)
+  return entry1.completion_item.label < entry2.completion_item.label
+end
+
 return {
   { -- Autocompletion
     "hrsh7th/nvim-cmp",
@@ -36,9 +62,9 @@ return {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-        performance = {
-          max_view_entries = 7,
-        },
+        -- performance = {
+        --   max_view_entries = 7,
+        -- },
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -86,7 +112,7 @@ return {
           {
             name = "nvim_lsp",
             priority = 1200,
-            max_item_count = 20,
+            -- max_item_count = 20,
             entry_filter = function(entry, ctx)
               local kind = entry:get_kind()
 
@@ -96,17 +122,59 @@ return {
               return true
             end,
           },
-          { name = "luasnip", priority = 1000, max_item_count = 5 },
-          { name = "nvim_lua", priority = 100, max_item_count = 20 },
-          { name = "lazydev", group_index = 0, max_item_count = 20 },
+          -- { name = "luasnip", priority = 1000, max_item_count = 5 },
+          -- { name = "nvim_lua", priority = 100, max_item_count = 20 },
+          -- { name = "lazydev", group_index = 0, max_item_count = 20 },
           -- { name = "copilot", priority = 800 },
-          { name = "vim-dadbod-completion", priority = 700 }, -- add new source
+          -- { name = "vim-dadbod-completion", priority = 700 }, -- add new source
         }, {
           -- { name = "buffer", priority = 500, keyword_length = 3, max_item_count = 10 },
-          { name = "emoji", priority = 800, max_item_count = 100 },
-          { name = "path", priority = 250, max_item_count = 3 },
-          { name = "calc" },
+          -- { name = "emoji", priority = 800, max_item_count = 100 },
+          -- { name = "path", priority = 250, max_item_count = 3 },
+          -- { name = "calc" },
         }),
+        sorting = {
+          comparators = {
+            -- cmp.config.compare.offset,
+            -- cmp.config.compare.kind,
+            -- cmp.config.compare.exact,
+            -- cmp.config.compare.score,
+            lspkind_comparator({
+              kind_priority = {
+                Field = 11,
+                Property = 11,
+                Constant = 10,
+                Enum = 10,
+                EnumMember = 10,
+                Event = 10,
+                Function = 10,
+                Method = 10,
+                Operator = 10,
+                Reference = 10,
+                Struct = 10,
+                Variable = 9,
+                File = 8,
+                Folder = 8,
+                Class = 5,
+                Color = 5,
+                Module = 5,
+                Keyword = 2,
+                Constructor = 1,
+                Interface = 1,
+                Snippet = 0,
+                Text = 1,
+                TypeParameter = 1,
+                Unit = 1,
+                Value = 1,
+              },
+            }),
+            label_comparator,
+
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+          },
+        },
         formatting = {
           fields = { "menu", "abbr", "kind" },
           format = function(entry, vim_item)

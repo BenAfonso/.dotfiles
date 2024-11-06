@@ -37,19 +37,23 @@ return {
 
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
       border = "rounded",
+      focus = false,
     })
 
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
       border = "rounded",
-      focusable = false,
+      focusable = true,
       focus = false,
       -- close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
-      close_events = { "CursorMoved", "BufHidden", "InsertCharPre", "InsertEnter" },
+      -- close_events = { "CursorMoved", "BufHidden", "InsertCharPre", "InsertEnter" },
     })
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
       callback = function(event)
+        local bufnr = event.buf
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+
         local map = function(keys, func, desc)
           vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
@@ -58,6 +62,11 @@ return {
           vim.keymap.set("i", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
 
+        map("H", function()
+          vim.diagnostic.open_float({
+            border = "rounded",
+          })
+        end, "Open LSP diagnostic")
         map("<leader>gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
         map("<leader>gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
         map("<leader>gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
@@ -74,14 +83,22 @@ return {
         map("<leader>gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
         imap("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
+        map("<C-s>", vim.lsp.buf.signature_help, "Signature Help")
 
         vim.keymap.set("i", "<c-s>", function()
           vim.lsp.buf.signature_help()
         end, { buffer = true })
 
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client ~= nil then
           local cap = client.server_capabilities
+
+          if vim.tbl_contains({ "null-ls" }, client.name) then -- blacklist lsp
+            return
+          end
+          -- require("lsp_signature").on_attach({
+          --   -- ... setup options here ...
+          -- }, bufnr)
+
           if client and client.server_capabilities.documentHighlightProvider and cap ~= nil then
             -- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             --   buffer = event.buf,

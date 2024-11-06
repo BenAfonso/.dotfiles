@@ -135,6 +135,13 @@ local M = {
       ["<CR>"] = "actions.select",
       ["sv"] = "actions.select_vsplit",
       ["sh"] = "actions.select_split",
+      ["CD"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory" },
+      ["CC"] = {
+        function()
+          vim.cmd("tcd -")
+        end,
+        desc = ":tcd -",
+      },
       ["<leader><CR>"] = {
         callback = function()
           local env = os.getenv("MACHINE")
