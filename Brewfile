@@ -28,6 +28,8 @@ brew "glibc" if OS.linux?
 
 brew "nvm"
 
+brew "pyenv"
+
 cask_args appdir: "~/Applications", require_sha: true
 
 cask "keepassxc"
