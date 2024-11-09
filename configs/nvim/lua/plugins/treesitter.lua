@@ -10,6 +10,7 @@ return {
         --   return true
         -- end,
       },
+      indent = { enable = true },
       ensure_installed = {
         "yaml",
         "toml",

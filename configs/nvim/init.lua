@@ -1,5 +1,3 @@
-require("ben")
-
 vim.cmd("packadd cfilter")
 
 vim.g.mapleader = " "
@@ -11,15 +9,6 @@ vim.opt.cmdheight = 0
 
 -- Make line numbers default
 vim.opt.number = true
-
--- vim.opt.tabstop = 2
--- vim.opt.shiftwidth = 2
--- vim.o.expandtab = true
--- vim.bo.softtabstop = 2
-
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set shiftwidth=2")
 
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
@@ -179,5 +168,7 @@ require("lazy").setup({
 require("config.keymaps")
 require("ben.autocmds")
 require("ben.cmds")
+
+require("ben")
 
 -- require("trouble")
