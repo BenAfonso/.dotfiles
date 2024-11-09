@@ -6,4 +6,4 @@ litellm/
 ts-test/
 node_modules/
 private/
-
+configs/nvim/lua/dev-plugins
