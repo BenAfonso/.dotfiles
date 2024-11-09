@@ -37,13 +37,14 @@ return {
 
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
       border = "rounded",
-      focus = false,
+      focusable = true,
+      focus = true,
     })
 
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
       border = "rounded",
       focusable = true,
-      focus = false,
+      focus = true,
       -- close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
       -- close_events = { "CursorMoved", "BufHidden", "InsertCharPre", "InsertEnter" },
     })

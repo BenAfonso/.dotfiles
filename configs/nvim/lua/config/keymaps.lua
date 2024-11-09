@@ -59,13 +59,15 @@ keymap.set("x", "p", '"_dP', { noremap = true, desc = "Paste and keep yank regis
 keymap.set({ "", "x" }, "<leader>d", '"_d', { noremap = true, silent = true, desc = "Deletes in blackhole register" })
 keymap.set({ "n", "x" }, "<leader>c", '"_c', { noremap = true, silent = true, desc = "Replace in blackhole register" })
 
--- Scroll
-keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true, desc = "Scroll down" })
+-- Centered on cursor move
+keymap.set("n", "<c-d>", "<c-d>zz", { noremap = true, silent = true, desc = "scroll down" })
 keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true, desc = "Scroll up" })
-
--- Center on n / N
-keymap.set("n", "n", "nzzzv", { noremap = true })
-keymap.set("n", "N", "Nzzzv", { noremap = true })
+keymap.set("n", "n", "nzz", { noremap = true })
+keymap.set("n", "N", "Nzz", { noremap = true })
+keymap.set("n", "*", "*zz", { noremap = true })
+keymap.set("n", "#", "#zz", { noremap = true })
+keymap.set("n", "g*", "g*zz", { noremap = true })
+keymap.set("n", "g#", "g#zz", { noremap = true })
 
 -- Select all
 keymap.set("n", "<C-A>", "gg<S-v>G")
@@ -90,3 +92,7 @@ keymap.set("n", "<C-b>", "<C-v>", { noremap = true, silent = true, desc = "Enter
 -- increment decrement
 keymap.set({ "n", "v" }, "+", "<C-a>", { noremap = true, silent = true, desc = "Increment" })
 -- keymap.set({ "n", "v" }, "-", "<C-x>", { noremap = true, silent = true, desc = "Decrement" })
+
+-- Say in indent mode
+keymap.set("v", "<", "<gv", { noremap = true, silent = true, desc = "Indent and stay in indent mode" })
+keymap.set("v", ">", ">gv", { noremap = true, silent = true, desc = "Indent and stay in indent mode" })
