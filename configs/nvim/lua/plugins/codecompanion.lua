@@ -20,6 +20,7 @@ return {
     -- Optional: Enhances 'vim.ui.select' with a better UI
     { "stevearc/dressing.nvim", opts = {} },
   },
+  event = "VeryLazy",
   -- Configuration options for the plugin
   opts = {
     display = {
