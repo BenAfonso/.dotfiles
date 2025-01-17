@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Check if gpg is unlocked
-echo "test" | gpg2 --sign --batch --no-tty --pinentry-mode error -o /dev/null > /dev/null
+echo "test" | gpg --sign --batch --no-tty --pinentry-mode error -o /dev/null > /dev/null
 
 if [ $? -eq 2 ]
 then

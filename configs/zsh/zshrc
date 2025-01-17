@@ -197,7 +197,15 @@ load-nvmrc
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+PLATFORM=$(uname)
+if [ $PLATFORM == 'Linux' ]
+then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [ $PLATFORM == 'Darwin' ]
+then
+
+fi
 
 
 eval $(gpg-agent --daemon)

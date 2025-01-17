@@ -31,4 +31,9 @@ ln -sfv $CONFIGS_PATH/lazygit/config.yml ~/.config/lazygit/config.yml
 if [[ $OSTYPE == 'darwin'* ]]; then 
   # Hammerspoon
   ln -sfv $CONFIGS_PATH/hammerspoon ~/.hammerspoon
+  # Aerospace
+  ln -sfv $CONFIGS_PATH/aerospace/aerospace.toml ~/.aerospace.toml
+  # SKHD
+  ln -sfv $CONFIGS_PATH/skhd/ ~/.config/
+  
 fi

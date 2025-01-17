@@ -14,6 +14,7 @@ then
   echo "Linux"
 elif [ $PLATFORM == 'Darwin' ]
 then
+  skhd --start-service
   echo "Apple"
 fi
 
