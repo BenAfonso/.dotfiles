@@ -9,57 +9,64 @@ end
 
 config.term = "wezterm"
 
-config.font_size = 14.0
-config.line_height = 1.2
+config.font_size = 14
+config.line_height = 1
 
-config.font = wezterm.font("FiraCode Nerd Font", { weight = "Medium" })
+-- config.font = wezterm.font("FiraCode Nerd Font")
+-- config.font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Medium" })
+config.font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Medium" })
+config.bold_brightens_ansi_colors = "BrightAndBold"
 
-config.font_rules = {
-	-- normal-intensity-and-italic
-	{
-		intensity = "Normal",
-		italic = true,
-		font = wezterm.font({
-			family = "FiraCode Nerd Font",
-			weight = "DemiBold",
-			italic = true,
-		}),
-	},
-}
+-- config.font = wezterm.font("Monaspace Neon", { weight = "Regular" })
+-->
+-- => asdas
 
--- Trying out Monaspace
--- config.font = wezterm.font("Monaspace Neon", { weight = "Medium", stretch = "Normal" })
 -- config.font_rules = {
--- 	{
--- 		intensity = "Bold",
--- 		italic = false,
--- 		font = wezterm.font({
--- 			family = "Monaspace Argon",
--- 			weight = "Bold",
--- 			italic = false,
--- 		}),
--- 	},
--- 	-- Bold-and-italic
--- 	{
--- 		intensity = "Bold",
--- 		italic = true,
--- 		font = wezterm.font({
--- 			family = "Monaspace Radon",
--- 			weight = "Bold",
--- 			italic = true,
--- 		}),
--- 	},
 -- 	-- normal-intensity-and-italic
 -- 	{
 -- 		intensity = "Normal",
 -- 		italic = true,
 -- 		font = wezterm.font({
--- 			family = "Monaspace Radon",
--- 			weight = "DemiBold",
--- 			italic = true,
+-- 			family = "FiraCode Nerd Font",
+-- 			-- weight = "DemiBold",
+-- 			-- italic = true,
 -- 		}),
 -- 	},
 -- }
+
+-- Trying out Monaspace
+-- config.font = wezterm.font("Monaspace Neon", { weight = "Medium", stretch = "Normal" })
+config.font_rules = {
+	-- {
+	-- 	intensity = "Bold",
+	-- 	italic = false,
+	-- 	font = wezterm.font({
+	-- 		family = "Monaspace Argon",
+	-- 		weight = "Bold",
+	-- 		italic = false,
+	-- 	}),
+	-- },
+	-- 	-- Bold-and-italic
+	-- {
+	-- 	intensity = "Bold",
+	-- 	italic = true,
+	-- 	font = wezterm.font({
+	-- 		family = "Monaspace Radon",
+	-- 		weight = "Bold",
+	-- 		italic = true,
+	-- 	}),
+	-- },
+	-- 	-- normal-intensity-and-italic
+	{
+		intensity = "Normal",
+		italic = true,
+		font = wezterm.font({
+			family = "Monaspace Radon",
+			weight = "Regular",
+			italic = false,
+		}),
+	},
+}
 
 -- config.exit_behavior = "Close"
 -- config.hide_tab_bar_if_only_one_tab = true
@@ -90,7 +97,7 @@ config.keys = {
 	},
 	{ key = "P", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
 	{ key = "p", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
-	{ key = "P", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "P", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
 }
 
 local color = "#ff33b8"
@@ -175,5 +182,30 @@ config.colors = {
 		},
 	},
 }
+
+-- Zen mode nvim plugin
+-- https://github.com/folke/zen-mode.nvim?tab=readme-ov-file#wezterm
+wezterm.on("user-var-changed", function(window, pane, name, value)
+	local overrides = window:get_config_overrides() or {}
+	if name == "ZEN_MODE" then
+		local incremental = value:find("+")
+		local number_value = tonumber(value)
+		if incremental ~= nil then
+			while number_value > 0 do
+				window:perform_action(wezterm.action.IncreaseFontSize, pane)
+				number_value = number_value - 1
+			end
+			overrides.enable_tab_bar = false
+		elseif number_value < 0 then
+			window:perform_action(wezterm.action.ResetFontSize, pane)
+			overrides.font_size = nil
+			overrides.enable_tab_bar = true
+		else
+			overrides.font_size = number_value
+			overrides.enable_tab_bar = false
+		end
+	end
+	window:set_config_overrides(overrides)
+end)
 
 return config

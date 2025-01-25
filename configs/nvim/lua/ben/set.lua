@@ -9,6 +9,8 @@ vim.bo.softtabstop = 0
 
 vim.opt.scrolloff = 10
 
+vim.opt.sidescrolloff = 30
+
 vim.opt_local.wrap = true
 vim.opt_local.linebreak = true
 vim.opt_local.breakindent = true

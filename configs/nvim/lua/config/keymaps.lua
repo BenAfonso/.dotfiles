@@ -69,6 +69,9 @@ keymap.set("n", "#", "#zz", { noremap = true })
 keymap.set("n", "g*", "g*zz", { noremap = true })
 keymap.set("n", "g#", "g#zz", { noremap = true })
 
+-- Center cursor horizontally
+keymap.set("n", "zZ", "zszH", { noremap = true })
+
 -- Select all
 keymap.set("n", "<C-A>", "gg<S-v>G")
 
@@ -78,6 +81,7 @@ keymap.set("", "∆", "<cmd>:m .+1<CR>", { noremap = true, silent = true })
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move line down" })
 keymap.set({ "i", "n" }, "<A-j>", "<Cmd>m .+1<CR>==", { noremap = true, silent = true, desc = "Move line down" })
 keymap.set({ "v" }, "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move line down" })
+
 -- Move line up
 -- Option + K
 keymap.set("", "˚", "<cmd>:m .-2<CR>", { noremap = true, silent = true })
