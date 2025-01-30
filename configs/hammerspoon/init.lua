@@ -24,7 +24,7 @@ hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "C", function()
 end)
 
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "B", function()
-  hs.application.open("Arc")
+  hs.application.open("Zen Browser")
   hs.window.focusedWindow():maximize()
 end)
 
