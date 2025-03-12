@@ -6,9 +6,11 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
 
-    { "j-hui/fidget.nvim", opts = {} },
+    { "j-hui/fidget.nvim",       opts = {} },
 
-    "hrsh7th/cmp-nvim-lsp",
+
+    -- "hrsh7th/cmp-nvim-lsp",
+    "saghen/blink.cmp",
   },
   config = function()
     local lspconfig = require("lspconfig")
@@ -124,7 +126,9 @@ return {
     lspui.default_options.border = "double"
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+    capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
+
+    -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
     local servers = {
       html = {},
@@ -140,7 +144,7 @@ return {
           },
         },
       },
-      go_pls = {
+      gopls = {
         settings = {
 
           analyses = {
@@ -153,47 +157,27 @@ return {
       lua_ls = {},
       -- Web development
       ts_ls = {
-        root_dir = lspconfig.util.root_pattern("package.json"),
-        single_file_support = true,
+        enabled = false
       },
       denols = {
+        enabled = false,
         root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
       },
       cssls = {},
       tailwindcss = {
-        filetypes = {
-          "javascript",
-          "javascriptreact",
-          "javascript.jsx",
-          "typescript",
-          "typescriptreact",
-          "typescript.tsx",
-          "astro",
+        -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss
+        settings = {
+          tailwindCSS = {
+            classAttributes = { "class", "className", "tw" }
+          }
         },
       },
       astro = {},
-      -- eslint = {
-      --   filetypes = {
-      --     "javascript",
-      --     "javascriptreact",
-      --     "javascript.jsx",
-      --     "typescript",
-      --     "typescriptreact",
-      --     "typescript.tsx",
-      --   },
-      -- },
     }
 
     require("mason").setup()
 
     local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      "stylua",
-      "prettier",
-      "eslint_d",
-      "shfmt",
-      "spellcheck",
-    })
 
     require("mason-tool-installer").setup({
       ensure_installed = ensure_installed,
@@ -205,6 +189,7 @@ return {
     })
 
     require("mason-lspconfig").setup({
+      ensure_installed = ensure_installed,
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}

@@ -5,6 +5,7 @@ local M = {
     -- Better Around/Inside textobjects
     require("mini.ai").setup({ n_lines = 500 })
     require("mini.diff").setup()
+    require("mini.icons").setup()
     -- require('mini.surround').setup()
   end,
 }

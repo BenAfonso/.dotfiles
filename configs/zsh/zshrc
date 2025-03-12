@@ -122,12 +122,21 @@ export PATH="$HOME/.local/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
- else
-   export EDITOR='nvim'
- fi
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+    alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
+fi
+
+if [[ -n "$NVIM_LISTEN_ADDRESS" ]]; then
+    export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+else
+  # Preferred editor for local and remote sessions
+   if [[ -n $SSH_CONNECTION ]]; then
+     export EDITOR='vim'
+   else
+     export EDITOR='nvim'
+   fi
+fi
 
 # Flutter
 export PATH=$HOME/Applications/flutter/bin:$PATH

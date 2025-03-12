@@ -1,6 +1,9 @@
 os:
-  editCommand: "nvim --server $NVIM_SERVER"
-  editCommandTemplate: "{{editor}} --remote-send '<C-\\><C-n>:5ToggleTerm<CR>:lua Edit({{filename}}, {{line}})<CR>'"
+  editCommand: "nvim"
+  editCommandTemplate: '{{editor}} --server $(nvim-server-name) --remote-tab "$(pwd)/{{filename}}"'
+  # editCommandTemplate: "{{editor}} --server $(nvim-server-name) --remote-send '<C-\\><C-n>:e +{{line}} {{filename}}<CR>'"
+# editCommandTemplate: "nvr --servername $(nvim-server-name) "
+# editCommandTemplate: "{{editor}} --remote-send ':e {{filename}}<CR>'"
 gui:
   theme:
     activeBorderColor:

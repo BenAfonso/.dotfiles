@@ -1,6 +1,7 @@
 local M = {
   {
     "hrsh7th/nvim-cmp",
+    enabled = false,
     dependencies = {
       {
         "L3MON4D3/LuaSnip",
@@ -40,7 +41,7 @@ local M = {
         -- },
         mapping = cmp.mapping.preset.insert({
           ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Scroll up
-          ["<C-d>"] = cmp.mapping.scroll_docs(4), -- Scroll down
+          ["<C-d>"] = cmp.mapping.scroll_docs(4),  -- Scroll down
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -83,13 +84,13 @@ local M = {
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp", priority = 1001 },
-          { name = "luasnip", priority = 1000, max_item_count = 5 },
-          { name = "nvim_lua", priority = 100, max_item_count = 20 },
-          { name = "lazydev", group_index = 0, max_item_count = 20 },
-          { name = "path", priority = 250, max_item_count = 10 },
+          { name = "luasnip",  priority = 1000,   max_item_count = 5 },
+          { name = "nvim_lua", priority = 100,    max_item_count = 20 },
+          { name = "lazydev",  group_index = 0,   max_item_count = 20 },
+          { name = "path",     priority = 250,    max_item_count = 10 },
           { name = "calc" },
           { name = "emoji" },
-          { name = "buffer", max_item_count = 5 },
+          { name = "buffer",   max_item_count = 5 },
         }, {
           -- { name = "buffer", max_item_count = 5 },
         }),
@@ -115,6 +116,22 @@ local M = {
           end,
         },
       }
+    end,
+    config = function(_, opts)
+      local cmp = require("cmp")
+      --   local luasnip = require("luasnip")
+      vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
+      cmp.setup(opts)
+      --
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+        }, {
+          { name = "cmdline" },
+        }),
+      })
     end,
   },
 }
