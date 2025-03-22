@@ -1,3 +1,9 @@
+local has_words_before = function()
+  unpack = unpack or table.unpack
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
 local M = {
   'saghen/blink.cmp',
   -- optional: provides snippets for the snippet source
@@ -31,8 +37,9 @@ local M = {
         function(cmp)
           if cmp.snippet_active() then
             return cmp.accept()
-          else
+          elseif has_words_before() and cmp.is_visible() then
             return cmp.select_next()
+          else
           end
         end,
         'snippet_forward',
@@ -42,8 +49,9 @@ local M = {
         function(cmp)
           if cmp.snippet_active() then
             return cmp.accept()
-          else
+          elseif has_words_before() and cmp.is_visible() then
             return cmp.select_prev()
+          else
           end
         end,
         'snippet_backward',
@@ -63,10 +71,19 @@ local M = {
     },
 
     completion = {
+      trigger = {
+        show_in_snippet = false,
+        show_on_keyword = true,
+        show_on_trigger_character = true,
+        show_on_x_blocked_trigger_characters = { "'", '"', '(', '{', '[', '\t', '	' },
+        show_on_blocked_trigger_characters = { ' ', '\n', '\t', '	' },
+      },
       list = {
         selection = {
-          preselect = true,
-          auto_insert = false,
+          auto_insert = true,
+          preselect = function(ctx)
+            return not require('blink.cmp').snippet_active({ direction = 1 })
+          end,
         }
       },
       ghost_text = {
@@ -97,12 +114,16 @@ local M = {
         }
       },
       documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 500,
         window = {
           border = "single"
         }
       }
     },
-    signature = { window = { border = 'single' } },
+    signature = {
+      window = { border = 'single' }
+    },
 
     cmdline = {
       keymap = {

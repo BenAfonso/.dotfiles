@@ -9,23 +9,23 @@ local Catppuccin = {
     require("catppuccin").setup({
       flavour = "mocha", -- latte, frappe, macchiato, mocha
       -- flavour = "auto" -- will respect terminal's background
-      background = { -- :h background
+      background = {     -- :h background
         light = "latte",
         dark = "mocha",
       },
       transparent_background = false, -- disables setting the background color.
-      show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
-      term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+      show_end_of_buffer = false,     -- shows the '~' characters after the end of buffers
+      term_colors = false,            -- sets terminal colors (e.g. `g:terminal_color_0`)
       dim_inactive = {
-        enabled = false, -- dims the background color of inactive window
+        enabled = false,              -- dims the background color of inactive window
         shade = "dark",
-        percentage = 0.15, -- percentage of the shade to apply to the inactive window
+        percentage = 0.15,            -- percentage of the shade to apply to the inactive window
       },
-      no_italic = false, -- Force no italic
-      no_bold = false, -- Force no bold
-      no_underline = false, -- Force no underline
-      styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-        comments = { "italic" }, -- Change the style of comments
+      no_italic = false,              -- Force no italic
+      no_bold = false,                -- Force no bold
+      no_underline = false,           -- Force no underline
+      styles = {                      -- Handles the styles of general hi groups (see `:h highlight-args`):
+        comments = { "italic" },      -- Change the style of comments
         conditionals = { "italic" },
         loops = {},
         functions = {},
@@ -58,6 +58,12 @@ local Catppuccin = {
         TelescopeSelectionCaret = { bg = "#361e3f", fg = "#ff33b8" },
         TelescopeMultiSelection = { fg = "#ff33b8" },
         TelescopeMultiIcon = { fg = "#ff33b8" },
+        SnacksPickerBorder = { fg = "#ff33b8" },
+        SnacksPickerMatching = { fg = "#ff33b8", bold = true },
+        SnacksPickerSelection = { bg = "#361e3f" },
+        SnacksPickerSelectionCaret = { bg = "#361e3f", fg = "#ff33b8" },
+        SnacksPickerMultiSelection = { fg = "#ff33b8" },
+        SnacksPickerMultiIcon = { fg = "#ff33b8" },
       },
       default_integrations = true,
       integrations = {
@@ -101,7 +107,7 @@ local Catppuccin = {
 local TokyoNight = {
   "folke/tokyonight.nvim",
   enabled = true,
-  lazy = false, -- make sure we load this during startup if it is your main colorscheme
+  lazy = false,    -- make sure we load this during startup if it is your main colorscheme
   priority = 1000, -- make sure to load this before all the other start plugins
   opts = {
     on_highlights = function(hl, c)
@@ -160,6 +166,13 @@ local NightOwl = {
       vim.api.nvim_set_hl(0, "TelescopeMultiSelection", { fg = "#ff33b8" })
       vim.api.nvim_set_hl(0, "TelescopeMultiIcon", { fg = "#ff33b8" })
 
+      vim.api.nvim_set_hl(0, "SnacksPickerBorder", { fg = "#ff33b8" })
+      vim.api.nvim_set_hl(0, "SnacksPickerMatching", { fg = "#ff33b8", bold = true })
+      vim.api.nvim_set_hl(0, "SnacksPickerSelection", { bg = "#361e3f" })
+      vim.api.nvim_set_hl(0, "SnacksPickerSelectionCaret", { bg = "#361e3f", fg = "#ff33b8" })
+      vim.api.nvim_set_hl(0, "SnacksPickerMultiSelection", { fg = "#ff33b8" })
+      vim.api.nvim_set_hl(0, "SnacksPickerMultiIcon", { fg = "#ff33b8" })
+
       -- Enable transparent background
       -- vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
       -- vim.api.nvim_set_hl(0, "NonText", { bg = "NONE", ctermbg = "NONE" })
@@ -182,25 +195,25 @@ local NightOwl = {
 local Kanagawa = {
   "rebelot/kanagawa.nvim",
   opts = {
-    compile = false, -- enable compiling the colorscheme
+    compile = false,  -- enable compiling the colorscheme
     undercurl = true, -- enable undercurls
     commentStyle = { italic = true },
     functionStyle = {},
     keywordStyle = { italic = true },
     statementStyle = { bold = true },
     typeStyle = {},
-    transparent = false, -- do not set background color
-    dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+    transparent = false,   -- do not set background color
+    dimInactive = false,   -- dim inactive window `:h hl-NormalNC`
     terminalColors = true, -- define vim.g.terminal_color_{0,17}
-    colors = { -- add/modify theme and palette colors
+    colors = {             -- add/modify theme and palette colors
       palette = {},
       theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
     },
     overrides = function(colors) -- add/modify highlights
       return {}
     end,
-    theme = "wave", -- Load "wave" theme when 'background' option is not set
-    background = { -- map the value of 'background' option to a theme
+    theme = "wave",  -- Load "wave" theme when 'background' option is not set
+    background = {   -- map the value of 'background' option to a theme
       dark = "wave", -- try "dragon" !
       light = "lotus",
     },
