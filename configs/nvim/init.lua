@@ -86,34 +86,34 @@ require("lazy").setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 
-  { -- Useful plugin to show you pending keybinds.
+  {                   -- Useful plugin to show you pending keybinds.
     "folke/which-key.nvim",
-    version = "3.13.3",
+    version = "3.17.0",
     event = "VimEnter", -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
       require("which-key").setup()
 
       -- Document existing key chains
       require("which-key").add({
-        { "<leader>c", group = "[C]ode" },
+        { "<leader>c",  group = "[C]ode" },
         { "<leader>c_", hidden = true },
-        { "<leader>h", group = "[H]unks" },
+        { "<leader>h",  group = "[H]unks" },
         { "<leader>h_", hidden = true },
-        { "<leader>d", group = "[D]ocument" },
+        { "<leader>d",  group = "[D]ocument" },
         { "<leader>d_", hidden = true },
-        { "<leader>r", group = "[R]ename" },
+        { "<leader>r",  group = "[R]ename" },
         { "<leader>r_", hidden = true },
-        { "<leader>s", group = "[S]earch" },
+        { "<leader>s",  group = "[S]earch" },
         { "<leader>s_", hidden = true },
-        { "<leader>w", group = "[W]orkspace" },
+        { "<leader>w",  group = "[W]orkspace" },
         { "<leader>w_", hidden = true },
-        { "<leader>x", group = "Trouble" },
+        { "<leader>x",  group = "Trouble" },
         { "<leader>x_", hidden = true },
-        { "<leader>g", group = "[G]o" },
+        { "<leader>g",  group = "[G]o" },
         { "<leader>g_", hidden = true },
-        { "<leader>b", group = "[B]uffers" },
+        { "<leader>b",  group = "[B]uffers" },
         { "<leader>b_", hidden = true },
-        { "<leader>t", group = "[T]erminal" },
+        { "<leader>t",  group = "[T]erminal" },
         { "<leader>t_", hidden = true },
       })
     end,
@@ -165,6 +165,7 @@ require("lazy").setup({
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 
+-- require("config.lsp")
 require("config.keymaps")
 require("ben.autocmds")
 require("ben.cmds")

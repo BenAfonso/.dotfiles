@@ -1,48 +1,25 @@
 return {
   { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
-
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       highlight = {
         enable = true,
-        -- disable = function(lang, bufnr)
-        --   return true
-        -- end,
+        disable = function(lang, bufnr)
+          local max_filesize = 100 * 1024 -- 100 KB
+          local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(bufnr))
+          if ok and stats and stats.size > max_filesize then
+            return true
+          end
+        end,
       },
       indent = { enable = true },
       ensure_installed = {
-        "yaml",
-        "toml",
-        "vimdoc",
-        "markdown_inline",
-
-        "cmake",
-        "cpp",
-        "css",
-        "comment",
-        "gitignore",
-        "go",
-        "http",
-        "rust",
-        "sql",
-        "lua",
-
-        "scss",
-        "graphql",
-        "html",
-        "svelte",
-        "javascript",
-        "typescript",
-        "tsx",
-        "jsdoc",
-        "styled",
-        "astro",
+        "yaml", "toml", "vimdoc", "markdown_inline", "cmake", "cpp", "css",
+        "comment", "gitignore", "go", "http", "rust", "sql", "lua",
+        "scss", "graphql", "html", "svelte", "javascript", "typescript", "tsx",
+        "jsdoc", "styled", "astro",
       },
-
-      -- matchup = {
-      -- 	enable = true,
-      -- },
 
       -- https://github.com/nvim-treesitter/playground#query-linter
       query_linter = {

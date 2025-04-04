@@ -29,18 +29,18 @@ local M = {
       end, { desc = "[T]est [F]ile" })
     end,
   },
-  {
-    "mfussenegger/nvim-dap",
-    keys = {
-      {
-        "<leader>td",
-        function()
-          require("neotest").run.run({ strategy = "dap" })
-        end,
-        desc = "Debug Nearest",
-      },
-    },
-  },
+  -- {
+  --   "mfussenegger/nvim-dap",
+  --   keys = {
+  --     {
+  --       "<leader>td",
+  --       function()
+  --         require("neotest").run.run({ strategy = "dap" })
+  --       end,
+  --       desc = "Debug Nearest",
+  --     },
+  --   },
+  -- },
 }
 
 return M

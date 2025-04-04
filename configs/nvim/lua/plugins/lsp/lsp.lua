@@ -12,6 +12,7 @@ return {
     -- "hrsh7th/cmp-nvim-lsp",
     "saghen/blink.cmp",
   },
+  enabled = true,
   config = function()
     local lspconfig = require("lspconfig")
     local lspui = require("lspconfig.ui.windows")
@@ -37,22 +38,9 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
     end
 
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-      border = "rounded",
-      focusable = true,
-      focus = true,
-    })
-
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-      border = "rounded",
-      focusable = true,
-      focus = true,
-      -- close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
-      -- close_events = { "CursorMoved", "BufHidden", "InsertCharPre", "InsertEnter" },
-    })
 
     vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+      group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
         local bufnr = event.buf
         local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -76,47 +64,49 @@ return {
         map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
         map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
         map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-        map("]d", vim.diagnostic.goto_next, "[D]iagnostic next")
-        map("[d", vim.diagnostic.goto_prev, "[D]iagnostic prev")
+        map("]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, "[D]iagnostic next")
+        map("[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, "[D]iagnostic prev")
         map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
         map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-        map("K", vim.lsp.buf.hover, "Hover Documentation")
+        map("K", function()
+          vim.lsp.buf.hover({
+            border = "rounded",
+            focusable = true,
+            focus = true,
+          })
+        end, "Hover Documentation")
         map("<leader>gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
         map("<leader>gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
+
+        local signature_help = function()
+          vim.lsp.buf.signature_help({
+            border = "rounded",
+            focusable = true,
+            focus = true,
+          })
+        end
+
+        local hover = function()
+          vim.lsp.buf.hover({
+            border = "rounded",
+            focusable = true,
+            focus = true,
+          })
+        end
+
+        vim.lsp.handlers["textDocument/hover"] = hover
+        vim.lsp.handlers["textDocument/signatureHelp"] = signature_help
         imap("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
         map("<C-s>", vim.lsp.buf.signature_help, "Signature Help")
-
-        vim.keymap.set("i", "<c-s>", function()
-          vim.lsp.buf.signature_help()
-        end, { buffer = true })
+        vim.keymap.set("i", "<c-s>", vim.lsp.buf.signature_help, { buffer = true })
 
         if client ~= nil then
           local cap = client.server_capabilities
 
           if vim.tbl_contains({ "null-ls" }, client.name) then -- blacklist lsp
             return
-          end
-          -- require("lsp_signature").on_attach({
-          --   -- ... setup options here ...
-          -- }, bufnr)
-
-          if client and client.server_capabilities.documentHighlightProvider and cap ~= nil then
-            -- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-            --   buffer = event.buf,
-            --   callback = vim.lsp.buf.document_highlight,
-            -- })
-
-            -- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-            --   buffer = event.buf,
-            --   callback = vim.lsp.buf.signature_help,
-            -- })
-
-            -- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-            --   buffer = event.buf,
-            --   callback = vim.lsp.buf.clear_references,
-            -- })
           end
         end
       end,
@@ -154,10 +144,17 @@ return {
           gofumpt = true,
         },
       },
-      lua_ls = {},
+      lua_ls = {
+      },
       -- Web development
       ts_ls = {
-        enabled = false
+        enabled = true,
+        -- init_options = {
+        --   preferences = {
+        --     -- importModuleSpecifierPreference = 'relative',
+        --     -- importModuleSpecifierEnding = 'minimal',
+        --   }
+        -- }
       },
       denols = {
         enabled = false,

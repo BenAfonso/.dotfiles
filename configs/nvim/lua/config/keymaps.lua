@@ -56,7 +56,8 @@ keymap.set("n", "<C-down>", "<C-i>", { noremap = true, silent = true, desc = "Ju
 
 -- Clipboard
 keymap.set("x", "p", '"_dP', { noremap = true, desc = "Paste and keep yank register" })
-keymap.set({ "", "x" }, "<leader>d", '"_d', { noremap = true, silent = true, desc = "Deletes in blackhole register" })
+
+keymap.set({ "n", "x" }, "<leader>d", '"_d', { noremap = true, silent = true, desc = "Deletes in blackhole register" })
 keymap.set({ "n", "x" }, "<leader>c", '"_c', { noremap = true, silent = true, desc = "Replace in blackhole register" })
 
 -- Centered on cursor move
@@ -100,3 +101,6 @@ keymap.set({ "n", "v" }, "+", "<C-a>", { noremap = true, silent = true, desc = "
 -- Say in indent mode
 keymap.set("v", "<", "<gv", { noremap = true, silent = true, desc = "Indent and stay in indent mode" })
 keymap.set("v", ">", ">gv", { noremap = true, silent = true, desc = "Indent and stay in indent mode" })
+
+-- Terminal
+keymap.set("t", "<Esc><Esc>", "<C-\\><C-N>")

@@ -8,8 +8,8 @@ return {
     library = {
       -- See the configuration section for more details
       -- Load luvit types when the `vim.uv` word is found
-      "${3rd}/luv/library",
-      { path = "LazyVim", words = { "LazyVim" } },
+      { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      { path = "LazyVim",            words = { "LazyVim" } },
       -- vim.env.VIMRUNTIME,
       "~/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
       -- { path = "luvit-meta/library", words = { "vim%.uv" } },

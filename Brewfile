@@ -21,6 +21,12 @@ brew "fzf"
 brew "lua"
 brew "luarocks"
 
+brew "typescript-language-server"
+brew "lua-language-server"
+brew "rust-analyzer"
+brew "tailwindcss-language-server"
+brew "gopls"
+
 brew "starship"
 
 brew "gnupg" if OS.mac?
@@ -34,3 +40,5 @@ cask_args appdir: "~/Applications", require_sha: true
 
 cask "keepassxc"
 cask "firefox"
+
+
