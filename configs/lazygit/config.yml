@@ -1,16 +1,16 @@
 os:
-  editCommand: "nvim"
-  editCommandTemplate: '{{editor}} --server $(nvim-server-name) --remote-tab "$(pwd)/{{filename}}"'
+  edit: "nvr --servername $(nvim-server-name) {{filename}}"
+  editAtLine: '{{editor}} --server $(nvim-server-name) --remote-tab "$(pwd)/{{filename}}"'
   # editCommandTemplate: "{{editor}} --server $(nvim-server-name) --remote-send '<C-\\><C-n>:e +{{line}} {{filename}}<CR>'"
 # editCommandTemplate: "nvr --servername $(nvim-server-name) "
 # editCommandTemplate: "{{editor}} --remote-send ':e {{filename}}<CR>'"
 gui:
   theme:
     activeBorderColor:
-      - "#f5c2e7"
+      - "#ff33b8"
       - bold
     inactiveBorderColor:
-      - "#a6adc8"
+      - "#f5c2e7"
     optionsTextColor:
       - "#89b4fa"
     selectedLineBgColor:
@@ -32,11 +32,11 @@ git:
   branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline {{branchName}} --"
   commitPrefixes:
     my_project: # This is repository folder name
-      pattern: "^\\w+\\/(\\w+-\\w+).*"
-      replace: "[$1] "
+      - pattern: "^\\w+\\/(\\w+-\\w+).*"
+        replace: "[$1] "
   paging:
     colorArg: always
-    pager: delta --dark --paging=never
+    pager: delta --dark --diff-so-fancy --paging=never
     # useConfig: use
   commit:
     signOff: false

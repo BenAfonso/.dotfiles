@@ -104,3 +104,9 @@ keymap.set("v", ">", ">gv", { noremap = true, silent = true, desc = "Indent and 
 
 -- Terminal
 keymap.set("t", "<Esc><Esc>", "<C-\\><C-N>")
+
+
+-- Execute
+vim.keymap.set("n", "<leader>X", "<cmd>source %<CR>")
+vim.keymap.set("n", "<leader>x", "<cmd>.lua<CR>")
+vim.keymap.set("n", "<leader>\\", "<cmd>%.lua<CR>")

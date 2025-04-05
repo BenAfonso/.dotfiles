@@ -378,9 +378,9 @@ local M = { -- Fuzzy Finder (files, lsp, etc)
     -- end
     -- vim.keymap.set("n", "<leader>sf", open_file_browser, { desc = "Open file browser" })
 
-    vim.keymap.set("n", "<leader>sf", function()
-      require("ben.fzflua-pickers").files({})
-    end, { desc = "Open file browser" })
+    -- vim.keymap.set("n", "<leader>sf", function()
+    --   require("ben.fzflua-pickers").files({})
+    -- end, { desc = "Open file browser" })
 
     -- vim.keymap.set("n", "sf", open_file_browser, { desc = "Open file browser" })
 
