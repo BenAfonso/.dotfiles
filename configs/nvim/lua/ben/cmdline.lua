@@ -236,7 +236,7 @@ cmd.open = function()
         relative = "editor",
 
         row = cmd.comp_enable == true and math.floor((vim.o.lines - (h + cmp_h)) / 2)
-          or math.floor((vim.o.lines - h) / 2),
+            or math.floor((vim.o.lines - h) / 2),
         col = math.floor((vim.o.columns - w) / 2),
 
         width = w,
@@ -273,7 +273,7 @@ cmd.open = function()
       relative = "editor",
 
       row = cmd.comp_enable == true and math.floor((vim.o.lines - (h + cmp_h)) / 2)
-        or math.floor((vim.o.lines - h) / 2),
+          or math.floor((vim.o.lines - h) / 2),
       col = math.floor((vim.o.columns - w) / 2),
 
       width = w,
@@ -499,9 +499,9 @@ cmd.draw = function()
       0,
       cmd.state.position - diff,
       #vim.fn.strcharpart(txt, 0, vim.fn.strchars(before) + 1)
-      --- Doing "(cmd.state.position - diff) + 1" doesn't
-      --- work on multi-byte characters(e.g. emojis, nerd font
-      --- characters)
+    --- Doing "(cmd.state.position - diff) + 1" doesn't
+    --- work on multi-byte characters(e.g. emojis, nerd font
+    --- characters)
     )
   end
 end

@@ -13,9 +13,9 @@ config.font_size = 14
 config.line_height = 1
 
 -- config.font = wezterm.font("FiraCode Nerd Font")
--- config.font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Medium" })
 config.font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Medium" })
-config.bold_brightens_ansi_colors = "BrightAndBold"
+-- config.font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Medium" })
+-- config.bold_brightens_ansi_colors = "BrightAndBold"
 
 -- config.font = wezterm.font("Monaspace Neon", { weight = "Regular" })
 -->
