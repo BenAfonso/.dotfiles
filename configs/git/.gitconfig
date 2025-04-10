@@ -1,18 +1,68 @@
 [user]
 	name = Ben Afonso
 	email = ben@nightzookeeper.com
+	signinkey = "53D247567DC6A9D588E57D134D6A371A17A97C4C"
+
 [credential]
 	helper = cache
+
+[gpg]
+
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+
 [core]
-  pager = delta
+	pager = delta
 	editor = nvim
+
 [delta]
 	features = side-by-side line-numbers decorations
 	navigate = true
 	whitespace-error-style = 22 reverse
+
 [delta "decorations"]
 	commit-decoration-style = bold yellow box ul
 	file-style = bold yellow ul
 	file-decoration-style = none
-; [rebase]
-;   instructionFormat = %s%nexec GIT_COMMITTER_DATE=\"%cI\" GIT_COMMITTER_NAME=\"%cN\" GIT_COMMITTER_EMAIL=\"%cE\" git commit --amend --no-edit%n
+[diff]
+	algorithm = patience
+	compactionHeuristic = true
+	tool = nvimdiff
+
+[difftool]
+      prompt = false
+
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
+
+[difftool "nvimdiff"]
+	cmd = nvr --servername $(nvim-server-name) -d \"$LOCAL\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd L\"
+
+[merge]
+	tool = nvimdiff4
+	prompt = false
+
+[mergetool "nvimdiff4"]
+	cmd = nvr --servername $(nvim-server-name) -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+ 
+[alias]
+	dlogtastic = -c diff.external=difft log -p --ext-diff
+	dlog = log -p --ext-diff
+	ll = log --oneline
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	a = commit --amend
+	cm = commit -m
+	co = checkout
+	cob = checkout -b
+	discard = reset HEAD --hard
+	unstage = reset HEAD --
+	s = status
+	diff-stat = diff --stat --ignore-space-change -r
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
+

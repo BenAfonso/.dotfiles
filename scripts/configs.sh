@@ -13,7 +13,7 @@ ln -sfv $CONFIGS_PATH/tmux/.tmux ~/
 ln -sfv $CONFIGS_PATH/wezterm/wezterm.lua ~/.wezterm.lua
 
 # Git
-ln -sfv $CONFIGS_PATH/git/config ~/.gitconfig
+ln -sfv $CONFIGS_PATH/git/.gitconfig ~/.gitconfig
 
 # Starship
 ln -sfv $CONFIGS_PATH/starship/starship.toml ~/.config/
