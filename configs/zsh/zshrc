@@ -109,6 +109,8 @@ export PATH="$DOTFILES/bin:$PATH"
 export GOPATH=$HOME/go
 export PATH="$PATH:$GOPATH/bin"
 
+export PATH="$PATH:$HOME/google-cloud-sdk/bin"
+
 # Flutter
 export PATH="$HOME/Applications/flutter/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
@@ -214,17 +216,10 @@ then
 fi
 
 
-eval $(gpg-agent --daemon)
-GPG_TTY=$(tty)
-export GPG_TTY
-if [ -f "${HOME}/.gpg-agent-info" ]; then
-    . "${HOME}/.gpg-agent-info"
-    export GPG_AGENT_INFO
-    export SSH_AUTH_SOCK
-fi
 
 # Update config path on mac (at least for lazygit)
 export XDG_CONFIG_HOME="$HOME/.config"
+export TP_PATH="TexturePacker.exe"
 
 
 eval "$(starship init zsh)"
@@ -236,3 +231,16 @@ if [ -f '/Users/ben/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ben/google-
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ben/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ben/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+# eval $(gpg-agent --daemon)
+# GPG_TTY=$(tty)
+# export GPG_TTY
+# if [ -f "${HOME}/.gpg-agent-info" ]; then
+#     . "${HOME}/.gpg-agent-info"
+#     export GPG_AGENT_INFO
+#     export SSH_AUTH_SOCK
+# fi
+if [[ $PLATFORM == 'Linux' ]] then
+  gpg-agent-relay.sh &
+fi
