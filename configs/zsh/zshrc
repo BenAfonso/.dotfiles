@@ -146,10 +146,12 @@ export WSL_GPG="/mnt/c/Program Files (x86)/gnupg/bin/gpg.exe"
 
 export GPG_TTY=$(tty)
 
-alias vim="nvim"
-alias cat="bat"
-alias ls="lsd"
 
+if [[ bat ]] then alias cat="bat"; fi
+if [[ z ]] then alias cd="z"; fi
+if [[ lsd ]] then alias ls="lsd"; fi
+
+alias vim="nvim"
 alias nvim="v"
 alias nvdis="nvr --servername $(nvim-server-name) -s"
 
@@ -206,8 +208,8 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 
 PLATFORM=$(uname)
-if [[ $PLATFORM == 'Linux' ]]
-then
+if [[ $PLATFORM == 'Linux' ]] then
+  alias wslopen="/mnt/c/Windows/explorer.exe \`wslpath -w $PWD\`"
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 elif [[ $PLATFORM == 'Darwin' ]]
   alias TexturePacker.exe="/Applications/TexturePacker.app/Contents/MacOS/TexturePacker"
@@ -234,8 +236,6 @@ if [ -f '/Users/ben/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ben/g
 
 
 # eval $(gpg-agent --daemon)
-# GPG_TTY=$(tty)
-# export GPG_TTY
 # if [ -f "${HOME}/.gpg-agent-info" ]; then
 #     . "${HOME}/.gpg-agent-info"
 #     export GPG_AGENT_INFO
