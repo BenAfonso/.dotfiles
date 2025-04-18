@@ -142,7 +142,7 @@ export PATH=$HOME/Applications/flutter/bin:$PATH
 # Java
 export JAVA_HOME="/usr/"
 
-export WSL_GPG="/mnt/c/Program Files (x86)/gnupg/bin/gpg.exe"
+# export WSL_GPG="/mnt/c/Program Files (x86)/gnupg/bin/gpg.exe"
 
 export GPG_TTY=$(tty)
 
@@ -211,6 +211,8 @@ PLATFORM=$(uname)
 if [[ $PLATFORM == 'Linux' ]] then
   alias wslopen="/mnt/c/Windows/explorer.exe \`wslpath -w $PWD\`"
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+  source ssh-agent-bridge.sh
 elif [[ $PLATFORM == 'Darwin' ]]
   alias TexturePacker.exe="/Applications/TexturePacker.app/Contents/MacOS/TexturePacker"
 then
@@ -234,13 +236,3 @@ if [ -f '/Users/ben/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ben/google-
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ben/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ben/google-cloud-sdk/completion.zsh.inc'; fi
 
-
-# eval $(gpg-agent --daemon)
-# if [ -f "${HOME}/.gpg-agent-info" ]; then
-#     . "${HOME}/.gpg-agent-info"
-#     export GPG_AGENT_INFO
-#     export SSH_AUTH_SOCK
-# fi
-if [[ $PLATFORM == 'Linux' ]] then
-  gpg-agent-relay.sh &
-fi

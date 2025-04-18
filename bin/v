@@ -2,7 +2,7 @@
 
 set -e
 
-tmux-unlock-gpg || true
+# tmux-unlock-gpg || true
 
 if test -x "$(which nvim-server-name)" ; then
   NVIM_LISTEN_ADDRESS="$(nvim-server-name)"
