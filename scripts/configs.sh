@@ -27,6 +27,8 @@ ln -sfv $CONFIGS_PATH/gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 # Lazygit
 ln -sfv $CONFIGS_PATH/lazygit/config.yml ~/.config/lazygit/config.yml
 
+ln -sfv $CONFIGS_PATH/aider/aider.conf.yml ~/.aider.conf.yml
+
 ## Mac specifics
 if [[ $OSTYPE == 'darwin'* ]]; then 
   # Hammerspoon
@@ -37,3 +39,5 @@ if [[ $OSTYPE == 'darwin'* ]]; then
   ln -sfv $CONFIGS_PATH/skhd/ ~/.config/
   
 fi
+
+python -m pip install aider-install

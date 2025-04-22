@@ -3,7 +3,7 @@
 ```
 import requests
 x = requests.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
-print(x.text
+print(x.text)
 ```
 
 ### Step 2 - Interpolate

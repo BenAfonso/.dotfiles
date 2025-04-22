@@ -2,11 +2,13 @@
 	name = Ben Afonso
 	email = ben@nightzookeeper.com
 	signinkey = "53D247567DC6A9D588E57D134D6A371A17A97C4C"
+	signingkey = 4D6A371A17A97C4C
 
 [credential]
 	helper = cache
 
 [gpg]
+	program = gpg
 
 [commit]
 	gpgsign = true
