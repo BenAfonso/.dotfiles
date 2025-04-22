@@ -2,7 +2,7 @@ tap "homebrew/cask"
 
 brew "tmux"
 brew "neovim"
-brew "pass"
+brew "gopass"
 brew "age"
 brew "btop"
 brew "duf"

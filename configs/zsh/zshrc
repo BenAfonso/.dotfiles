@@ -150,6 +150,8 @@ export GPG_TTY=$(tty)
 if [[ bat ]] then alias cat="bat"; fi
 if [[ z ]] then alias cd="z"; fi
 if [[ lsd ]] then alias ls="lsd"; fi
+if [[ gopass ]] then alias pass="gopass"; fi
+
 
 alias vim="nvim"
 alias nvim="v"
