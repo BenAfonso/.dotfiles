@@ -17,11 +17,6 @@ local M = {
       -- To disable a built-in meta, set its key to `false`, e.g., `metas = { R = false }`
       metas = {
         aider = require('yarepl.extensions.aider').create_aider_meta(),
-        aichat = { cmd = 'aichat', formatter = 'bracketed_pasting', source_func = 'aichat' },
-        radian = { cmd = 'radian', formatter = 'bracketed_pasting_no_final_new_line', source_func = 'R' },
-        ipython = { cmd = 'ipython', formatter = 'bracketed_pasting', source_func = 'ipython' },
-        python = { cmd = 'python', formatter = 'trim_empty_lines', source_func = 'python' },
-        R = { cmd = 'R', formatter = 'trim_empty_lines', source_func = 'R' },
         bash = {
           cmd = 'bash',
           formatter = vim.fn.has 'linux' == 1 and 'bracketed_pasting' or 'trim_empty_lines',
@@ -84,75 +79,62 @@ local M = {
 
 
     local ft_to_repl = {
-      r = 'radian',
-      R = 'radian',
-      rmd = 'radian',
-      quarto = 'radian',
-      markdown = 'radian',
-      python = 'ipython',
       sh = 'bash',
     }
 
-    autocmd('FileType', {
-      pattern = { 'quarto', 'markdown', 'markdown.pandoc', 'rmd', 'python', 'sh', 'REPL', 'r' },
-      group = my_augroup,
-      desc = 'set up REPL keymap',
-      callback = function()
-        local repl = ft_to_repl[vim.bo.filetype]
-        repl = repl and ('-' .. repl) or ''
+    local repl = ft_to_repl[vim.bo.filetype] or 'aider'
+    repl = repl and ('-' .. repl) or ''
 
-        bufmap(0, 'n', '<LocalLeader>rs', string.format('<Plug>(REPLStart%s)', repl), {
-          desc = 'Start an REPL',
-        })
-        bufmap(0, 'n', '<LocalLeader>rf', '<Plug>(REPLFocus)', {
-          desc = 'Focus on REPL',
-        })
-        bufmap(0, 'n', '<LocalLeader>rv', '<CMD>Telescope REPLShow<CR>', {
-          desc = 'View REPLs in telescope',
-        })
-        bufmap(0, 'n', '<LocalLeader>rh', '<Plug>(REPLHide)', {
-          desc = 'Hide REPL',
-        })
-        bufmap(0, 'v', '<LocalLeader>s', '<Plug>(REPLSendVisual)', {
-          desc = 'Send visual region to REPL',
-        })
-        bufmap(0, 'v', '<LocalLeader>S', '<Plug>(REPLSourceVisual)', {
-          desc = 'Source visual region to REPL',
-        })
-        bufmap(0, 'n', '<LocalLeader>ss', '<Plug>(REPLSendLine)', {
-          desc = 'Send line to REPL',
-        })
-        bufmap(0, 'n', '<LocalLeader>s', '<Plug>(REPLSendOperator)', {
-          desc = 'Send operator to REPL',
-        })
-        bufmap(0, 'n', '<LocalLeader>S', '<Plug>(REPLSourceOperator)', {
-          desc = 'Source operator to REPL',
-        })
-        bufmap(0, 'n', '<LocalLeader>re', '<Plug>(REPLExec)', {
-          desc = 'Execute command in REPL',
-          expr = true,
-        })
-        bufmap(0, 'n', '<LocalLeader>rq', '<Plug>(REPLClose)', {
-          desc = 'Quit REPL',
-        })
-        bufmap(0, 'n', '<LocalLeader>rc', '<CMD>REPLCleanup<CR>', {
-          desc = 'Clear REPLs.',
-        })
-        bufmap(0, 'n', '<LocalLeader>rS', '<CMD>REPLSwap<CR>', {
-          desc = 'Swap REPLs.',
-        })
-        bufmap(0, 'n', '<LocalLeader>r?', '<Plug>(REPLStart)', {
-          desc = 'Start an REPL from available REPL metas',
-        })
-        bufmap(0, 'n', '<LocalLeader>ra', '<CMD>REPLAttachBufferToREPL<CR>', {
-          desc = 'Attach current buffer to a REPL',
-        })
-        bufmap(0, 'n', '<LocalLeader>rd', '<CMD>REPLDetachBufferToREPL<CR>', {
-          desc = 'Detach current buffer to any REPL',
-        })
-      end,
+    vim.api.nvim_set_keymap('n', '<LocalLeader>rs', string.format('<Plug>(REPLStart%s)', repl), {
+      desc = 'Start an REPL',
     })
-  end
+    vim.api.nvim_set_keymap('n', '<LocalLeader>rf', '<Plug>(REPLFocus)', {
+      desc = 'Focus on REPL',
+    })
+    vim.api.nvim_set_keymap('n', '<LocalLeader>rv', '<CMD>Telescope REPLShow<CR>', {
+      desc = 'View REPLs in telescope',
+    })
+    vim.api.nvim_set_keymap('n', '<Leader>rH', '<Plug>(REPLHide)', {
+      desc = 'Hide REPL',
+    })
+    vim.api.nvim_set_keymap('v', '<LocalLeader>s', '<Plug>(REPLSendVisual)', {
+      desc = 'Send visual region to REPL',
+    })
+    vim.api.nvim_set_keymap('v', '<LocalLeader>S', '<Plug>(REPLSourceVisual)', {
+      desc = 'Source visual region to REPL',
+    })
+    vim.api.nvim_set_keymap('n', '<LocalLeader>ss', '<Plug>(REPLSendLine)', {
+      desc = 'Send line to REPL',
+    })
+    vim.api.nvim_set_keymap('n', '<LocalLeader>s', '<Plug>(REPLSendOperator)', {
+      desc = 'Send operator to REPL',
+    })
+    vim.api.nvim_set_keymap('n', '<LocalLeader>S', '<Plug>(REPLSourceOperator)', {
+      desc = 'Source operator to REPL',
+    })
+    vim.api.nvim_set_keymap('n', '<LocalLeader>re', '<Plug>(REPLExec)', {
+      desc = 'Execute command in REPL',
+      expr = true,
+    })
+    vim.api.nvim_set_keymap('n', '<LocalLeader>rq', '<Plug>(REPLClose)', {
+      desc = 'Quit REPL',
+    })
+    vim.api.nvim_set_keymap('n', '<LocalLeader>rc', '<CMD>REPLCleanup<CR>', {
+      desc = 'Clear REPLs.',
+    })
+    vim.api.nvim_set_keymap('n', '<LocalLeader>rS', '<CMD>REPLSwap<CR>', {
+      desc = 'Swap REPLs.',
+    })
+    vim.api.nvim_set_keymap('n', '<LocalLeader>r?', '<Plug>(REPLStart)', {
+      desc = 'Start an REPL from available REPL metas',
+    })
+    vim.api.nvim_set_keymap('n', '<LocalLeader>ra', '<CMD>REPLAttachBufferToREPL<CR>', {
+      desc = 'Attach current buffer to a REPL',
+    })
+    vim.api.nvim_set_keymap('n', '<LocalLeader>rd', '<CMD>REPLDetachBufferToREPL<CR>', {
+      desc = 'Detach current buffer to any REPL',
+    })
+  end,
 }
 
 

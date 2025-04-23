@@ -10,7 +10,7 @@ ln -sfv $CONFIGS_PATH/tmux/.tmux/.tmux.conf ~/.tmux.conf
 ln -sfv $CONFIGS_PATH/tmux/.tmux ~/
 
 # Wezterm
-ln -sfv $CONFIGS_PATH/wezterm/wezterm.lua ~/.wezterm.lua
+ln -sfv $CONFIGS_PATH/wezterm ~/.wezterm
 
 # Git
 ln -sfv $CONFIGS_PATH/git/.gitconfig ~/.gitconfig

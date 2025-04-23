@@ -6,7 +6,7 @@ local M = {
   opts = {
     win = {
       backdrop = {
-        blend = 80
+        blend = 100
       }
     },
     -- animate = { enabled = false },
