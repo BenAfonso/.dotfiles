@@ -200,9 +200,6 @@ load-nvmrc() {
 
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
-
-
- 
  
 # zprof
 
@@ -225,7 +222,10 @@ fi
 
 # Update config path on mac (at least for lazygit)
 export XDG_CONFIG_HOME="$HOME/.config"
+
 export TP_PATH="TexturePacker.exe"
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 
 eval "$(starship init zsh)"
@@ -238,8 +238,6 @@ if [ -f '/Users/ben/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ben/google-
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ben/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ben/google-cloud-sdk/completion.zsh.inc'; fi
 
-export GEMINI_API_KEY=$(pass show keepass-noha | keepassxc-cli show ~/.keepass/keepass-noha.kdbx gcloud-free -a gemini -s -q)
-
 # eval $(gpg-agent --daemon)
 # if [ -f "${HOME}/.gpg-agent-info" ]; then
 #     . "${HOME}/.gpg-agent-info"
@@ -249,3 +247,5 @@ export GEMINI_API_KEY=$(pass show keepass-noha | keepassxc-cli show ~/.keepass/k
 if [[ $PLATFORM == 'Linux' ]] then
   gpg-agent-relay.sh &
 fi
+
+# export GEMINI_API_KEY=$(pass show keepass-noha | keepassxc-cli show ~/.keepass/keepass-noha.kdbx gcloud-free -a gemini -s -q)
