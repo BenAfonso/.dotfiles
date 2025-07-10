@@ -1,7 +1,3 @@
--- This file has been commented by an AI tool
--- This file configures the 'codecompanion.nvim' plugin for Neovim,
--- allowing integration with OpenAI's API for chat and inline functionalities.
-
 return {
   -- Define the main plugin to be loaded
   "olimorris/codecompanion.nvim",
@@ -31,24 +27,34 @@ return {
     strategies = {
       -- Define a strategy for chat-based interactions
       chat = {
-        adapter = "openai", -- Specify using OpenAI API
+        adapter = "gemini",
       },
       -- Define a strategy for inline commands
       inline = {
-        adapter = "openai", -- Specify using OpenAI API
+        adapter = "gemini",
+        keymaps = {
+          accept_change = {
+            modes = { n = "ga" },
+            description = "Accept the suggested change",
+          },
+          reject_change = {
+            modes = { n = "gr" },
+            description = "Reject the suggested change",
+          },
+        },
       },
     },
     adapters = {
-      -- Adapter setup for OpenAI integration
-      openai = function()
-        return require("codecompanion.adapters").extend("openai", {
+      gemini = function()
+        return require("codecompanion.adapters").extend("gemini", {
           schema = {
             model = {
-              default = "gpt-4o-mini",
+              default = "gemini-2.5-flash",
             },
           },
           env = {
-            api_key = "cmd:gpt-key", -- API key retrieval command
+            api_key =
+            "cmd:gemini-key"
           },
         })
       end,

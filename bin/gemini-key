@@ -1,0 +1,4 @@
+#!/bin/bash
+
+gopass show keepass-noha | keepassxc-cli show ~/.keepass/keepass-noha.kdbx gcloud-free -a gemini -s -q
+

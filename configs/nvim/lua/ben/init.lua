@@ -1,4 +1,6 @@
 require("ben.set")
 require("ben.lua-repl")
+require("ben.autocmds")
+require("ben.cmds")
 -- require("ben.command-ui")
 -- require("ben.cmdline")

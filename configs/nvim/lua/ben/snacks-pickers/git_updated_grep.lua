@@ -68,6 +68,4 @@ M.grep_git_updated = function(opts)
   end)
 end
 
-M.grep_git_updated()
-
 return M

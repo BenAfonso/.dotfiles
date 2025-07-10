@@ -162,13 +162,20 @@ local M = {
     { "<leader>sb", function() Snacks.picker.grep_buffers() end,  desc = "[S]earch current [B]uffer" },
     { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "[S]earch [T]odos" },
     { "<leader>sC", function() Snacks.picker.colorschemes() end,  desc = "[S]earch [T]heme" },
-    { "<leader>sH", function() Snacks.picker.highlights() end,    desc = "[S]earch [H]ighlights" },
-    { ";r",         function() Snacks.picker.grep() end,          desc = "[S]earch by [G]rep" },
-    { "<leader>sd", function() Snacks.picker.diagnostics() end,   desc = "[S]earch [D]iagnostics" },
-    { ";;",         function() Snacks.picker.resume() end,        desc = "[S]earch [R]esume" },
-    { "<leader>s.", function() end,                               desc = '[S]earch Recent Files ("." for repeat)' },
-    { "<leader>os", function() Snacks.scratch() end,              desc = '[O]pen [s]cratch buffer' },
-    { "<leader>oS", function() Snacks.scratch.select() end,       desc = '[O]pen [S]cratch buffer selector' },
+    {
+      "<leader>sg",
+      function()
+        require('ben.snacks-pickers.git_updated_grep').grep_git_updated()
+      end,
+      desc = "[S]earch [g]it changes"
+    },
+    { "<leader>sH", function() Snacks.picker.highlights() end,  desc = "[S]earch [H]ighlights" },
+    { ";r",         function() Snacks.picker.grep() end,        desc = "[S]earch by [G]rep" },
+    { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "[S]earch [D]iagnostics" },
+    { ";;",         function() Snacks.picker.resume() end,      desc = "[S]earch [R]esume" },
+    { "<leader>s.", function() end,                             desc = '[S]earch Recent Files ("." for repeat)' },
+    { "<leader>os", function() Snacks.scratch() end,            desc = '[O]pen [s]cratch buffer' },
+    { "<leader>oS", function() Snacks.scratch.select() end,     desc = '[O]pen [S]cratch buffer selector' },
     {
       "<leader>hh",
       function()

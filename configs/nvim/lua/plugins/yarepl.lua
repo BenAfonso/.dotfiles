@@ -1,5 +1,6 @@
 local M = {
   'milanglacier/yarepl.nvim',
+  enabled = false,
   config = function(_, opts)
     local yarepl = require 'yarepl'
 
