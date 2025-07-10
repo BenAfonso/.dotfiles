@@ -10,11 +10,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
     end
 
-    vim.api.nvim_create_user_command("LspReload", function()
-      vim.lsp.stop_client(vim.lsp.get_clients())
-      vim.cmd("edit")
-    end, {})
-
     local imap = function(keys, func, desc)
       vim.keymap.set("i", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
     end
@@ -25,49 +20,69 @@ vim.api.nvim_create_autocmd("LspAttach", {
       })
     end, "Open LSP diagnostic")
 
-
-    map("<leader>gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-    map("<leader>gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-    map("<leader>gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-    map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-    map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-    map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-    map("]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, "[D]iagnostic next")
-    map("[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, "[D]iagnostic prev")
+    map("<leader>gd", require("snacks").picker.lsp_definitions, "[G]oto [D]efinition")
+    map("<leader>gr", require("snacks").picker.lsp_references, "[G]oto [R]eferences")
+    map("<leader>gI", require("snacks").picker.lsp_implementations, "[G]oto [I]mplementation")
+    map("<leader>D", require("snacks").picker.lsp_type_definitions, "Type [D]efinition")
+    map("<leader>ds", require("snacks").picker.lsp_symbols, "[D]ocument [S]ymbols")
+    map("<leader>ws", require("snacks").picker.lsp_workspace_symbols, "[W]orkspace [S]ymbols")
+    map("]d", function()
+      vim.diagnostic.jump({ count = 1, float = true })
+    end, "[D]iagnostic next")
+    map("[d", function()
+      vim.diagnostic.jump({ count = -1, float = true })
+    end, "[D]iagnostic prev")
     map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
     map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-    map("K", function()
-      vim.lsp.buf.hover({
-        border = "rounded",
-        focusable = true,
-        focus = true,
-      })
-    end, "Hover Documentation")
+    map("<leader>gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
     map("<leader>gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-    map("<leader>gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+    vim.api.nvim_buf_create_user_command(bufnr, "LspRestart", function()
+      vim.lsp.stop_client(vim.lsp.get_clients())
 
-    local signature_help = function()
-      vim.lsp.buf.signature_help({
+      vim.defer_fn(function()
+        vim.api.nvim_create_autocmd("LspAttach", {
+          once = true,
+          callback = function()
+            vim.notify("Reloaded")
+          end,
+        })
+        vim.cmd("edit")
+      end, 200)
+    end, {})
+    vim.api.nvim_buf_create_user_command(bufnr, "LspStop", function()
+      vim.lsp.stop_client(vim.lsp.get_clients())
+    end, {})
+    vim.api.nvim_buf_create_user_command(bufnr, "LspInfo", function()
+      -- local clients = vim.lsp.get_clients({ bufnr })
+      vim.cmd("checkhealth vim.lsp")
+    end, {})
+
+    local signature_help = vim.lsp.buf.signature_help
+    ---@diagnostic disable-next-line: duplicate-set-field
+    vim.lsp.buf.signature_help = function()
+      signature_help({
         border = "rounded",
         focusable = true,
         focus = true,
       })
     end
-
-    local hover = function()
-      vim.lsp.buf.hover({
-        border = "rounded",
-        focusable = true,
-        focus = true,
-      })
-    end
-
-    vim.lsp.handlers["textDocument/hover"] = hover
-    vim.lsp.handlers["textDocument/signatureHelp"] = signature_help
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.buf.signature_help
     imap("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
     map("<C-s>", vim.lsp.buf.signature_help, "Signature Help")
     vim.keymap.set("i", "<c-s>", vim.lsp.buf.signature_help, { buffer = true })
+
+    local hover = vim.lsp.buf.hover
+    ---@diagnostic disable-next-line: duplicate-set-field
+    vim.lsp.buf.hover = function()
+      hover({
+        border = "rounded",
+        focusable = true,
+        focus = true,
+      })
+    end
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.buf.hover
+    map("K", vim.lsp.buf.hover, "Hover Documentation")
 
     if client ~= nil then
       local cap = client.server_capabilities
@@ -78,7 +93,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
-
 
 vim.diagnostic.config({
   diagnostic = {
@@ -95,7 +109,6 @@ vim.diagnostic.config({
   },
 })
 
-
 local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
@@ -106,14 +119,6 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.buf.hover({
   border = "rounded",
   focusable = true,
   focus = true,
-})
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.buf.signature_help({
-  border = "rounded",
-  focusable = true,
-  focus = true,
-  -- close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
-  -- close_events = { "CursorMoved", "BufHidden", "InsertCharPre", "InsertEnter" },
 })
 
 -- This is copied straight from blink
@@ -138,10 +143,10 @@ vim.lsp.config("*", {
 
 -- Enable each language server by filename under the lsp/ folder
 vim.lsp.enable({
-  -- "gopls",
-  -- "basedpyright",
-  -- "luals",
-  -- "typescript",
-  -- "tailwind",
-  -- "rustls",
+  "gopls",
+  "luals",
+  "typescript",
+  "tailwind",
+  "rustls",
+  "graphql"
 })

@@ -55,6 +55,10 @@ keymap.set("n", "<C-up>", "<C-o>", { noremap = true, silent = true, desc = "Jump
 keymap.set("n", "<C-down>", "<C-i>", { noremap = true, silent = true, desc = "Jump forward" })
 
 -- Clipboard
+keymap.set("n", "Yp", '<cmd>:let @+=expand("%:.")<CR>', { noremap = true, desc = "Copy relative path to current buffer" })
+keymap.set("n", "Yap", '<cmd>:let @+=expand("%:p")<CR>',
+  { noremap = true, desc = "Copy absolute path to current buffer" })
+
 keymap.set("x", "p", '"_dP', { noremap = true, desc = "Paste and keep yank register" })
 
 keymap.set({ "n", "x" }, "<leader>d", '"_d', { noremap = true, silent = true, desc = "Deletes in blackhole register" })

@@ -6,6 +6,7 @@ end
 
 local M = {
   'saghen/blink.cmp',
+  enabled = true,
   -- optional: provides snippets for the snippet source
   dependencies = 'rafamadriz/friendly-snippets',
 
@@ -71,6 +72,11 @@ local M = {
     },
 
     completion = {
+      accept = {
+        auto_brackets = {
+          enabled = false
+        },
+      },
       trigger = {
         show_in_snippet = false,
         show_on_keyword = true,
@@ -155,6 +161,7 @@ local M = {
       providers = {
         lazydev = {
           name = "LazyDev",
+          fallbacks = { 'lsp' },
           module = "lazydev.integrations.blink",
           score_offset = 100,
         }

@@ -166,6 +166,7 @@ local M = {
       ["<C-l>"] = false,
       ["<C-p>"] = "actions.preview",
       ["<C-c>"] = "actions.close",
+      ["yp"] = "actions.copy_entry_path",
       ["q"] = "actions.close",
       ["<C-r>"] = "actions.refresh",
       ["-"] = "actions.parent",
