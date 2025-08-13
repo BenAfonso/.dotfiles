@@ -19,7 +19,7 @@ local M = {
   },
   config = function(_, opts)
     require("diffview").setup(opts)
-    vim.opt.fillchars = vim.opt.fillchars + "diff:╱"
+    vim.opt.fillchars = vim.opt.fillchars + "diff: "
 
     vim.keymap.set({ "n" }, "<leader>Go", ":DiffviewOpen<CR>", { noremap = true, desc = "[Git] Diff [Open]" })
   end,
