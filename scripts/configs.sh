@@ -2,6 +2,8 @@
 
 CONFIGS_PATH=~/.dotfiles/configs
 
+mkdir ~/.config
+
 # Neovim
 ln -sfv $CONFIGS_PATH/nvim ~/.config
 
@@ -25,6 +27,7 @@ ln -sfv $CONFIGS_PATH/zsh/zshrc ~/.zshrc
 ln -sfv $CONFIGS_PATH/gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 
 # Lazygit
+mkdir ~/.config/lazygit
 ln -sfv $CONFIGS_PATH/lazygit/config.yml ~/.config/lazygit/config.yml
 
 ln -sfv $CONFIGS_PATH/aider/aider.conf.yml ~/.aider.conf.yml
@@ -40,4 +43,4 @@ if [[ $OSTYPE == 'darwin'* ]]; then
   
 fi
 
-python -m pip install aider-install
+# python -m pip install aider-install

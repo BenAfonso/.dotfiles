@@ -148,5 +148,5 @@ vim.lsp.enable({
   "typescript",
   "tailwind",
   "rustls",
-  "graphql"
+  "graphql",
 })

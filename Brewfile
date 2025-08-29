@@ -2,6 +2,10 @@ tap "homebrew/cask"
 
 brew "tmux"
 brew "neovim"
+brew "nvr"
+brew "lazygit"
+brew "delta"
+
 brew "gopass"
 brew "age"
 brew "btop"
@@ -11,6 +15,7 @@ brew "jq"
 brew "tealdeer"
 
 brew "zoxide"
+brew "bat"
 
 
 brew "ripgrep"

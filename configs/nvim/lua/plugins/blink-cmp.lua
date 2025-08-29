@@ -5,13 +5,13 @@ local has_words_before = function()
 end
 
 local M = {
-  'saghen/blink.cmp',
+  "saghen/blink.cmp",
   enabled = true,
   -- optional: provides snippets for the snippet source
-  dependencies = 'rafamadriz/friendly-snippets',
+  dependencies = "rafamadriz/friendly-snippets",
 
   -- use a release tag to download pre-built binaries
-  version = '*',
+  version = "*",
   -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
   -- build = 'cargo build --release',
   -- If you use nix, you can build from source using latest nightly rust with:
@@ -32,8 +32,8 @@ local M = {
     -- See the full "keymap" documentation for information on defining your own keymap.
     keymap = {
       preset = "default",
-      ["<C-k>"] = { 'select_prev', 'fallback' },
-      ["<C-j>"] = { 'select_next', 'fallback' },
+      ["<C-k>"] = { "select_prev", "fallback" },
+      ["<C-j>"] = { "select_next", "fallback" },
       ["<Tab>"] = {
         function(cmp)
           if cmp.snippet_active() then
@@ -43,8 +43,8 @@ local M = {
           else
           end
         end,
-        'snippet_forward',
-        'fallback'
+        "snippet_forward",
+        "fallback",
       },
       ["<S-Tab>"] = {
         function(cmp)
@@ -55,10 +55,10 @@ local M = {
           else
           end
         end,
-        'snippet_backward',
-        'fallback'
+        "snippet_backward",
+        "fallback",
       },
-      ["<Enter>"] = { 'select_and_accept', 'fallback' },
+      ["<Enter>"] = { "select_and_accept", "fallback" },
     },
 
     appearance = {
@@ -68,77 +68,83 @@ local M = {
       use_nvim_cmp_as_default = true,
       -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
       -- Adjusts spacing to ensure icons are aligned
-      nerd_font_variant = 'mono'
+      nerd_font_variant = "mono",
     },
 
     completion = {
       accept = {
         auto_brackets = {
-          enabled = false
+          enabled = false,
         },
       },
       trigger = {
         show_in_snippet = false,
         show_on_keyword = true,
         show_on_trigger_character = true,
-        show_on_x_blocked_trigger_characters = { "'", '"', '(', '{', '[', '\t', '	' },
-        show_on_blocked_trigger_characters = { ' ', '\n', '\t', '	' },
+        show_on_x_blocked_trigger_characters = { "'", '"', "(", "{", "[", "\t", "	" },
+        show_on_blocked_trigger_characters = { " ", "\n", "\t", "	" },
       },
       list = {
         selection = {
           auto_insert = true,
           preselect = function(ctx)
-            return not require('blink.cmp').snippet_active({ direction = 1 })
+            return not require("blink.cmp").snippet_active({ direction = 1 })
           end,
-        }
+        },
       },
       ghost_text = {
         enabled = false,
-        show_with_menu = false
+        show_with_menu = false,
       },
       menu = {
         border = "single",
         draw = {
           components = {
-            kind_icon = {
-              ellipsis = false,
-              text = function(ctx)
-                local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
-                return kind_icon
-              end,
-              -- Optionally, you may also use the highlights from mini.icons
-              highlight = function(ctx)
-                local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
-                return hl
-              end,
-            }
+            --           kind_icon = {
+            --             ellipsis = false,
+            --             text = function(ctx)
+            -- local mini_icons = require("mini.icons")
+            --               if mini_icons ~= nil then
+            --                 local kind_icon, _, _ = mini_icons.get("lsp", ctx.kind)
+            --                 return kind_icon
+            --               end
+            --             end,
+            --             -- Optionally, you may also use the highlights from mini.icons
+            --             highlight = function(ctx)
+            --               local mini_icons = require("mini.icons")
+            --               if mini_icons ~= nil then
+            --                 local _, hl, _ = mini_icons.get("lsp", ctx.kind)
+            --               end
+            --               return hl
+            --             end,
+            --           },
           },
           columns = {
-            { "label",     "label_description", gap = 1 },
-            { "kind_icon", "kind",              gap = 1 },
-          }
-        }
+            { "label", "label_description", gap = 1 },
+            { "kind_icon", "kind", gap = 1 },
+          },
+        },
       },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 500,
         window = {
-          border = "single"
-        }
-      }
+          border = "single",
+        },
+      },
     },
     signature = {
-      window = { border = 'single' }
+      window = { border = "single" },
     },
 
     cmdline = {
       keymap = {
         preset = "default",
-        ["<C-k>"] = { 'select_prev', 'fallback' },
-        ["<C-j>"] = { 'select_next', 'fallback' },
+        ["<C-k>"] = { "select_prev", "fallback" },
+        ["<C-j>"] = { "select_next", "fallback" },
         ["<Tab>"] = {
-          'select_and_accept',
-          'fallback'
+          "select_and_accept",
+          "fallback",
         },
         -- ["<Enter>"] = { 'select_and_accept', 'fallback' },
       },
@@ -146,7 +152,7 @@ local M = {
       completion = {
         menu = {
           auto_show = function(ctx)
-            return vim.fn.getcmdtype() == ':'
+            return vim.fn.getcmdtype() == ":"
             -- enable for inputs as well, with:
             -- or vim.fn.getcmdtype() == '@'
           end,
@@ -157,15 +163,15 @@ local M = {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+      default = { "lazydev", "lsp", "path", "snippets", "buffer" },
       providers = {
         lazydev = {
           name = "LazyDev",
-          fallbacks = { 'lsp' },
+          fallbacks = { "lsp" },
           module = "lazydev.integrations.blink",
           score_offset = 100,
-        }
-      }
+        },
+      },
     },
 
     -- Blink.cmp uses a Rust fuzzy matcher by default for typo resistance and significantly better performance
@@ -173,9 +179,9 @@ local M = {
     -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
     --
     -- See the fuzzy documentation for more information
-    fuzzy = { implementation = "prefer_rust_with_warning" }
+    fuzzy = { implementation = "prefer_rust_with_warning" },
   },
-  opts_extend = { "sources.default" }
+  opts_extend = { "sources.default" },
 }
 
 return M

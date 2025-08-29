@@ -45,19 +45,21 @@ return {
       },
     },
     adapters = {
-      gemini = function()
-        return require("codecompanion.adapters").extend("gemini", {
-          schema = {
-            model = {
-              default = "gemini-2.5-flash",
+      http = {
+        gemini = function()
+          return require("codecompanion.adapters").extend("gemini", {
+            schema = {
+              model = {
+                default = "gemini-2.5-flash",
+              },
             },
-          },
-          env = {
-            api_key =
-            "cmd:gemini-key"
-          },
-        })
-      end,
+            env = {
+              api_key =
+              "cmd:gemini-key"
+            },
+          })
+        end,
+      }
     },
   },
 }
