@@ -1,0 +1,82 @@
+<!DOCTYPE patchbay>
+<patchbay name="headphones" version="0.9.5">
+ <items>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Virtual Comm" port="Virtual Comm:monitor_FL"/>
+   <input node="Family 17h/19h/1ah HD Audio Controller Analog Stereo" port="ALC897 Analog:playback_FL"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Easy Effects Source" port="Easy Effects Source:capture_FR"/>
+   <input node="Virtual Mic" port="Virtual Mic:playback_FR"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Easy Effects Source" port="Easy Effects Source:capture_FL"/>
+   <input node="Virtual Mic" port="Virtual Mic:playback_FL"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Spectrum" port="spectrum:output_FL"/>
+   <input node="Output Level Meter" port="output_level:input_FL"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Virtual Comm" port="Virtual Comm:monitor_FR"/>
+   <input node="Family 17h/19h/1ah HD Audio Controller Analog Stereo" port="ALC897 Analog:playback_FR"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Zen" port="Zen:output_FR"/>
+   <input node="Browser" port="Browser:playback_FR"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Virtual Mic" port="Virtual Mic:capture_FL"/>
+   <input node="Noise Canceling source" port="Noise Canceling source:input_MONO"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Browser" port="Browser:monitor_FR"/>
+   <input node="Family 17h/19h/1ah HD Audio Controller Analog Stereo" port="ALC897 Analog:playback_FR"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Spectrum" port="spectrum:output_FR"/>
+   <input node="Output Level Meter" port="output_level:input_FR"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Zen-2" port="Zen:output_FR"/>
+   <input node="Easy Effects Sink" port="Easy Effects Sink:playback_FR"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Easy Effects Sink" port="Easy Effects Sink:monitor_FR"/>
+   <input node="Spectrum" port="spectrum:input_FR"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Zen" port="Zen:output_FL"/>
+   <input node="Easy Effects Sink" port="Easy Effects Sink:playback_FL"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Zen" port="Zen:output_FL"/>
+   <input node="Browser" port="Browser:playback_FL"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Zen-2" port="Zen:output_FL"/>
+   <input node="Easy Effects Sink" port="Easy Effects Sink:playback_FL"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Output Level Meter" port="output_level:output_FL"/>
+   <input node="Family 17h/19h/1ah HD Audio Controller Analog Stereo" port="ALC897 Analog:playback_FL"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Output Level Meter" port="output_level:output_FR"/>
+   <input node="Family 17h/19h/1ah HD Audio Controller Analog Stereo" port="ALC897 Analog:playback_FR"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Browser" port="Browser:monitor_FL"/>
+   <input node="Family 17h/19h/1ah HD Audio Controller Analog Stereo" port="ALC897 Analog:playback_FL"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Zen" port="Zen:output_FR"/>
+   <input node="Easy Effects Sink" port="Easy Effects Sink:playback_FR"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Easy Effects Sink" port="Easy Effects Sink:monitor_FL"/>
+   <input node="Spectrum" port="spectrum:input_FL"/>
+  </item>
+ </items>
+</patchbay>
+

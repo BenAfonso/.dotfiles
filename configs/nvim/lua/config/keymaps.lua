@@ -109,6 +109,16 @@ keymap.set("v", ">", ">gv", { noremap = true, silent = true, desc = "Indent and 
 -- Terminal
 keymap.set("t", "<Esc><Esc>", "<C-\\><C-N>")
 
+keymap.set("n", "<leader>lg", function()
+  local cwd = vim.fn.getcwd()
+  local cmd = string.format("tmux display-popup -E 'cd %s && lazygit'", cwd, cwd)
+
+  -- Using $TMUX_PANE ensures we target the exact pane Neovim is running in,
+  -- regardless of how many sessions or windows you have open.
+
+  os.execute(cmd)
+end)
+
 
 -- Execute
 vim.keymap.set("n", "<leader>X", "<cmd>source %<CR>")

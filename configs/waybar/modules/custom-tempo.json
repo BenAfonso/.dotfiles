@@ -1,0 +1,11 @@
+{
+  "custom/tempo": {
+    "exec": "/home/ben/.dotfiles/configs/waybar/scripts/tempo_color.sh",
+    "format": "{0}",
+    "rotate": 0,
+    "interval": 86400,
+    "tooltip": true,
+    "signal": 20
+  }
+}
+

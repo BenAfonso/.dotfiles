@@ -1,0 +1,9 @@
+(defwidget framed [?padding]
+  (box :orientation "vertical" :class "window-frame" :style "margin-top: -${padding}"
+    (box :orientation "vertical" 
+      (box :orientation "vertical" :class "inner" :style "padding: ${padding}"
+        (children)
+      )
+    )
+  )
+)

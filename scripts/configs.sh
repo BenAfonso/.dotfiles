@@ -22,15 +22,30 @@ ln -sfv $CONFIGS_PATH/starship/starship.toml ~/.config/
 
 # Zsh
 ln -sfv $CONFIGS_PATH/zsh/zshrc ~/.zshrc
+ln -sfv $CONFIGS_PATH/zsh/zshrc ~/.config/zsh/.zshrc
 
 # Gnupg
 ln -sfv $CONFIGS_PATH/gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+
+# Hyprland
+ln -sfv $CONFIGS_PATH/hypr ~/.config/
+
+# Rofi
+ln -sfv $CONFIGS_PATH/rofi ~/.config/
+ln -sfv $CONFIGS_PATH/dunst ~/.config/
+
+# Waybar
+ln -sfv $CONFIGS_PATH/waybar ~/.config/
+
+# Fastfetch
+ln -sfv $CONFIGS_PATH/fastfetch ~/.config/
 
 # Lazygit
 mkdir ~/.config/lazygit
 ln -sfv $CONFIGS_PATH/lazygit/config.yml ~/.config/lazygit/config.yml
 
-ln -sfv $CONFIGS_PATH/aider/aider.conf.yml ~/.aider.conf.yml
+# Yazi
+ln -sfv $CONFIGS_PATH/yazi ~/.config/
 
 ## Mac specifics
 if [[ $OSTYPE == 'darwin'* ]]; then 

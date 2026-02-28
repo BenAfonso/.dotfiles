@@ -1,0 +1,13 @@
+/* User custom styles */
+
+
+* {
+    font-size: 16px;
+}
+
+
+#workspaces .visible {
+    background-color: @wb-hvr-bg;
+    font-weight: 800;
+}
+

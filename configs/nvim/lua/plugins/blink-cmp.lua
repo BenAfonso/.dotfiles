@@ -120,8 +120,8 @@ local M = {
             --           },
           },
           columns = {
-            { "label", "label_description", gap = 1 },
-            { "kind_icon", "kind", gap = 1 },
+            { "label",     "label_description", gap = 1 },
+            { "kind_icon", "kind",              gap = 1 },
           },
         },
       },
@@ -163,13 +163,17 @@ local M = {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+      default = { "lazydev", "lsp", "path", "snippets", "buffer", "codecompanion" },
       providers = {
         lazydev = {
           name = "LazyDev",
           fallbacks = { "lsp" },
           module = "lazydev.integrations.blink",
           score_offset = 100,
+        },
+        codecompanion = {
+          name = "CodeCompanion",
+          module = "codecompanion.providers.completion.blink",
         },
       },
     },

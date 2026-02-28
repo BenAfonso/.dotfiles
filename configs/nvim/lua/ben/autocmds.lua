@@ -43,3 +43,22 @@ vim.api.nvim_create_autocmd("ModeChanged", {
     end
   end,
 })
+
+
+vim.api.nvim_create_autocmd("ExitPre", {
+  callback = function()
+    vim.fn.jobstart({
+      "tmux", "set-option", "-u", "@project_path"
+    })
+  end
+})
+
+
+vim.api.nvim_create_autocmd("DirChanged", {
+  pattern = "tabpage",
+  callback = function()
+    vim.fn.jobstart({
+      "tmux", "set-option", "@project_path", vim.fn.getcwd()
+    })
+  end
+})

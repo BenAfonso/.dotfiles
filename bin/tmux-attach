@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Check if any tmux session exists
+if tmux has-session 2>/dev/null; then
+  tmux attach
+else
+  tmux new
+fi

@@ -1,0 +1,95 @@
+(defwidget gpu-frame []
+  (box :spacing -13 :orientation "vertical"  :valign "center"
+    :style "font-size: 22px"
+
+  (eventbox
+    :onclick 'hyprctl dispatch exec "kitty --override window_padding_width=0 btop"'
+
+    (box :spacing 10 :orientation "vertical"  :valign "center"
+        (label :text "CPU" :style "font-weight: bold" :halign "start")
+        (framed
+          :padding "20px"
+            (box :orientation "horizontal"
+              :spacing 5
+              :space-evenly false
+               (label :text "${cpu_usage}%"   :style "font-size: 11px; min-width: 25px")
+              (label :text cpu_bar)
+              (label :text "${EWW_TEMPS["AMDGPU_EDGE"]}°C" :width 1  :style "font-size: 11px")
+            )
+        )
+      )
+  )
+
+  (eventbox
+    :onclick 'hyprctl dispatch exec "kitty --override window_padding_width=0 btop"'
+
+    (box :spacing 10 :orientation "vertical"  :valign "center"
+        (label :text "GPU" :style "font-weight: bold" :halign "start")
+        (framed
+          :padding "20px"
+            (box
+            :orientation "horizontal"
+            :spacing 5
+            :space-evenly false
+              (label :text "${gpu_usage}%"   :style "font-size: 11px; min-width: 25px")
+              (label :text gpu_bar :style "font-size: 24px;")
+              (label :text "${gpu_temp}°C" :width 1  :style "font-size: 11px")
+            )
+        )
+      )
+    )
+
+
+    (box  :orientation "vertical"  
+      :style "margin-top:40px"
+        (framed
+            (box :orientation "vertical"
+            (graph :value gpu_usage :thickness 2 :min 0 :max 100 :time-range "60s" )
+          )
+      )
+    )
+
+  )
+
+
+)
+
+(defwindow gpu-frame-window-1
+  :visible show_eww
+  :monitor 0
+  :geometry (
+    geometry :x "30px" :y "3px" :width "270px"
+    :anchor "top right"
+  )
+  :stacking "bg"
+  :exclusive false
+  :focusable false
+  (gpu-frame)
+)
+
+(defwindow gpu-frame-window-2
+  :visible show_eww
+  :monitor 1
+  :geometry (
+    geometry :x "30px" :y "3px" :width "270px"
+    :anchor "top right"
+  )
+  :stacking "bg"
+  :exclusive false
+  :focusable false
+  (gpu-frame)
+)
+
+
+(defwindow gpu-frame-window-3
+  :visible show_eww
+  :monitor 2
+  :geometry (
+    geometry :x "30px" :y "3px" :width "270px"
+    :anchor "top right"
+  )
+  :stacking "bg"
+  :exclusive false
+  :focusable false
+  (gpu-frame)
+)

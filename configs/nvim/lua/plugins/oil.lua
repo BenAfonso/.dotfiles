@@ -144,9 +144,12 @@ local M = {
       },
       ["<leader><CR>"] = {
         callback = function()
-          local env = os.getenv("MACHINE")
           -- WSL environment open current directory
-          if env == "windows" then
+          if vim.fn.executable("dolphin") then
+            os.execute(
+              "dolphin " .. require("oil").get_current_dir() .. " > /dev/null 2>&1 & disown"
+            )
+          elseif vim.fn.executable("wslpath") then
             os.execute(
               "/mnt/c/Windows/explorer.exe `wslpath -w " .. require("oil").get_current_dir() .. "` > /dev/null"
             )

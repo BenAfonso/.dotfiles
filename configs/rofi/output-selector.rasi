@@ -1,0 +1,142 @@
+/**
+ * User: keystroke3
+ * Copyright: keystroke3
+ *
+ */
+
+configuration {
+	sidebar-mode: true;
+}
+
+* {
+	text-color: @foreground;
+	selected-normal-background: #2E2B3E;
+	selected-normal-foreground: #2E2B3E;
+	background: #231F31;
+	foreground: #EE32AE;
+
+	active-background: @foreground;
+	active-foreground: @foreground;
+	normal-background: #231F31;
+	normal-foreground: #231F31;
+	urgent-foreground: @foreground;
+	alternate-active-background: #00ff00;
+	alternate-active-foreground: @foreground;
+	alternate-normal-background: #00ff00;
+	alternate-normal-foreground: #00ff00;
+	alternate-urgent-background: #00ff00;
+	alternate-urgent-foreground: #00ff00;
+	selected-active-foreground: #ff0000;
+	selected-urgent-foreground: @foreground;
+	background-color: @background;
+	spacing: 0;
+}
+
+window {
+	location: center;
+	anchor: center;
+	orientation: vertical;
+	children: [mainbox];
+	border: 2px 2px 2px 2px;
+	border-color: @active-background;
+	hide-scrollbar: true;
+  border-radius: 20px;
+}
+
+mainbox {
+	spacing: 0.2em;
+  padding: 20px;
+	children: [inputbar, listview];
+}
+
+
+
+listview {
+	spacing: 0.6em;
+  columns: 6;
+  lines: 2;
+	cycle: true;
+dynamic: true;
+layout: vertical;
+	padding: 0px 5px 0px 5px;
+  fixed-width: true;
+}
+
+inputbar {
+    enabled: false;
+	border-radius: 10px;
+	padding: 5px;
+	border-spacing: 5px 0 0 0;
+	border: 1px;
+	spacing: 10px;
+	margin: 5px 0 10px;
+	border-color: @foreground;
+
+}
+
+entry{
+  padding: 3px;
+}
+
+prompt{
+	padding: 5px;
+  enabled: false;
+	background-color: @foreground;
+	text-color: @background-color;
+	border: 1px;
+	border-radius: 8px;
+
+}
+
+
+element {
+  border: 2px;
+  padding: 10px;
+  border-radius: 6px;
+  border-color: @foreground;
+}
+element-text selected.normal  {
+  background-color: @foreground;
+  color: #fff;
+
+}
+
+element normal.normal {
+	background-color: @normal-background;
+	text-color: @normal-foreground;
+}
+
+element normal.urgent {
+}
+
+element normal.active {
+	background-color: @active-background;
+	text-color: @active-foreground;
+}
+
+element selected.normal {
+	background-color: @foreground;
+	text-color: @selected-normal-foreground;
+	border-color: @foreground;
+}
+
+element selected.urgent {
+}
+
+element selected.active {
+  border: 2px;
+  border-color: @foreground;
+}
+
+element alternate.normal {
+	background-color: @normal-background;
+	text-color: @normal-foreground;
+}
+
+element alternate.urgent {
+}
+
+element alternate.active {
+	background-color: @active-background;
+	text-color: @active-foreground;
+}

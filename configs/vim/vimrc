@@ -1,0 +1,84 @@
+let s:plugin_dir = expand('~/.vim/plugged')
+
+function! s:ensure(repo)
+  let name = split(a:repo, '/')[-1]
+  let path = s:plugin_dir . '/' . name
+
+  if !isdirectory(path)
+    if !isdirectory(s:plugin_dir)
+      call mkdir(s:plugin_dir, 'p')
+    endif
+    execute '!git clone --depth=1 https://github.com/' . a:repo . ' ' . shellescape(path)
+  endif
+
+  execute 'set runtimepath+=' . fnameescape(path)
+endfunction
+
+call s:ensure("ghifarit53/tokyonight-vim")
+call s:ensure("junegunn/fzf")
+call s:ensure("junegunn/fzf.vim")
+
+"""""""""""""""""""""""""""""""
+"          OPTIONS
+"""""""""""""""""""""""""""""""
+
+set number
+set relativenumber
+
+filetype plugin indent on
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set smartindent
+
+set backspace=indent,eol,start
+
+syntax on
+
+
+"""""""""""""""""""""""""""""""
+"          COLORS
+"""""""""""""""""""""""""""""""
+
+set termguicolors
+
+let g:tokyonight_enable_italic = 1
+colorscheme tokyonight
+
+
+"""""""""""""""""""""""""""""""
+"          KEYBINDS
+"""""""""""""""""""""""""""""""
+
+let mapleader = " "
+
+nnoremap <leader>cd :Ex<CR>
+nnoremap - :Ex<CR>
+
+nnoremap <c-a> ggVG
+
+nnoremap <c-p> :Files<CR>
+nnoremap <leader>sf :Files<CR>
+nnoremap <leader>sh :History<CR>
+nnoremap \\ :Buffers<CR>
+nnoremap <leader>sg :Rg<Space>
+nnoremap ;r :Rg<Space><CR>
+nnoremap <c-u> <c-u>zz
+nnoremap <c-d> <c-d>zz
+
+
+
+nmap <silent> <c-q> :q<CR>
+
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-l> :wincmd l<CR>
+
+nmap <silent> sv :vsplit<CR>
+nmap <silent> sh :split<CR>
+
+
+nnoremap ;q :bdel<CR>
+

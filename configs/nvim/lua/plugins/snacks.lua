@@ -65,6 +65,9 @@ local M = {
       current = true,
 
     },
+    image = {
+      enabled = false,
+    },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = false },

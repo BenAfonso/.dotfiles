@@ -1,0 +1,45 @@
+(defwindow bar
+  :visible show_eww
+  :monitor 1
+  :geometry (
+    geometry :x "0px" :y "0px" :width "100%"
+    :anchor "top center"
+  )
+  :stacking "overlay"
+  :exclusive true
+  :focusable false
+
+  (box
+    :space-evenly true
+    :class "bar"
+    
+    (box
+      :class "datetime"
+      :halign "start"
+      (label :text "${current_workspace}")
+    )
+
+    (box
+      :class "datetime"
+      (label :text datetime_str)
+    )
+
+      (box
+
+        :hexpand false
+        :halign "end"
+
+        (systray
+          :class "tray"
+          :pack-direction "down"
+          :orientation "h"
+          :icon-size 24
+          :spacing 10
+        )
+      )
+
+
+  )
+
+
+)

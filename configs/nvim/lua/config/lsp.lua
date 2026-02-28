@@ -148,5 +148,10 @@ vim.lsp.enable({
   "typescript",
   "tailwind",
   "rustls",
+  "pyright",
+  'templ',
+  "ruff",
   "graphql",
+  "eslint",
+  "astro"
 })

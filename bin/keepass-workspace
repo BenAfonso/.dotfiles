@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+APP_CMD="keepassxc"
+SPECIAL_NAME="keepass"
+
+# Launch KeepassXC if not running
+if ! pgrep -x "$APP_CMD" > /dev/null; then
+    "$APP_CMD" & disown
+    launched="true"
+    # echo "Launched $APP_CMD"
+    sleep 1
+fi
+
+# Wait for KeepassXC window to appear and get its address
+tries=100  # wait up to 10 seconds
+
+while ((tries--)); do
+    WINADDR=$(hyprctl clients -j | jq -r '
+      .[] | select(
+        (.class != null and (.class | ascii_downcase | test("keepass"; "i"))) or
+        (.title != null and (.title | ascii_downcase | test("keepass"; "i"))) or
+        (.appId != null and (.appId | ascii_downcase | test("keepass"; "i")))
+      )
+      | .address' | head -n1)
+
+    if [[ -n "$WINADDR" ]]; then
+        # echo "Found KeepassXC window at address $WINADDR"
+        break
+    fi
+    sleep 0.1
+done
+
+if [[ -z "$WINADDR" ]]; then
+    # echo "Error: Could not find KeepassXC window."
+    hyprctl clients -j | jq  # optional: dump for debugging
+    exit 1
+fi
+
+if [ "$launched" = "true" ]; then
+    # Focus KeepassXC window so only it gets moved
+    hyprctl dispatch focuswindow address:$WINADDR
+    # Move the focused (KeepassXC) window to special workspace and toggle it
+    hyprctl dispatch movetoworkspacesilent special:$SPECIAL_NAME
+fi
+
+hyprctl dispatch togglespecialworkspace $SPECIAL_NAME
+
+# echo "Moved KeepassXC to special:$SPECIAL_NAME and toggled it."
+

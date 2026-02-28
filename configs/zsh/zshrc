@@ -104,6 +104,7 @@ export LOVE2D_PATH=/mnt/c/Users/Ben/Downloads/love-11.5-win64/love-11.5-win64/lo
 ## Dotfiles scripts
 export DOTFILES="$HOME/.dotfiles"
 export PATH="$DOTFILES/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 ## Go
 export GOPATH=$HOME/go
@@ -114,6 +115,23 @@ export PATH="$PATH:$HOME/google-cloud-sdk/bin"
 # Flutter
 export PATH="$HOME/Applications/flutter/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+
+alias open-dir='/mnt/c/Windows/explorer.exe `wslpath -w '
+
+PLATFORM=$(uname)
+if [[ $PLATFORM == 'Linux' ]] then
+  export MACHINE=arch
+
+  alias open-dir="dolphin " 
+  #alias wslopen="/mnt/c/Windows/explorer.exe \`wslpath -w $PWD\`"
+  #eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+  #source ssh-agent-bridge.sh
+elif [[ $PLATFORM == 'Darwin' ]]
+  alias TexturePacker.exe="/Applications/TexturePacker.app/Contents/MacOS/TexturePacker"
+then
+
+fi
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -147,15 +165,15 @@ export JAVA_HOME="/usr/"
 export GPG_TTY=$(tty)
 
 
-if [[ bat ]] then alias cat="bat"; fi
+#if [[ bat ]] then alias cat="bat"; fi
 if [[ z ]] then alias cd="z"; fi
-if [[ lsd ]] then alias ls="lsd"; fi
-if [[ gopass ]] then alias pass="gopass"; fi
+#if [[ lsd ]] then alias ls="lsd"; fi
+#if [[ gopass ]] then alias pass="gopass"; fi
 
 
-alias vim="nvim"
-alias nvim="v"
-alias nvdis="nvr --servername $(nvim-server-name) -s"
+#alias vim="nvim"
+#alias nvim="v"
+#alias nvdis="nvr --servername $(nvim-server-name) -s"
 
 
 # Android
@@ -164,10 +182,11 @@ export PATH=$HOME/Applications/android/emulator:$PATH
 export PATH=$HOME/Applications/android/platform-tools:$PATH
 export ADB_SERVER_SOCKET=tcp:$(cat /etc/resolv.conf | grep nameserver | cut -d' ' -f2):5037
 
-if [ -z "$TMUX" ]
-then
-    tmux attach || tmux new
-fi
+# alias tmux=tmux-attach
+# if [ -z "$TMUX" ]
+# then
+#     tmux attach || tmux new
+# fi
 
 export PYTHON=3.11
 
@@ -206,26 +225,20 @@ load-nvmrc
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 
-PLATFORM=$(uname)
-if [[ $PLATFORM == 'Linux' ]] then
-  alias wslopen="/mnt/c/Windows/explorer.exe \`wslpath -w $PWD\`"
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-  source ssh-agent-bridge.sh
-elif [[ $PLATFORM == 'Darwin' ]]
-  alias TexturePacker.exe="/Applications/TexturePacker.app/Contents/MacOS/TexturePacker"
-then
-
-fi
-
-
 
 # Update config path on mac (at least for lazygit)
 export XDG_CONFIG_HOME="$HOME/.config"
 
-export TP_PATH="TexturePacker.exe"
+# export TP_PATH="TexturePacker.exe"
+export TP_PATH="flatpak run com.codeandweb.texturepacker"
 
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export LESS='-R' # colors for less
+export PAGER="bat --paging=always"
+export MANROFFOPT='-c' # colors for man
+export MANPAGER="sh -c 'col -b | bat -l man -p'"
+# export MANPAGER="man --no-hyphenation --no-justification test | col -b | bat -l man -p"
+
+# export MANPAGER="nvim -R -c 'set ft=man | set nomod | set nowrap'"
 
 
 eval "$(starship init zsh)"
@@ -244,8 +257,20 @@ if [ -f '/Users/ben/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ben/g
 #     export GPG_AGENT_INFO
 #     export SSH_AUTH_SOCK
 # fi
-if [[ $PLATFORM == 'Linux' ]] then
-  gpg-agent-relay.sh &
-fi
+
+# if [[ $PLATFORM == 'Linux' ]] then
+#   gpg-agent-relay.sh &
+# fi
 
 # export GEMINI_API_KEY=$(pass show keepass-noha | keepassxc-cli show ~/.keepass/keepass-noha.kdbx gcloud-free -a gemini -s -q)
+# fastfetch
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+# bun completions
+[ -s "/home/ben/.bun/_bun" ] && source "/home/ben/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

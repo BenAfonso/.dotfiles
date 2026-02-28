@@ -1,0 +1,7 @@
+{
+    "custom/keepass": {
+        "format": "󱕴",
+        "rotate": 0,
+        "on-click": "/home/ben/.dotfiles/configs/waybar/scripts/toggle-keepass.sh"
+    }
+}
