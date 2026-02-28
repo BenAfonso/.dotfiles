@@ -1,6 +1,6 @@
 {
     "custom/obs": {
-        "format": "",
+        "format": " ",
         "rotate": 0,
         "on-click": "/home/ben/.dotfiles/configs/waybar/scripts/toggle-obs.sh"
     }

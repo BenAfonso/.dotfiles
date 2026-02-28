@@ -1,5 +1,5 @@
 {
-  "pulseaudio": {
+  "custom/audio": {
     "format": "{icon} {volume}",
     "rotate": 0,
     "format-muted": "婢",

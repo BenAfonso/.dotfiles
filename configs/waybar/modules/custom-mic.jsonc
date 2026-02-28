@@ -1,5 +1,5 @@
 {
-  "pulseaudio#microphone": {
+  "custom/mic": {
     "format": "{format_source}",
     "rotate": 0,
     "format-source": "\uf86b",

@@ -1,0 +1,9 @@
+{
+  "custom/media": {
+      "format": "{text}",
+      "exec": "$HOME/.config/waybar/scripts/mediaplayer.py",
+      "return-type": "json",
+      // "escape": true,
+      "on-click": "hyprctl dispatch togglespecialworkspace spotify"
+  }
+}

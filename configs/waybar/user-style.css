@@ -5,9 +5,7 @@
     font-size: 16px;
 }
 
-
 #workspaces .visible {
-    background-color: @wb-hvr-bg;
-    font-weight: 800;
+    background: #FF26B9;
 }
 
