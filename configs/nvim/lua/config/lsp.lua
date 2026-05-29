@@ -72,17 +72,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("<C-s>", vim.lsp.buf.signature_help, "Signature Help")
     vim.keymap.set("i", "<c-s>", vim.lsp.buf.signature_help, { buffer = true })
 
-    local hover = vim.lsp.buf.hover
-    ---@diagnostic disable-next-line: duplicate-set-field
-    vim.lsp.buf.hover = function()
-      hover({
-        border = "rounded",
-        focusable = true,
-        focus = true,
-      })
-    end
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.buf.hover
-    map("K", vim.lsp.buf.hover, "Hover Documentation")
+    map("K", function()
+      vim.lsp.buf.hover({ border = "rounded", focus = true })
+    end, "Hover Documentation")
 
     if client ~= nil then
       local cap = client.server_capabilities
@@ -114,12 +106,6 @@ for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.buf.hover({
-  border = "rounded",
-  focusable = true,
-  focus = true,
-})
 
 -- This is copied straight from blink
 -- https://cmp.saghen.dev/installation#merging-lsp-capabilities

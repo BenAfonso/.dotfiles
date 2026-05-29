@@ -2,24 +2,9 @@ return {
   { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     opts = {
-      highlight = {
-        enable = true,
-        disable = function(lang, bufnr)
-          local max_filesize = 100 * 1024 -- 100 KB
-          local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(bufnr))
-          if ok and stats and stats.size > max_filesize then
-            return true
-          end
-        end,
-      },
       indent = { enable = true },
-      ensure_installed = {
-        "yaml", "toml", "vimdoc", "markdown_inline", "cmake", "cpp", "css",
-        "comment", "gitignore", "go", "http", "rust", "sql", "lua",
-        "scss", "graphql", "html", "svelte", "javascript", "typescript", "tsx",
-        "jsdoc", "styled", "astro",
-      },
 
       -- https://github.com/nvim-treesitter/playground#query-linter
       query_linter = {
@@ -47,8 +32,32 @@ return {
         },
       },
     },
+    init = function()
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function()
+          -- Enable treesitter highlighting and disable regex syntax
+          pcall(vim.treesitter.start)
+          -- Enable treesitter-based indentation
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
+
+      local ensureInstalled = {
+        "yaml", "toml", "vimdoc", "markdown_inline", "cmake", "cpp", "css",
+        "comment", "gitignore", "go", "http", "rust", "sql", "lua",
+        "scss", "graphql", "html", "svelte", "javascript", "typescript", "tsx",
+        "jsdoc", "styled", "astro",
+      }
+      local alreadyInstalled = require('nvim-treesitter').get_installed()
+      local parsersToInstall = vim.iter(ensureInstalled)
+          :filter(function(parser)
+            return not vim.tbl_contains(alreadyInstalled, parser)
+          end)
+          :totable()
+      require('nvim-treesitter').install(parsersToInstall)
+    end,
     config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+      require("nvim-treesitter").setup(opts)
 
       -- MDX
       vim.filetype.add({
@@ -61,9 +70,10 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
     config = function(_, opts)
       ---@diagnostic disable-next-line: missing-fields
-      require("nvim-treesitter.configs").setup({
+      require("nvim-treesitter").setup({
         opts,
         textobjects = {
           select = {

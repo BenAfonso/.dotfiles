@@ -97,26 +97,12 @@ local M = {
           map("<leader>gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
 
-          local signature_help = function()
-            vim.lsp.buf.signature_help({
-              border = "rounded",
-              focusable = true,
-              focus = true,
-            })
-          end
-
-          local hover = function()
-            vim.lsp.buf.hover({
-              border = "rounded",
-              focusable = true,
-              focus = true,
-            })
-          end
-
-          vim.lsp.handlers["textDocument/hover"] = hover
-          vim.lsp.handlers["textDocument/signatureHelp"] = signature_help
-          imap("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
-          map("<C-s>", vim.lsp.buf.signature_help, "Signature Help")
+          imap("<C-k>", function()
+            vim.lsp.buf.signature_help({ border = "rounded", focus = true })
+          end, "Signature Help")
+          map("<C-s>", function()
+            vim.lsp.buf.signature_help({ border = "rounded", focus = true })
+          end, "Signature Help")
           vim.keymap.set("i", "<c-s>", vim.lsp.buf.signature_help, { buffer = true })
 
           if client ~= nil then

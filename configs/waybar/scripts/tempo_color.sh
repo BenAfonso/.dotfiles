@@ -6,8 +6,8 @@ TOMORROW=$(curl -s -X GET https://www.api-couleur-tempo.fr/api/jourTempo/tomorro
 getColorEmoji () {
   case "$1" in 
     "Bleu") echo -n "🔵";;
-    "Bleu") echo -n "🔴";;
-    "Bleu") echo -n "⚪";;
+    "Rouge") echo -n "🔴";;
+    "Blanc") echo -n "⚪";;
     "*") echo -n "⚫";;
   esac
 }

@@ -1,0 +1,10 @@
+{
+    "custom/discord_status": {
+        "exec": "~/.config/waybar/scripts/discord_rpc.py",
+        "return-type": "json",
+        "restart-interval": 5,
+        "format": "{text}",
+        "on-click": "pgrep -x Discord > /dev/null && (hyprctl dispatch focusmonitor l && WS=$(hyprctl activeworkspace -j | jq -r '.name') && hyprctl dispatch focuswindow 'class:^(discord)$' && hyprctl dispatch movetoworkspace \"$WS\") || (hyprctl dispatch focusmonitor l && discord)",
+        "on-click-right": "hyprctl dispatch sendshortcut CTRL_SHIFT, M, class:^[Dd]iscord$"
+    }
+}

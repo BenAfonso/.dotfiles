@@ -45,6 +45,12 @@
             "custom/keepass"
         ]
     },
+    "group/pill#discord": {
+        "orientation": "inherit",
+        "modules": [
+            "custom/discord_status"
+        ]
+    },
     "group/pill#left": {
         "orientation": "inherit",
         "modules": [
@@ -62,6 +68,7 @@
         ]
     },
     "modules-right": [
+        "group/pill#discord",
         "group/pill#tempo_color",
         "group/pill#obs",
         "group/pill#keepass",

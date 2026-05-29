@@ -171,6 +171,7 @@ if [[ z ]] then alias cd="z"; fi
 #if [[ gopass ]] then alias pass="gopass"; fi
 
 
+# alias nvim=$HOME/apps/nvim-linux-x86_64.appimage
 #alias vim="nvim"
 #alias nvim="v"
 #alias nvdis="nvr --servername $(nvim-server-name) -s"
@@ -274,3 +275,11 @@ if [ -f '/Users/ben/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ben/g
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/home/ben/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end

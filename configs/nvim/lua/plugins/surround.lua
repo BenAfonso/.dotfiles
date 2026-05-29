@@ -5,7 +5,6 @@ return {
   event = "VeryLazy",
   config = function()
     require("nvim-surround").setup({
-      keymaps = {},
       highlight = {},
       aliases = {},
       surrounds = {},
