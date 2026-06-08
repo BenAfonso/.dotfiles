@@ -12,6 +12,7 @@ local config = {
 	window_decorations = "NONE",
 	-- enable_wayland = false,
 	enable_kitty_graphics = false,
+	enable_kitty_keyboard = true,
 }
 
 
