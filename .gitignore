@@ -8,3 +8,8 @@ node_modules/
 private/
 configs/nvim/lua/dev-plugins
 .aider*
+context-mode/sessions/
+configs/pi/agent/sessions/
+configs/pi/context-mode/sessions
+
+# pi-diff dummy test marker

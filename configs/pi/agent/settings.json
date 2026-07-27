@@ -1,0 +1,41 @@
+{
+  "defaultModel": "gpt-5.6-sol",
+  "defaultProvider": "openai-codex",
+  "defaultThinkingLevel": "high",
+  "lastChangelogVersion": "0.81.1",
+  "packages": [
+    "npm:context-mode",
+    "npm:pi-mono-sentinel",
+    "/home/ben/.dotfiles/configs/pi/agent/extensions/pi-pretty"
+  ],
+  "extensions": [],
+  "editorPaddingX": 3,
+  "enabledModels": [
+    "openai-codex/gpt-5.4-mini",
+    "openai-codex/gpt-5.5",
+    "openai-codex/gpt-5.4",
+    "openai-codex/gpt-5.6-sol",
+    "openai-codex/gpt-5.6-terra",
+    "openai-codex/gpt-5.6-luna"
+  ],
+  "theme": "catppuccin-mocha",
+  "diffTheme": "neon",
+  "piPretty": {
+    "mode": "border",
+    "readMode": "summary",
+    "searchMode": "preview",
+    "bashMode": "preview",
+    "mcpMode": "summary",
+    "groupToolCalls": true,
+    "themeAdaptive": true,
+    "previewLines": 6,
+    "expandedPreviewLines": 28,
+    "wideDiffAt": 110,
+    "diffColors": {
+      "bgAdd": "toolDiffAddedBg",
+      "bgDel": "toolDiffRemovedBg",
+      "bgAddHighlight": "toolDiffAddedBg",
+      "bgDelHighlight": "toolDiffRemovedBg"
+    }
+  }
+}

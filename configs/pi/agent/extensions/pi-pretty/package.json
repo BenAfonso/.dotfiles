@@ -1,0 +1,9 @@
+{
+  "name": "pi-pretty",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Claude Code inspired tool rendering for Pi",
+  "pi": {
+    "extensions": ["./index.ts"]
+  }
+}

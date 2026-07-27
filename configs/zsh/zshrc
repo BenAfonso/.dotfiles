@@ -272,6 +272,12 @@ if [ -f '/Users/ben/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ben/g
 # bun completions
 [ -s "/home/ben/.bun/_bun" ] && source "/home/ben/.bun/_bun"
 
+unalias pi 2>/dev/null
+function pi {
+  [[ "$(node -v 2>/dev/null)" == v22.* ]] || nvm use 22
+  command pi "$@"
+}
+
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"

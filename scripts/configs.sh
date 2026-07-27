@@ -2,7 +2,15 @@
 
 CONFIGS_PATH=~/.dotfiles/configs
 
-mkdir ~/.config
+mkdir -p ~/.config ~/.config/zsh ~/.config/lazygit
+
+# Pi
+if [ -e ~/.pi ] && [ ! -L ~/.pi ]; then
+  mv ~/.pi ~/.pi.backup.$(date +%Y%m%d%H%M%S)
+fi
+ln -sfn $CONFIGS_PATH/pi ~/.pi
+mkdir -p ~/.dotfiles/private/pi/agent
+ln -sfn ../../../private/pi/agent/auth.json $CONFIGS_PATH/pi/agent/auth.json
 
 # Neovim
 ln -sfv $CONFIGS_PATH/nvim ~/.config
@@ -41,7 +49,6 @@ ln -sfv $CONFIGS_PATH/waybar ~/.config/
 ln -sfv $CONFIGS_PATH/fastfetch ~/.config/
 
 # Lazygit
-mkdir ~/.config/lazygit
 ln -sfv $CONFIGS_PATH/lazygit/config.yml ~/.config/lazygit/config.yml
 
 # Yazi

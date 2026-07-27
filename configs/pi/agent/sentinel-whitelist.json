@@ -1,0 +1,19 @@
+{
+  "readPaths": [
+    "/home/ben/.bun/install/global/node_modules/@earendil-works/pi-coding-agent/docs/extensions.md"
+  ],
+  "paths": [
+    "~/Work/nzk/nzk-app-dashboard/modules/quests/graphql/",
+    "~/Work/nzk/nzk-app-dashboard/modules/quests/components/",
+    "~/Work/nzk/nzk-app-dashboard/pages/education/quests/[id]/index.page.tsx",
+    "~/Work/nzk/nzk-app-dashboard/modules/games-center/graphql/",
+    "~/Work/nzk/nzk-app-dashboard/modules/games-center/components/",
+    "~/Work/nzk/nzk-app-dashboard/pages/games-center/games/[gameId]/levels/[levelId]/index.page.tsx",
+    "~/.pi/agent/extensions/delta-edit-diff.ts",
+    "~/.pi/agent/extensions/",
+    "/tmp/",
+    "~/Work/nzk/next-app/dynamic-menu/modules/menu/tiles/",
+    "~/Work/nzk/next-app/dynamic-menu/modules/menu/tileTypes.ts",
+    "~/Work/nzk/next-app/dynamic-menu/modules/menu/"
+  ]
+}
